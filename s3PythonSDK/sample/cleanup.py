@@ -1,29 +1,34 @@
-import boto
-from boto.exception import S3ResponseError
-from client import conn 
-from boto.s3.key import Key
+import boto3
+from boto3.exceptions import S3UploadFailedError
+from client import client 
+#from boto3.s3.key import Key
 from xml.dom import minidom
 def Expectexception(e,code):
     if(e.status != code):
-        print"Expected Status Code :"+repr(code)+", get another Exception...";
+        print("Expected Status Code :"+repr(code)+", get another Exception...")
         xmldoc = minidom.parseString(e.body)
         itemlist = xmldoc.getElementsByTagName('Message')
-        print "Status Code: " + repr(e.status)
-        print "Reason: " + repr(e.reason)
-        print "Message: " + itemlist[0].childNodes[0].nodeValue    
+        print("Status Code: " + repr(e.status))
+        print("Reason: " + repr(e.reason))
+        print("Message: " + itemlist[0].childNodes[0].nodeValue)
 def main(arg):
     
     for i in arg:
         try:
-            print "prepare clean bucket: " + i
-            bucket = conn.get_bucket(i)
-            bucket.configure_versioning(False)
-
-            result = bucket.get_all_versions()
+            print( "prepare clean bucket: " + i)
+            result =client.list_objects_v2(
+                    Bucket=i,
+                    )
             for v in result:
-                bucket.delete_key(v.name,version_id=v.version_id)
-        
-            conn.delete_bucket(bucket)
+                if v=='Contents':
+                    for r in result['Contents']:
+                        print(r['Key'])
+                        client.delete_object(
+                            Bucket=i,
+                            Key=r['Key']
+                        )
             
-        except S3ResponseError,e:
+        except S3UploadFailedError as e:
             Expectexception(e,404)
+#except S3ResponseError,e:
+#Expectexception(e,404)

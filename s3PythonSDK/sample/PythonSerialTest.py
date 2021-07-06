@@ -1,6 +1,6 @@
 import os
 import time
-import ACLSerialTesting
+'''import ACLSerialTesting
 import BucketLoggingSerialTesting
 import BucketSerialTesting
 import LifecycleSerialTesting
@@ -10,14 +10,14 @@ import PolicySerialTesting
 import VersioningSerialTesting
 import WebsiteSerialTesting
 import BucketCorsSerialTesting
-import BucketTaggingSerialTesting
+import BucketTaggingSerialTesting'''
 import cleanup
-import ConfigParser
+import configparser
  
 #Change test buckets' name here
-buckets=["allentest1","allentest2","allentest3"] 
+buckets=["yuyuman1","yuyuman2", "yuyuman3"] 
 
-config = ConfigParser.ConfigParser()
+config = configparser.ConfigParser()
 config.read('Config.ini')
 
 #Change userA Information here, canonical ID -> e-mail 
@@ -27,16 +27,16 @@ userBInfo=[config.get('Section_A', 'userBCanonicalID'),config.get('Section_A', '
 #Change owner Information here, canonical ID -> e-mail 
 ownerInfo=[config.get('Section_A', 'ownerCanonicalID'),config.get('Section_A', 'ownerMail')] 
 #FilePath
-filePath=["castle.jpg.001", "castle.jpg.002", "castle.jpg.003"]
+filePath=["castle.jpg.001"]
 
-print "S3 Python SDK Serial Test-\nbucketname1:" +buckets[0]+ " ,bucketname2: " +buckets[1]
-print "-----------------------------------------------------------------------"
+print ("S3 Python SDK Serial Test-\nbucketname1:" +buckets[0]+ " ,bucketname2: " +buckets[1])
+print ("-----------------------------------------------------------------------")
 
 os.system('echo cleanup ') 
 cleanup.main(buckets);
 time.sleep(5)
 
-os.system('echo ACLSerialTesting ') 
+'''os.system('echo ACLSerialTesting ') 
 ACLSerialTesting.main(buckets, userAInfo, ownerInfo);
 time.sleep(5)
    
@@ -78,6 +78,6 @@ time.sleep(5)
 
 os.system('echo BucketTaggingSerialTesting')
 BucketTaggingSerialTesting.main(buckets);
-time.sleep(5)
+time.sleep(5)'''
 
 os.system('echo S3 Python SDK Serial Test Done!')

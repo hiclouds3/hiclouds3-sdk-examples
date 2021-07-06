@@ -58,3 +58,15 @@ def main(arg, userAInfo, ownerInfo):
         print "Status Code: " + repr(e.status)
         print "Reason: " + repr(e.reason)
         print "Message: " + itemlist[0].childNodes[0].nodeValue
+
+
+'''client.create_bucket(
+                    ACL='private' or 'public-read' or 'public-read-write' or'authenticated-read',
+                    CreateBucketConfiguration={
+                            'LocationConstraint': 'ap-northeast-1'
+                            },
+                    Bucket=i,
+                    )
+            client.delete_bucket(
+                    Bucket=i,
+            )'''

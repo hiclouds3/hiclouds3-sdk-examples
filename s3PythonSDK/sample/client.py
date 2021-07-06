@@ -1,10 +1,14 @@
-from boto.s3.connection import S3Connection
-from boto.s3.connection import OrdinaryCallingFormat
-
+import boto3
+from botocore.config import Config
 #Initiate connection without using boto.cfg
-conn = S3Connection(aws_access_key_id='Enter Your AccessKey Here',
-                    aws_secret_access_key='Enter Your SecretKey Here',
-                    is_secure=False,
-                    host='s3.hicloud.net.tw',
-                    calling_format=OrdinaryCallingFormat(),
-                    )
+my_config = Config(
+    region_name = 'ap-northeast-1',
+)
+client = boto3.client(
+    's3',
+    config=my_config,
+    aws_access_key_id='AKIAURU5V4C2WJHJAQXI',
+    aws_secret_access_key='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'
+    )
+#is_secure=False,
+#calling_format=OrdinaryCallingFormat(),
