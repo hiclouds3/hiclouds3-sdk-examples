@@ -1,16 +1,13 @@
-import boto
-from boto.exception import S3ResponseError
-from client import conn 
-from boto.s3.key import Key
-from xml.dom import minidom
+from client import client
+#from boto.s3.key import Key
 def main(arg, userAInfo, ownerInfo):
     try:
-        bucket = conn.create_bucket(arg[0])
+        bucket = client.create_bucket(arg[0])
         bucket.set_canned_acl('public-read')
         result = repr(bucket.get_acl())
-        #print "Set canned ACL 'public-read':\n" + result
+        print ("Set canned ACL 'public-read':\n" + result)
         
-        bucket.make_public();
+        '''bucket.make_public();
         result = repr(bucket.get_acl())
         #print "Make bucket public :\n" + result
         
@@ -48,25 +45,9 @@ def main(arg, userAInfo, ownerInfo):
         for v in bucket.get_all_versions():
             v.delete()
         
-        conn.delete_bucket(bucket)
+        conn.delete_bucket(bucket)'''
         
-        #print "ACL Serial Test done!"
+        print "ACL Serial Test done!"
         
-    except S3ResponseError, e:
-        xmldoc = minidom.parseString(e.body)
-        itemlist = xmldoc.getElementsByTagName('Message')
-        print "Status Code: " + repr(e.status)
-        print "Reason: " + repr(e.reason)
-        print "Message: " + itemlist[0].childNodes[0].nodeValue
-
-
-'''client.create_bucket(
-                    ACL='private' or 'public-read' or 'public-read-write' or'authenticated-read',
-                    CreateBucketConfiguration={
-                            'LocationConstraint': 'ap-northeast-1'
-                            },
-                    Bucket=i,
-                    )
-            client.delete_bucket(
-                    Bucket=i,
-            )'''
+    except :
+        print("ACLSerialTesting","Error")

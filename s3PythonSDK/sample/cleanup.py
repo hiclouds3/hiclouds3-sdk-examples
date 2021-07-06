@@ -1,20 +1,19 @@
-import boto3
-from boto3.exceptions import S3UploadFailedError
 from client import client 
 #from boto3.s3.key import Key
-from xml.dom import minidom
-def Expectexception(e,code):
-    if(e.status != code):
-        print("Expected Status Code :"+repr(code)+", get another Exception...")
-        xmldoc = minidom.parseString(e.body)
-        itemlist = xmldoc.getElementsByTagName('Message')
-        print("Status Code: " + repr(e.status))
-        print("Reason: " + repr(e.reason))
-        print("Message: " + itemlist[0].childNodes[0].nodeValue)
+def Expectexception():
+    print ("Cleanup" ,"Error")
 def main(arg):
     
     for i in arg:
         try:
+            '''client.create_bucket(
+                    ACL='private' or 'public-read' or 'public-read-write' or'authenticated-read',
+                    CreateBucketConfiguration={
+                            'LocationConstraint': 'ap-northeast-1'
+                            },
+                    Bucket=i,
+                    )'''
+            
             print( "prepare clean bucket: " + i)
             result =client.list_objects_v2(
                     Bucket=i,
@@ -22,13 +21,15 @@ def main(arg):
             for v in result:
                 if v=='Contents':
                     for r in result['Contents']:
-                        print(r['Key'])
                         client.delete_object(
                             Bucket=i,
                             Key=r['Key']
                         )
+            client.delete_bucket(
+                    Bucket=i,
+            )
             
-        except S3UploadFailedError as e:
-            Expectexception(e,404)
+        except :
+            Expectexception()
 #except S3ResponseError,e:
 #Expectexception(e,404)

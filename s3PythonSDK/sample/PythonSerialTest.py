@@ -1,7 +1,7 @@
 import os
 import time
-'''import ACLSerialTesting
-import BucketLoggingSerialTesting
+#import ACLSerialTesting
+'''import BucketLoggingSerialTesting
 import BucketSerialTesting
 import LifecycleSerialTesting
 import MPUSerialTesting
@@ -34,11 +34,11 @@ print ("-----------------------------------------------------------------------"
 
 os.system('echo cleanup ') 
 cleanup.main(buckets);
-time.sleep(5)
+time.sleep(5);
 
-'''os.system('echo ACLSerialTesting ') 
+os.system('echo ACLSerialTesting ') 
 ACLSerialTesting.main(buckets, userAInfo, ownerInfo);
-time.sleep(5)
+time.sleep(5);'''
    
 os.system('echo BucketLoggingSerialTesting ') 
 BucketLoggingSerialTesting.main(buckets, ownerInfo);
