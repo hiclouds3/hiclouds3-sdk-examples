@@ -1,0 +1,8 @@
+{
+  "accessKeyId" : "Enter Your Access Key Here",
+  "secretAccessKey" : "Enter Your Secret Key Here",
+  "sslEnabled": false ,
+  "endpoint": "s3.hicloud.net.tw",
+  "s3ForcePathStyle": true,
+  "region": "us"
+}

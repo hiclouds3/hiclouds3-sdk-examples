@@ -1,0 +1,54 @@
+<html>
+<head>
+	<script src="aws-sdk-2.1.39.min.js"></script>
+	<script src="javascriptSerialTest.js"></script>
+	<script src="ACLSerialTesting.js"></script>
+	<script src="BucketCorsSerialTesting.js"></script>
+	<script src="BucketLoggingSerialTesting.js"></script>
+	<script src="BucketTaggingSerialTesting.js"></script>
+	<script src="BucketSerialTesting.js"></script>
+	<script src="LifecycleSerialTesting.js"></script>
+	<script src="ObjectSerialTesting.js"></script>
+	<script src="PolicySerialTesting.js"></script>
+	<script src="VersioningSerialTesting.js"></script>
+	<script src="WebsiteSerialTesting.js"></script>
+	<script src="q.js"></script>
+</head>
+<body>
+<script >	
+// Hard-Coding Credentials----------------to be filled
+	AWS.config.update({accessKeyId: 'Enter Your Access Key Here',
+		secretAccessKey: 'Enter Your Secret Key Here',
+		"sslEnabled": false ,
+		"endpoint": "s3.hicloud.net.tw",
+		"s3ForcePathStyle": false,
+		"region": "us"});
+// Setting the Region----------------to be filled
+	//AWS.config.region = 'ap-northeast-1';
+	var testBucketName = 'testjsbucket1';
+	var granteeId = 'Enter User A Canonical ID Here';
+	var ownerName = 'Enter Your Display Name Here';
+	var ownerID = 'Enter Your Canonical ID Here';
+	console.log('s3 SDK testing start');
+	var s3 = new AWS.S3();
+</script>
+Please setting put bucket and set bucket cors using "Node.js SDK" before test on the following.</br>
+<button onclick = aclSerialTest()> testingACL</button>
+ACL testing needs to be run before Logging, since 
+we have to grant Logging readACP and write.</br>
+<button onclick = lifecycleSerialTesting()> testingLifecycle</button></br>
+<button onclick = versionTesting()> testingVersion</button></br>
+<button onclick = bucketTaggingSerialTesting()> testingBucketTagging</button></br>
+<button onclick = objectSerialTesting()> testingobjectSerial</button></br>
+<button onclick = bucketLoggingTest()> testingBucketLogging</button></br>
+<button onclick = websiteSerialTesting()> testingwebsiteSerial</button></br>
+<button onclick = policySerialTesting()> testingpolicySerial</button></br>
+<button onclick = bucketCorsTesting()> testingbucketCors</button></br>
+select three files -- castle.jpg.001, castle.jpg.002 and castle.jpg.003</br>
+<input type="file" id="file-chooser" multiple />
+<button id="upload-button">Upload to S3</button>
+<div id="results"></div>
+<script src="MPUSerialTesting.js"></script>
+<button onclick = deleteBucket(testBucketName)> deleteBucket(testBucket)</button></br>
+</body>
+</html>
