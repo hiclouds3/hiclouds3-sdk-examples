@@ -1,0 +1,29 @@
+hicloud S3 .NET SDK Sample Code v1.11
+
+*******************
+v3.08.1 Major Changes
+*******************
+- 新增 Tagging.cs
+	示範使用 .NET SDK 於 hicloud S3 進行 Bucket Tagging 相關操作
+
+*******************
+v3.05 Major Changes
+*******************
+
+- 新增 Cors.cs
+	示範使用 .NET SDK 於 hicloud S3 進行 Bucket CORS 相關操作
+
+*******************
+v1.11 Major Changes
+*******************
+
+- 新增 headBucket function
+	示範使用 .NET SDK 於 hicloud S3 進行 Head Bucket 操作
+
+- 新增 preSignedURL function
+	示範使用 .NET SDK 產生上傳、下載與刪除 Object動作之 PreSigned URL
+
+- 新增 ServerSideEncryption function
+	示範使用 .NET SDK 於 hicloud S3 上搭配 Server Side Encryption 功能進行上傳與下載 Object 操作
+
+- Library版本 1.5.16

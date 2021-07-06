@@ -1,0 +1,5 @@
+D:\Local Repo\s3NetSDK\aws-sdk-net\AWSSDK\bin\Debug\AWSSDK.xml
+D:\Local Repo\s3NetSDK\aws-sdk-net\AWSSDK\bin\Debug\AWSSDK.dll
+D:\Local Repo\s3NetSDK\aws-sdk-net\AWSSDK\bin\Debug\AWSSDK.pdb
+D:\Local Repo\s3NetSDK\aws-sdk-net\AWSSDK\obj\Debug\AWSSDK.dll
+D:\Local Repo\s3NetSDK\aws-sdk-net\AWSSDK\obj\Debug\AWSSDK.pdb
