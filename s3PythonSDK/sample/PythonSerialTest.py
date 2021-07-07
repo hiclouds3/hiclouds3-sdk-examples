@@ -1,6 +1,6 @@
 import os
 import time
-#import ACLSerialTesting
+import ACLSerialTesting
 '''import BucketLoggingSerialTesting
 import BucketSerialTesting
 import LifecycleSerialTesting
@@ -37,8 +37,9 @@ cleanup.main(buckets);
 time.sleep(5);
 
 os.system('echo ACLSerialTesting ') 
-ACLSerialTesting.main(buckets, userAInfo, ownerInfo);
-time.sleep(5);'''
+ACLSerialTesting.main(buckets, userAInfo, userBInfo, ownerInfo)
+time.sleep(5)
+'''
    
 os.system('echo BucketLoggingSerialTesting ') 
 BucketLoggingSerialTesting.main(buckets, ownerInfo);

@@ -7,8 +7,8 @@ my_config = Config(
 client = boto3.client(
     's3',
     config=my_config,
-    aws_access_key_id='AKIAURU5V4C2WJHJAQXI',
-    aws_secret_access_key='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'
+    aws_access_key_id='??',
+    aws_secret_access_key='??'
     )
 #is_secure=False,
 #calling_format=OrdinaryCallingFormat(),

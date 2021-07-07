@@ -1,53 +1,95 @@
 from client import client
 #from boto.s3.key import Key
-def main(arg, userAInfo, ownerInfo):
+from botocore.exceptions import ClientError
+def main(arg, userAInfo, userBInfo, ownerInfo):
     try:
-        bucket = client.create_bucket(arg[0])
-        bucket.set_canned_acl('public-read')
-        result = repr(bucket.get_acl())
-        print ("Set canned ACL 'public-read':\n" + result)
+        client.create_bucket(
+                CreateBucketConfiguration={'LocationConstraint': 'ap-northeast-1'},
+                Bucket=arg[0]
+                )
+        client.put_bucket_acl(
+                Bucket=arg[0],
+                ACL='public-read'
+                )
+        result = repr(client.get_bucket_acl(
+                Bucket=arg[0],
+                ))
+        #print ("Set canned ACL 'public-read':\n" + result)
         
-        '''bucket.make_public();
-        result = repr(bucket.get_acl())
-        #print "Make bucket public :\n" + result
+        client.put_bucket_acl(
+                Bucket=arg[0],
+                ACL='public-read-write'
+                )
+        result = repr(client.get_bucket_acl(
+                Bucket=arg[0],
+                ))
+        #print("Make bucket public-read-write :\n" + result)
         
-        bucket.set_canned_acl('private')
+        client.put_bucket_acl(
+                Bucket=arg[0],
+                AccessControlPolicy={
+                        'Grants': [
+                                {
+                                        'Grantee': {
+                                                'ID': userBInfo[0],
+                                                'Type': 'CanonicalUser',
+                                        },
+                                        'Permission': 'FULL_CONTROL'
+                                },
+                                {
+                                        'Grantee': {
+                                                'ID': userAInfo[0],
+                                                'Type': 'CanonicalUser',
+                                        },
+                                        'Permission': 'FULL_CONTROL'
+                                }
+                        ],
+                        'Owner': {
+                                'DisplayName': 'yoyoman0817',
+                                'ID': ownerInfo[0]
+                        }
+                },
+        )
+        result = repr(client.get_bucket_acl(
+                Bucket=arg[0],
+                ))
+        #print ("Add grant by user id:\n" + result)
         
-        bucket.add_email_grant('READ', userAInfo[1],True)
-        bucket.add_user_grant('FULL_CONTROL', ownerInfo[0],True)
-        result = repr(bucket.get_acl())
-        #print "Add grant by email & by user id:\n" + result
+        client.put_bucket_acl(
+                Bucket=arg[0],
+                AccessControlPolicy={
+                        'Grants': [
+                                {
+                                        'Grantee': {
+                                                'EmailAddress': userBInfo[1],
+                                                'Type': 'AmazonCustomerByEmail',
+                                        },
+                                        'Permission': 'FULL_CONTROL'
+                                },
+                                {
+                                        'Grantee': {
+                                                'EmailAddress': userAInfo[1],
+                                                'Type': 'AmazonCustomerByEmail',
+                                        },
+                                        'Permission': 'FULL_CONTROL'
+                                }
+                        ],
+                        'Owner': {
+                                'DisplayName': 'yoyoman0817',
+                                'ID': ownerInfo[0]
+                        }
+                },
+        )
+        result = repr(client.get_bucket_acl(
+                Bucket=arg[0],
+        ))
+        #print ("Add grant by email :\n" + result)
         
-        #print "\nEnable Versioning :"
-        bucket.configure_versioning(True)
-        #print bucket.get_versioning_status()
+        client.delete_bucket(
+                    Bucket=arg[0],
+            )
         
-        k = Key(bucket)
-        k.key = 'testV.txt'
-        k.set_contents_from_string('This is a test2 of S3')
+        print( "ACL Serial Test done!")
         
-        result = bucket.get_all_versions()
-        
-        #print "\nList all Versions:\n  File    |   Version-ID"
-        #for v in result:
-            #print v.name + " | " + v.version_id
-        
-        #print "\nSuspend Versioning :"
-        bucket.configure_versioning(False)
-        #print bucket.get_versioning_status()
-        
-        #print "\nClean up.."
-        # clear bucket
-        
-        #for g in bucket.list_grants():
-        #    print g.display_name
-        
-        for v in bucket.get_all_versions():
-            v.delete()
-        
-        conn.delete_bucket(bucket)'''
-        
-        print "ACL Serial Test done!"
-        
-    except :
+    except ClientError:
         print("ACLSerialTesting","Error")
