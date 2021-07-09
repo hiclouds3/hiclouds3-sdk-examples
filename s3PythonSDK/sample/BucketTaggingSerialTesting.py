@@ -1,9 +1,7 @@
-import boto
-from boto.exception import S3ResponseError
-from client import conn 
-from xml.dom import minidom
-from boto.s3.tagging import Tags, TagSet
-from boto.s3.connection import Location
+from botocore.exceptions import ClientError
+from client import client
+#from boto.s3.tagging import Tags, TagSet
+#from boto.s3.connection import Location
 
  
 # test 1. Basic putBucket
@@ -38,9 +36,6 @@ def main(arg):
         #print "Clean up.."
         conn.delete_bucket(bucket)
         #print " - Bucket logging Serial test done!"
-    except S3ResponseError, e:
-        xmldoc = minidom.parseString(e.body)
-        itemlist = xmldoc.getElementsByTagName('Message')
-        print "Status Code: " + repr(e.status)
-        print "Reason: " + repr(e.reason)
-        print "Message: " + itemlist[0].childNodes[0].nodeValue
+    except ClientError as e:
+        print("Error operation : " + e.operation_name)
+        print("Error response : " + e.response['Error']['Message'])

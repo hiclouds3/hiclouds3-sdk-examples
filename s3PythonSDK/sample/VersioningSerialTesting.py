@@ -1,6 +1,5 @@
-import boto.exception 
-from client import conn
-from xml.dom import minidom
+from botocore.exceptions import ClientError
+from client import client
 
 # test 1.
 #      2.
@@ -66,10 +65,7 @@ def main(arg):
         conn.delete_bucket(bucket)
         #print " - Versioning Serial Test Done !"
         
-    except boto.exception.S3ResponseError, e:
-        xmldoc = minidom.parseString(e.body)
-        itemlist = xmldoc.getElementsByTagName('Message')
-        print "Status Code: " + repr(e.status)
-        print "Reason: " + repr(e.reason)
-        print "Message: " + itemlist[0].childNodes[0].nodeValue
+    except ClientError as e:
+        print("Error operation : " + e.operation_name)
+        print("Error response : " + e.response['Error']['Message'])
     
