@@ -12,7 +12,6 @@ from client import client
 
 def main(arg):
     try:
-        # putBucket with region
         #print("Try putBucket with region 'ap-northeast-1':")
         client.create_bucket(
             CreateBucketConfiguration={'LocationConstraint': 'ap-northeast-1'},
@@ -25,7 +24,7 @@ def main(arg):
         client.delete_bucket(
             Bucket=arg[2],
         )
-        #print(" - Put bukcet with region done\n---------------------------------------------------")
+        #print("Put bukcet with region done\n---------------------------------------------------")
         #print("put Bucket with 'public-read' permission..")
         client.create_bucket(
             ACL='public-read',
@@ -69,7 +68,7 @@ def main(arg):
             Bucket=arg[0],
         )
         # for r in result['Contents']:
-        # print(r['Key'])
+        #     print(r['Key'])
 
         #print("Get bucket photos/:")
         result = client.list_objects_v2(
@@ -77,7 +76,7 @@ def main(arg):
             Bucket=arg[0],
         )
         # for r in result['Contents']:
-        # print(r['Key'])
+        #     print(r['Key'])
 
         #print("Get bucket delimiter=/:")
         result = client.list_objects_v2(
@@ -85,7 +84,7 @@ def main(arg):
             Bucket=arg[0],
         )
         # for r in result['Contents']:
-        # print(r['Key'])
+        #     print(r['Key'])
 
         #print("Get bucket MaxKeys=2:")
         result = client.list_objects_v2(
@@ -93,7 +92,7 @@ def main(arg):
             Bucket=arg[0],
         )
         # for r in result['Contents']:
-        # print(r['Key'])
+        #     print(r['Key'])
 
         #print("Get bucket Delimiter='/' & Prefix='photos/2006/':")
         result = client.list_objects_v2(
@@ -102,11 +101,9 @@ def main(arg):
             Bucket=arg[0],
         )
         # for r in result['Contents']:
-        # print(r['Key'])
+        #     print(r['Key'])
 
-        print("\nClean up..")
-        # clear bucket
-
+        #print("\nClean up..")
         result = client.list_objects_v2(
             Bucket=arg[0],
         )
@@ -120,8 +117,8 @@ def main(arg):
         client.delete_bucket(
             Bucket=arg[0],
         )
-        print(" - Bucket Serial Test done!\n")
+        print("Bucket Serial Test done!\n")
 
     except ClientError as e:
-        print(e.operation_name)
-        print(e.response['Error']['Message'])
+        print("Error operation : " + e.operation_name)
+        print("Error response : " + e.response['Error']['Message'])

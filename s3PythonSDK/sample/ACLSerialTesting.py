@@ -1,5 +1,4 @@
 from client import client
-#from boto.s3.key import Key
 from botocore.exceptions import ClientError
 
 
@@ -91,8 +90,8 @@ def main(arg, userAInfo, userBInfo, ownerInfo):
             Bucket=arg[0],
         )
 
-        print("ACL Serial Test done!")
+        print("ACL Serial Test done!\n")
 
     except ClientError as e:
-        print(e.operation_name)
-        print(e.response['Error']['Message'])
+        print("Error operation : " + e.operation_name)
+        print("Error response : " + e.response['Error']['Message'])

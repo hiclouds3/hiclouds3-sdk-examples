@@ -1,6 +1,5 @@
 from client import client
 from botocore.exceptions import ClientError
-#from boto3.s3.key import Key
 
 
 def main(arg):
@@ -15,7 +14,7 @@ def main(arg):
                 Bucket=i,
             )
 
-            print("prepare clean bucket: " + i)
+            #print("prepare clean bucket: " + i)
             result = client.list_objects_v2(
                 Bucket=i,
             )
@@ -30,8 +29,6 @@ def main(arg):
                 Bucket=i,
             )
         except ClientError as e:
-            print(e.operation_name)
-            print(e.response['Error']['Message'])
-    print("Cleanup done!")
-# except S3ResponseError,e:
-# Expectexception(e,404)
+            print("Error operation : " + e.operation_name)
+            print("Error response : " + e.response['Error']['Message'])
+    print("Cleanup done!\n")
