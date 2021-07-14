@@ -55,8 +55,7 @@ def main(arg, userAInfo, userBInfo, ownerInfo):
             Bucket=arg[0],
         ))
         #print ("Add grant by user id:\n" + result)
-
-        client.put_bucket_acl(
+        '''client.put_bucket_acl(
             Bucket=arg[0],
             AccessControlPolicy={
                 'Grants': [
@@ -84,7 +83,7 @@ def main(arg, userAInfo, userBInfo, ownerInfo):
         result = repr(client.get_bucket_acl(
             Bucket=arg[0],
         ))
-        #print ("Add grant by email :\n" + result)
+        #print ("Add grant by email :\n" + result)'''
 
         client.delete_bucket(
             Bucket=arg[0],
@@ -94,4 +93,4 @@ def main(arg, userAInfo, userBInfo, ownerInfo):
 
     except ClientError as e:
         print("Error operation : " + e.operation_name)
-        print("Error response : " + e.response['Error']['Message'])
+        print("Error response : " + e.response['Message'])

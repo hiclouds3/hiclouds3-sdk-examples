@@ -26,7 +26,7 @@ def main(arg):
             CreateBucketConfiguration={'LocationConstraint': 'ap-northeast-1'},
             Bucket=arg[1],
         )
-        print("Put Object 'test.txt' with Headers & custom metadata..")
+        #print("Put Object 'test.txt' with Headers & custom metadata..")
 
         client.put_object(
             Body=content,
