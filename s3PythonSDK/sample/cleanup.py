@@ -18,13 +18,12 @@ def main(arg):
             result = client.list_objects_v2(
                 Bucket=i,
             )
-            for v in result:
-                if v == 'Contents':
-                    for r in result['Contents']:
-                        client.delete_object(
-                            Bucket=i,
-                            Key=r['Key']
-                        )
+            if 'Contents' in result:
+                for r in result['Contents']:
+                    client.delete_object(
+                        Bucket=i,
+                        Key=r['Key']
+                    )
             client.delete_bucket(
                 Bucket=i,
             )

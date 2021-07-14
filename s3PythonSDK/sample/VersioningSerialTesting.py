@@ -109,17 +109,19 @@ def main(arg):
         #print("\nClean up..")
         result = client.list_object_versions(
             Bucket=arg[0],
+            
         )
-        for v in result['Versions']:
+        for r in result['Versions']:
             client.delete_object(
                 Bucket=arg[0],
-                Key=v['Key'],
-                VersionId=v['VersionId'],
-            )
+                Key=r['Key'],
+                VersionId=r['VersionId'],
+                )
         client.delete_bucket(
             Bucket=arg[0],
+            
         )
-        print("Versioning Serial Test Done !")
+        print("Versioning Serial Test Done !\n")
 
     except ClientError as e:
         print("Error operation : " + e.operation_name)

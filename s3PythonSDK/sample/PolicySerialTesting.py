@@ -27,20 +27,10 @@ def main(arg):
             Bucket=arg[0]
         )
         #print("\n Clean up..")
-        result = client.list_objects_v2(
-            Bucket=arg[0],
-        )
-        for v in result:
-            if v == 'Contents':
-                for r in result['Contents']:
-                    client.delete_object(
-                        Bucket=arg[0],
-                        Key=r['Key']
-                    )
         client.delete_bucket(
             Bucket=arg[0],
         )
-        print("Policy Serial Test Done !")
+        print("Policy Serial Test Done !\n")
     except ClientError as e:
         print("Error operation : " + e.operation_name)
         print("Error response : " + e.response['Error']['Message'])

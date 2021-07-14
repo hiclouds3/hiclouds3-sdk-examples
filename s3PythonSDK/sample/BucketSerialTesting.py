@@ -107,8 +107,7 @@ def main(arg):
         result = client.list_objects_v2(
             Bucket=arg[0],
         )
-        for v in result:
-            if v == 'Contents':
+        if 'Contents' in result:
                 for r in result['Contents']:
                     client.delete_object(
                         Bucket=arg[0],

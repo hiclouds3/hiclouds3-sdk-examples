@@ -5,12 +5,12 @@ import BucketLoggingSerialTesting
 import BucketSerialTesting
 import LifecycleSerialTesting
 import MPUSerialTesting
-'''import ObjectSerialTesting
+import ObjectSerialTesting
 import PolicySerialTesting
 import VersioningSerialTesting
 import WebsiteSerialTesting
 import BucketCorsSerialTesting
-import BucketTaggingSerialTesting'''
+import BucketTaggingSerialTesting
 import cleanup
 import configparser
 
@@ -36,7 +36,7 @@ print("S3 Python SDK Serial Test-\nbucketname1:" +
       buckets[0] + " ,bucketname2: " + buckets[1])
 print("-----------------------------------------------------------------------")
 
-'''os.system('echo cleanup ') 
+os.system('echo cleanup ') 
 cleanup.main(buckets);
 time.sleep(5);
 
@@ -54,13 +54,13 @@ time.sleep(5)
 
 os.system('echo LifecycleSerialTesting ') 
 LifecycleSerialTesting.main(buckets);
-time.sleep(5)'''
+time.sleep(5)
     
 os.system('echo MPUSerialTesting ') 
 MPUSerialTesting.main(buckets, filePath);
 time.sleep(5)
    
-'''os.system('echo ObjectSerialTesting ') 
+os.system('echo ObjectSerialTesting ') 
 ObjectSerialTesting.main(buckets);
 time.sleep(5)
     
@@ -82,6 +82,6 @@ time.sleep(5)
 
 os.system('echo BucketTaggingSerialTesting')
 BucketTaggingSerialTesting.main(buckets);
-time.sleep(5)'''
+time.sleep(5)
 
 os.system('echo S3 Python SDK Serial Test Done!')

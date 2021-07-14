@@ -1,66 +1,90 @@
 from botocore.exceptions import ClientError
 from client import client
-#from boto.s3.website import WebsiteConfiguration 
+
 
 def main(arg):
     try:
-        bucket=conn.create_bucket(arg[0])
-        k=bucket.new_key('error.html')
-        k.set_contents_from_string('404testchttl<br><title>chttl</title>')
-        k.set_acl('public-read')
-        k=bucket.new_key('index.html')
-        k.set_contents_from_string('<title>chttl</title>Hello World!')
-        k.set_acl('public-read')
-        
-        config=WebsiteConfiguration()
-        #Routing rules
-        config.suffix='index.html'
-        config.error_key='error.html'
-        
-        #RedirectAllRequestsTo NOT SUPPORT YET
-        #RoutingRules=boto.s3.website.RoutingRules()
-        #rule = boto.s3.website.RoutingRule()
-        #rule.redirect=boto.s3.website.Redirect(
-        #            hostname='www.google.com', protocol=None,
-        #            replace_key=None,
-        #            replace_key_prefix=None,
-        #            http_redirect_code=None)
-        #RoutingRules.add_rule(rule)
-        
-        #get bucket url
-        #print bucket.get_website_endpoint()
-        
-        #config.routing_rules=RoutingRules
-        #print "Put Website Configurations.."
-        bucket.set_website_configuration(config)
-        #print "Get Website Configurations.."
-        #print repr(bucket.get_website_configuration())
-        #print "Delete Website Configurations..\n"
-        bucket.delete_website_configuration()
-        
-        
-        
-        #RedirectAllRequestsTo NOT SUPPORT YET
-        #If 'redirect_all_requests_to' is set, all other attribute will be ignored!
-        config2=WebsiteConfiguration()
-        config2.suffix='index.html'
-        #config2.redirect_all_requests_to=boto.s3.website.RedirectLocation(hostname='www.google.com')
-        #print "Put Website Configurations with redirect all request"
-        bucket.set_website_configuration(config2)
-        #print "Get Website Configurations.."
-        #print repr(bucket.get_website_configuration())
-        #print "Delete Website Configurations..\n"
-        bucket.delete_website_configuration()
-        
-        #print "\nClean up.."
-        # clear bucket
-        result = bucket.get_all_versions()
-        for v in result:
-            v.delete()
-        
-        conn.delete_bucket(bucket)
-        #print " - Website Serial Test Done ! \n"
+        client.create_bucket(
+            CreateBucketConfiguration={'LocationConstraint': 'ap-northeast-1'},
+            Bucket=arg[0],
+        )
+        client.put_object(
+            ACL='public-read',
+            Body='404testchttl<br><title>chttl</title>',
+            Bucket=arg[0],
+            Key='error.html',
+        )
+        client.put_object(
+            ACL='public-read',
+            Body='<title>chttl</title>Hello World!',
+            Bucket=arg[0],
+            Key='index.html',
+        )
+        #print("Put Website Configurations..")
+        client.put_bucket_website(
+            Bucket=arg[0],
+            WebsiteConfiguration={
+                'ErrorDocument': {
+                    'Key': 'error.html'
+                },
+                'IndexDocument': {
+                    'Suffix': 'index.html'
+                },
+
+            },
+        )
+        #print("Get Website Configurations..")
+        response = client.get_bucket_website(
+            Bucket=arg[0],
+        )
+        #print('IndexDocument : ' + repr (response['IndexDocument']))
+        #print('ErrorDocument : ' + repr (response['ErrorDocument']))
+        #print("Delete Website Configurations..\n")
+        client.delete_bucket_website(
+            Bucket=arg[0],
+        )
+        client.put_bucket_website(
+            Bucket=arg[0],
+            WebsiteConfiguration={
+                'IndexDocument': {
+                    'Suffix': 'index.html'
+                },
+                'RoutingRules': [
+                    {
+                        'Redirect': {
+                            'HostName': 'www.google.com',
+                            'Protocol': 'https',
+                        }
+                    },
+                ]
+            },
+        )
+        #print("Put Website Configurations with redirect all request")
+        #print("Get Website Configurations..")
+        response = client.get_bucket_website(
+            Bucket=arg[0],
+        )
+        #print('IndexDocument : ' + repr (response['IndexDocument']))
+        #print('RoutingRules : ' + repr (response['RoutingRules']))
+        #print("Delete Website Configurations..\n")
+        client.delete_bucket_website(
+            Bucket=arg[0],
+        )
+
+        #print("\nClean up..")
+        result = client.list_objects_v2(
+            Bucket=arg[0],
+        )
+        if 'Contents' in result:
+            for r in result['Contents']:
+                client.delete_object(
+                    Bucket=arg[0],
+                    Key=r['Key']
+                )
+        client.delete_bucket(
+            Bucket=arg[0],
+        )
+        print("Website Serial Test Done ! \n")
     except ClientError as e:
         print("Error operation : " + e.operation_name)
         print("Error response : " + e.response['Error']['Message'])
-    

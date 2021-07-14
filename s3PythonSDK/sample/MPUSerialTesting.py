@@ -84,13 +84,12 @@ def main(arg, filePath):
         result = client.list_objects_v2(
             Bucket=arg[1],
         )
-        for v in result:
-            if v == 'Contents':
-                for r in result['Contents']:
-                    client.delete_object(
-                        Bucket=arg[1],
-                        Key=r['Key']
-                    )
+        if 'Contents' in result:
+            for r in result['Contents']:
+                client.delete_object(
+                    Bucket=arg[1],
+                    Key=r['Key']
+                )
         # print("Basic MPU test done\n-------------------------------------------------")
 
         # Abort MPU
@@ -193,13 +192,12 @@ def main(arg, filePath):
         result = client.list_objects_v2(
             Bucket=arg[1],
         )
-        for v in result:
-            if v == 'Contents':
-                for r in result['Contents']:
-                    client.delete_object(
-                        Bucket=arg[1],
-                        Key=r['Key']
-                    )
+        if 'Contents' in result:
+            for r in result['Contents']:
+                client.delete_object(
+                    Bucket=arg[1],
+                    Key=r['Key']
+                )
         client.delete_bucket(
             Bucket=arg[1],
         )
