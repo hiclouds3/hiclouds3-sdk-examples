@@ -1,8 +1,8 @@
 ## Sample Code
+## Environment setup
+* Python3.7 以上
+* pip install boto3==1.17.105
 ## Python SDK Serial Test Read me
-## Environment
---Python 3.7.0
---pip install boto3==1.17.105
 * 在「sample/client.py」填入AccessKey, SecretKey資訊
 * 在「sample/PythonSerialTest.py」填入使用者資訊
 * 在「sample/PythonSerialTest.py」設定bucketName/filePath等資訊
