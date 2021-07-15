@@ -10,16 +10,16 @@ from client import client
 
 def main(arg, ownerInfo):
     try:
-        for i in arg:
+        for bucket_name in arg:
             client.create_bucket(
                 CreateBucketConfiguration={
                     'LocationConstraint': 'ap-northeast-1'
                 },
-                Bucket=i,
+                Bucket=bucket_name,
             )
 
             client.put_bucket_acl(
-                Bucket=i,
+                Bucket=bucket_name,
                 ACL='log-delivery-write'
             )
         client.put_bucket_logging(
@@ -43,20 +43,21 @@ def main(arg, ownerInfo):
         #print("Logging List & Give full permission by user ID:")
         #print(repr(client.get_bucket_logging(Bucket=arg[0])['LoggingEnabled']) + "\n")
         #print("Clean up..\n")
-        for i in arg:
+        for bucket_name in arg:
             result = client.list_objects_v2(
-                Bucket=i,
+                Bucket=bucket_name,
             )
             if 'Contents' in result:
                 for r in result['Contents']:
                     client.delete_object(
-                        Bucket=i,
+                        Bucket=bucket_name,
                         Key=r['Key']
                     )
             client.delete_bucket(
-                Bucket=i,
+                Bucket=bucket_name,
             )
         print("Bucket logging Serial test done!\n")
     except ClientError as e:
         print("Error operation : " + e.operation_name)
-        print("Error response : " + e.response['Error']['Message'])
+        print("Error code : " + e.response['Code'])
+        print("Error response : " + e.response['Message'])

@@ -29,5 +29,6 @@ def main(arg):
             )
         except ClientError as e:
             print("Error operation : " + e.operation_name)
+            print("Error code : " + e.response['Code'])
             print("Error response : " + e.response['Message'])
     print("Cleanup done!\n")
