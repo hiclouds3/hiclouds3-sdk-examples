@@ -1,28 +1,37 @@
-import boto.exception 
-from client import conn 
-from xml.dom import minidom
+from botocore.exceptions import ClientError
+from client import client
 # Use http://awspolicygen.s3.amazonaws.com/policygen.html to generate policy String
 # test 1.Put bucket
 #      2.Put policy
 #      3.Get policy
 #      4.Delete policy
+
+
 def main(arg):
     try:
-        bucket=conn.create_bucket(arg[0])
-        policy='{"Version":"2012-10-17","Statement":[{"Sid":"DenyPublicREAD","Effect":"Deny","Principal":{"AWS":"*"},"Action":"s3:GetObject","Resource":"arn:aws:s3:::'+arg[0]+'/*"}]}';
-        #print "Put Deny Public-read policy to bucket"
-        bucket.set_policy(policy)
-        #print "Get Policy:"
-        #print repr(bucket.get_policy())
-        bucket.delete_policy()
-        
-        #print "\n Clean up.."
-        conn.delete_bucket(bucket)
-        #print " - Policy Serial Test Done !"
-    except boto.exception.S3ResponseError, e:
-        xmldoc = minidom.parseString(e.body)
-        itemlist = xmldoc.getElementsByTagName('Message')
-        print "Status Code: " + repr(e.status)
-        print "Reason: " + repr(e.reason)
-        print "Message: " + itemlist[0].childNodes[0].nodeValue
-    
+        client.create_bucket(
+            CreateBucketConfiguration={'LocationConstraint': 'ap-southeast-1'},
+            Bucket=arg[0]
+        )
+        #print("Put Deny Public-read policy to bucket")
+        client.put_bucket_policy(
+            Bucket=arg[0],
+            Policy='{"Version":"2012-10-17","Statement":[{"Sid":"DenyPublicREAD","Effect":"Deny","Principal":{"AWS":"*"},"Action":"s3:GetObject","Resource":"arn:aws:s3:::'+arg[0]+'/*"}]}',
+        )
+        #print("Get Policy:")
+        response = client.get_bucket_policy(
+            Bucket=arg[0]
+        )
+        # print(repr(response['Policy']))
+        client.delete_bucket_policy(
+            Bucket=arg[0]
+        )
+        #print("\n Clean up..")
+        client.delete_bucket(
+            Bucket=arg[0],
+        )
+        print("Policy Serial Test Done !\n")
+    except ClientError as e:
+        print("Error operation : " + e.operation_name)
+        print("Error code : " + e.response['Code'])
+        print("Error response : " + e.response['Message'])

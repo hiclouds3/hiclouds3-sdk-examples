@@ -1,7 +1,5 @@
-import boto
-import boto.exception 
-from client import conn 
-from xml.dom import minidom
+from botocore.exceptions import ClientError
+from client import client
 
 # test 1.Basic Initiate MPU
 #      2.Upload part from file
@@ -10,107 +8,202 @@ from xml.dom import minidom
 #      5.Copy part from Object
 #      6.Basic list MPU & with parameter
 #      7.Basci list parts & with parameters
+
+
 def main(arg, filePath):
     try:
-        bucket=conn.create_bucket(arg[1])
-          
-        #Basic MPU 
-        #print 'Initiate MPU for castle.jpg'
-        mpu=bucket.initiate_multipart_upload('castle.jpg',headers={"Content-Encoding":"UTF-8"},metadata={"flower":"lily"},policy="public-read")
-         
-        #print "uploading part1"
+        eTag = []
+        client.create_bucket(
+            CreateBucketConfiguration={'LocationConstraint': 'ap-southeast-1'},
+            Bucket=arg[1],
+        )
+        # Basic MPU
+        # print('Initiate MPU for castle.jpg')
+        responed = client.create_multipart_upload(
+            ACL="public-read",
+            Bucket=arg[1],
+            ContentEncoding='UTF-8',
+            Key='castle.jpg',
+        )
+        # print("uploading part1")
         fp = open(filePath[0], 'rb')
-        mpu.upload_part_from_file(fp,1)
+        response = client.upload_part(
+            Body=fp,
+            Bucket=arg[1],
+            Key='castle.jpg',
+            PartNumber=1,
+            UploadId=responed['UploadId'],
+        )
+        eTag.append(response['ETag'])
         fp.close()
-         
-        #print "uploading part2"
+        # print("uploading part2")
         fp = open(filePath[1], 'rb')
-        mpu.upload_part_from_file(fp,2)
+        response = client.upload_part(
+            Body=fp,
+            Bucket=arg[1],
+            Key='castle.jpg',
+            PartNumber=2,
+            UploadId=responed['UploadId'],
+        )
+        eTag.append(response['ETag'])
         fp.close()
-         
-        #print "uploading part3"
+        # print("uploading part3")
         fp = open(filePath[2], 'rb')
-        mpu.upload_part_from_file(fp,3)
+        response = client.upload_part(
+            Body=fp,
+            Bucket=arg[1],
+            Key='castle.jpg',
+            PartNumber=3,
+            UploadId=responed['UploadId'],
+        )
+        eTag.append(response['ETag'])
         fp.close()
-         
-        result=mpu.get_all_parts()
-        #print "MPU for "+mpu.key_name+":"
-    #     for m in result:
-    #         print " - "+mpu.key_name+".part"+repr(p.part_number)
-         
-        #print "Complete MPU.."
-        mpu.complete_upload()
-         
-        #print "Show Object & Clean up.."
-        for k in bucket.list():
-            #print k.name
-            k.delete()
-        #print "Basic MPU test done\n-------------------------------------------------"
-         
-        #Abort MPU
-        #print "Test Abort MPU"
-        mpu=bucket.initiate_multipart_upload('testAbort.jpg')
-        result=bucket.get_all_multipart_uploads()
-    #     for m in bucket.get_all_multipart_uploads():
-    #         print m.bucket.name+":"+m.key_name+"\nVersionID: "+m.id 
-        mpu.cancel_upload()
-         
-        #print "Basic Abort MPU test done\n-------------------------------------------------"
-      
-        #Copy parts from file
-        #print "\nTest copy part from Obj"
-        key=bucket.new_key('test1.txt')
-        key.set_contents_from_string('Hello World!')
+        # print("Complete MPU..")
+        client.complete_multipart_upload(
+            Bucket=arg[1],
+            Key='castle.jpg',
+            MultipartUpload={
+                'Parts': [
+                            {
+                                'ETag': eTag[0],
+                                'PartNumber': 1,
+                            },
+                    {
+                                'ETag': eTag[1],
+                                'PartNumber': 2,
+                            },
+                    {
+                                'ETag': eTag[2],
+                                'PartNumber': 3,
+                            },
+                ],
+            },
+            UploadId=responed['UploadId'],
+        )
+        # print("Show Object & Clean up..")
+        result = client.list_objects_v2(
+            Bucket=arg[1],
+        )
+        if 'Contents' in result:
+            for r in result['Contents']:
+                client.delete_object(
+                    Bucket=arg[1],
+                    Key=r['Key']
+                )
+        # print("Basic MPU test done\n-------------------------------------------------")
 
-        mpu=bucket.initiate_multipart_upload('test2.txt')
-        mpu2=bucket.initiate_multipart_upload('test3.txt')
-        
-        #copy part with range 
-        #You can copy a range only if the source object is greater than 5 GB.
-        #Range Copy Example: mpu.copy_part_from_key(arg[0],'5GB',1,0,5)
-        #mpu.copy_part_from_key(arg[0],'5GB',1) 
-        mpu.copy_part_from_key(arg[1],'test1.txt',2)
-        mpu.copy_part_from_key(arg[1],'test1.txt',3)
-        mpu2.copy_part_from_key(arg[1],'test1.txt',2)
-        
-    #     print "\nget MPU with max_uploads=2:"
-        result=bucket.get_all_multipart_uploads(max_uploads=2)
-    #     for m in result:
-    #         print m.bucket.name+":"+m.key_name+"\nUploadID: "+m.id
-        
-    #     print "\nget MPU with key_marker=test2.txt:"
-        result=bucket.get_all_multipart_uploads(key_marker='test2.txt')
-    #     for m in result:
-    #         print m.bucket.name+":"+m.key_name+"\nUploadID: "+m.id
-        
-        result=bucket.list_multipart_uploads(key_marker='test2.txt')
-    #     for m in result:
-    #         print m.bucket.name+":"+m.key_name+"\nUploadID: "+m.id
-        
-        
-    #     print "\nGet part with max_parts=2 :"
-        result=mpu.get_all_parts(max_parts=2)
-    #     for p in result:
-    #         print " - "+mpu.key_name+".part"+repr(p.part_number)
-            
-    #     print "Get part with part_number_marker=2:"
-        result=mpu.get_all_parts(part_number_marker=2)
-    #     for p in result:
-    #         print " - "+mpu.key_name+".part"+repr(p.part_number)
-        
-        
-    #     print "\nClean up.."
+        # Abort MPU
+        # print("Test Abort MPU")
+        responed = client.create_multipart_upload(
+            Bucket=arg[1],
+            Key='testAbort.jpg',
+        )
+        result = client.list_multipart_uploads(
+            Bucket=arg[1],
+        )
+        # print("Bucket :" + arg[1])
+        uploaddata = result['Uploads']
+        # for i in uploaddata:
+        #    print("Key :" + repr(i['Key']))
+        client.abort_multipart_upload(
+            Bucket=arg[1],
+            Key='testAbort.jpg',
+            UploadId=responed['UploadId'],
+        )
+
+        # print("Basic Abort MPU test done\n-------------------------------------------------")
+
+
+
+        # Copy parts from file
+        # print("\nTest copy part from Obj")
+        client.put_object(
+            Body = 'Hello World!',
+            Bucket = arg[1],
+            Key = 'test1.txt',
+        )
+        responed=client.create_multipart_upload(
+            Bucket = arg[1],
+            Key = 'test2.txt',
+        )
+        responed2=client.create_multipart_upload(
+            Bucket = arg[1],
+            Key = 'test3.txt',
+        )
+        client.upload_part_copy(
+            Bucket = arg[1],
+            CopySource = arg[1]+'/test1.txt',
+            Key = 'test2.txt',
+            PartNumber = 2,
+            UploadId = responed['UploadId'],
+        )
+        client.upload_part_copy(
+            Bucket = arg[1],
+            CopySource = arg[1]+'/test1.txt',
+            Key = 'test2.txt',
+            PartNumber = 3,
+            UploadId = responed['UploadId'],
+        )
+        client.upload_part_copy(
+            Bucket = arg[1],
+            CopySource = arg[1]+'/test1.txt',
+            Key = 'test3.txt',
+            PartNumber = 2,
+            UploadId = responed2['UploadId'],
+        )
+        # print("\nget MPU with max_uploads=2:")
+        result=client.list_multipart_uploads(
+            Bucket=arg[1],
+            MaxUploads=2,
+        )
+        # print("Bucket :" + arg[1])
+        uploaddata = result['Uploads']
+        # for i in uploaddata:
+        #    print("Key :" + repr(i['Key']))
+        # print("\nget MPU with key_marker=test2.txt:")
+        result = client.list_multipart_uploads(
+            Bucket=arg[1],
+            KeyMarker='test2.txt',
+        )
+        # print("Bucket :" + arg[1])
+        uploaddata = result['Uploads']
+        # for i in uploaddata:
+        #    print("Key :" + repr(i['Key']))
+        # print("\nGet part with max_parts=2 :")
+        result = client.list_parts(
+            Bucket=arg[1],
+            MaxParts=2,
+            Key='test2.txt',
+            UploadId=responed['UploadId'],
+        )
+        # for i in result['Parts']:
+        #    print(result['Key']+".part"+repr (i['PartNumber']))
+        # print("Get part with part_number_marker=2:")
+        result = client.list_parts(
+            Bucket=arg[1],
+            PartNumberMarker=2,
+            Key='test2.txt',
+            UploadId=responed['UploadId'],
+        )
+        # for i in result['Parts']:
+        #    print(result['Key']+".part"+repr (i['PartNumber']))
+        # print("\nClean up..")
         # clear bucket
-        result = bucket.get_all_versions()
-        for v in result:
-            v.delete()
-        conn.delete_bucket(bucket)
-    #     print " - MPU Serial Test Done!\n"
-        
-    except boto.exception.S3ResponseError, e:
-        xmldoc = minidom.parseString(e.body)
-        itemlist = xmldoc.getElementsByTagName('Message')
-        print "Status Code: " + repr(e.status)
-        print "Reason: " + repr(e.reason)
-        print "Message: " + itemlist[0].childNodes[0].nodeValue
-    
+        result = client.list_objects_v2(
+            Bucket=arg[1],
+        )
+        if 'Contents' in result:
+            for r in result['Contents']:
+                client.delete_object(
+                    Bucket=arg[1],
+                    Key=r['Key']
+                )
+        client.delete_bucket(
+            Bucket=arg[1],
+        )
+        print("MPU Serial Test Done!\n")
+
+    except ClientError as e:
+        print("Error operation : " + e.operation_name)
+        print("Error code : " + e.response['Code'])
+        print("Error response : " + e.response['Message'])

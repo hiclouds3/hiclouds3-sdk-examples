@@ -12,42 +12,46 @@ import WebsiteSerialTesting
 import BucketCorsSerialTesting
 import BucketTaggingSerialTesting
 import cleanup
-import ConfigParser
- 
-#Change test buckets' name here
-buckets=["allentest1","allentest2","allentest3"] 
+import configparser
 
-config = ConfigParser.ConfigParser()
+# Change test buckets' name here
+buckets = ["yuyuman1", "yuyuman2", "yuyuman3"]
+
+config = configparser.ConfigParser()
 config.read('Config.ini')
 
-#Change userA Information here, canonical ID -> e-mail 
-userAInfo=[config.get('Section_A', 'userACanonicalID'),config.get('Section_A', 'userAMail')] 
-#Change userB Information here, canonical ID -> e-mail 
-userBInfo=[config.get('Section_A', 'userBCanonicalID'),config.get('Section_A', 'userBMail')] 
-#Change owner Information here, canonical ID -> e-mail 
-ownerInfo=[config.get('Section_A', 'ownerCanonicalID'),config.get('Section_A', 'ownerMail')] 
-#FilePath
-filePath=["castle.jpg.001", "castle.jpg.002", "castle.jpg.003"]
+# Change userA Information here, canonical ID -> e-mail
+userAInfo = [config.get('Section_A', 'userACanonicalID'),
+             config.get('Section_A', 'userAMail')]
+# Change userB Information here, canonical ID -> e-mail
+userBInfo = [config.get('Section_A', 'userBCanonicalID'),
+             config.get('Section_A', 'userBMail')]
+# Change owner Information here, canonical ID -> e-mail
+ownerInfo = [config.get('Section_A', 'ownerCanonicalID'),
+             config.get('Section_A', 'ownerMail')]
+# FilePath
+filePath = ["castle.jpg.001","castle.jpg.002","castle.jpg.003"]
 
-print "S3 Python SDK Serial Test-\nbucketname1:" +buckets[0]+ " ,bucketname2: " +buckets[1]
-print "-----------------------------------------------------------------------"
+print("S3 Python SDK Serial Test-\nbucketname1:" +
+      buckets[0] + " ,bucketname2: " + buckets[1])
+print("-----------------------------------------------------------------------")
 
 os.system('echo cleanup ') 
 cleanup.main(buckets);
-time.sleep(5)
+time.sleep(5);
 
 os.system('echo ACLSerialTesting ') 
-ACLSerialTesting.main(buckets, userAInfo, ownerInfo);
+ACLSerialTesting.main(buckets, userAInfo, userBInfo, ownerInfo)
 time.sleep(5)
-   
+
 os.system('echo BucketLoggingSerialTesting ') 
 BucketLoggingSerialTesting.main(buckets, ownerInfo);
 time.sleep(5)
-  
-os.system('echo BucketSerialTesting ') 
-BucketSerialTesting.main(buckets);
+
+os.system('echo BucketSerialTesting ')
+BucketSerialTesting.main(buckets)
 time.sleep(5)
-   
+
 os.system('echo LifecycleSerialTesting ') 
 LifecycleSerialTesting.main(buckets);
 time.sleep(5)

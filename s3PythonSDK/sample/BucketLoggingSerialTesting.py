@@ -1,39 +1,63 @@
-import boto
-from boto.exception import S3ResponseError
-from client import conn 
-from boto.s3.key import Key
-from boto.s3.acl import Grant
-from xml.dom import minidom
+from botocore.exceptions import ClientError
+from client import client
 
- 
 # test 1. Basic putBucket
 #      2. put BucketACL
 #      3. put BucketLogging (put log Native & to target bucket)
 #      4. get BucketLogging
 #      5. Delete Bucket
+
+
 def main(arg, ownerInfo):
     try:
-        bucket = conn.create_bucket(arg[0])
-        bucket2 = conn.create_bucket(arg[1])
-        
-        # the following both way can give log-delievery group WRITE & READ_ACP permission
-        bucket.set_canned_acl('log-delivery-write')
-        bucket2.set_as_logging_target()
-        bucket.add_email_grant('READ', ownerInfo[1],True)
-        bucket.enable_logging(bucket,"chttestlog",grants=bucket.list_grants())
-        #print "Put log to itself & give full permission by user email:\n"+repr(bucket.get_logging_status())
-        bucket.enable_logging(bucket2,"chttestlog")
-        #print "Put log to another bucket:\n"+repr(bucket.get_logging_status())
-        bucket.disable_logging()
-        #print "Disable logging:\n"+repr(bucket.get_logging_status())
-        
-        #print "Clean up.."
-        conn.delete_bucket(bucket)
-        conn.delete_bucket(bucket2)
-        #print " - Bucket logging Serial test done!"
-    except S3ResponseError, e:
-        xmldoc = minidom.parseString(e.body)
-        itemlist = xmldoc.getElementsByTagName('Message')
-        print "Status Code: " + repr(e.status)
-        print "Reason: " + repr(e.reason)
-        print "Message: " + itemlist[0].childNodes[0].nodeValue
+        for bucket_name in arg:
+            client.create_bucket(
+                CreateBucketConfiguration={
+                    'LocationConstraint': 'ap-southeast-1'
+                },
+                Bucket=bucket_name,
+            )
+
+            client.put_bucket_acl(
+                Bucket=bucket_name,
+                ACL='log-delivery-write'
+            )
+        client.put_bucket_logging(
+            Bucket=arg[0],
+            BucketLoggingStatus={
+                'LoggingEnabled': {
+                    'TargetBucket': arg[1],
+                    'TargetGrants': [
+                        {
+                            'Grantee': {
+                                'ID': ownerInfo[0],
+                                'Type': 'CanonicalUser'
+                            },
+                            'Permission': 'FULL_CONTROL',
+                        },
+                    ],
+                    'TargetPrefix': '',
+                },
+            },
+        )
+        #print("Logging List & Give full permission by user ID:")
+        #print(repr(client.get_bucket_logging(Bucket=arg[0])['LoggingEnabled']) + "\n")
+        #print("Clean up..\n")
+        for bucket_name in arg:
+            result = client.list_objects_v2(
+                Bucket=bucket_name,
+            )
+            if 'Contents' in result:
+                for r in result['Contents']:
+                    client.delete_object(
+                        Bucket=bucket_name,
+                        Key=r['Key']
+                    )
+            client.delete_bucket(
+                Bucket=bucket_name,
+            )
+        print("Bucket logging Serial test done!\n")
+    except ClientError as e:
+        print("Error operation : " + e.operation_name)
+        print("Error code : " + e.response['Code'])
+        print("Error response : " + e.response['Message'])
