@@ -14,7 +14,7 @@ def main(arg, filePath):
     try:
         eTag = []
         client.create_bucket(
-            CreateBucketConfiguration={'LocationConstraint': 'ap-northeast-1'},
+            CreateBucketConfiguration={'LocationConstraint': 'ap-southeast-1'},
             Bucket=arg[1],
         )
         # Basic MPU

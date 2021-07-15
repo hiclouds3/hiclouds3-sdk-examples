@@ -5,7 +5,7 @@ from botocore.exceptions import ClientError
 def main(arg, userAInfo, userBInfo, ownerInfo):
     try:
         client.create_bucket(
-            CreateBucketConfiguration={'LocationConstraint': 'ap-northeast-1'},
+            CreateBucketConfiguration={'LocationConstraint': 'ap-southeast-1'},
             Bucket=arg[0]
         )
         client.put_bucket_acl(

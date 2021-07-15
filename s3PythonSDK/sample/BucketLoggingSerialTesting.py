@@ -13,7 +13,7 @@ def main(arg, ownerInfo):
         for bucket_name in arg:
             client.create_bucket(
                 CreateBucketConfiguration={
-                    'LocationConstraint': 'ap-northeast-1'
+                    'LocationConstraint': 'ap-southeast-1'
                 },
                 Bucket=bucket_name,
             )

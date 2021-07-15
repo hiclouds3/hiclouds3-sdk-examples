@@ -19,11 +19,11 @@ def main(arg):
         content = "abcdefghijklmnopqrstuvwxyz<br>01234567890112345678901234<br>!@#$%^&*()-=[]{};':',.<>/?<br>01234567890112345678901234<br>abcdefghijklmnopqrstuvwxyz<br>"
 
         client.create_bucket(
-            CreateBucketConfiguration={'LocationConstraint': 'ap-northeast-1'},
+            CreateBucketConfiguration={'LocationConstraint': 'ap-southeast-1'},
             Bucket=arg[0],
         )
         client.create_bucket(
-            CreateBucketConfiguration={'LocationConstraint': 'ap-northeast-1'},
+            CreateBucketConfiguration={'LocationConstraint': 'ap-southeast-1'},
             Bucket=arg[1],
         )
         #print("Put Object 'test.txt' with Headers & custom metadata..")

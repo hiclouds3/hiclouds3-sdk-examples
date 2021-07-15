@@ -9,7 +9,7 @@ def main(arg):
             client.create_bucket(
                 ACL='private' or 'public-read' or 'public-read-write' or 'authenticated-read',
                 CreateBucketConfiguration={
-                    'LocationConstraint': 'ap-northeast-1'
+                    'LocationConstraint': 'ap-southeast-1'
                 },
                 Bucket=i,
             )

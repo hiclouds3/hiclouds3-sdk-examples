@@ -14,7 +14,7 @@ def main(arg):
     try:
         #print("Try putBucket with region 'ap-northeast-1':")
         client.create_bucket(
-            CreateBucketConfiguration={'LocationConstraint': 'ap-northeast-1'},
+            CreateBucketConfiguration={'LocationConstraint': 'ap-southeast-1'},
             Bucket=arg[2],
         )
         result = client.get_bucket_location(
@@ -28,7 +28,7 @@ def main(arg):
         #print("put Bucket with 'public-read' permission..")
         client.create_bucket(
             ACL='public-read',
-            CreateBucketConfiguration={'LocationConstraint': 'ap-northeast-1'},
+            CreateBucketConfiguration={'LocationConstraint': 'ap-southeast-1'},
             Bucket=arg[0],
         )
         result = client.get_bucket_acl(

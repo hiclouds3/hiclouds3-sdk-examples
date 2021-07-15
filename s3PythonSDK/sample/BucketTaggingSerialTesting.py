@@ -5,7 +5,7 @@ from client import client
 def main(arg):
     try:
         client.create_bucket(
-            CreateBucketConfiguration={'LocationConstraint': 'ap-northeast-1'},
+            CreateBucketConfiguration={'LocationConstraint': 'ap-southeast-1'},
             Bucket=arg[0],
         )
         # print("SetBucketTags")
