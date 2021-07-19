@@ -1,11 +1,28 @@
 package clients
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/credentials"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
-client := s3.New(s3.Options{
-	Region :            "ap-southeast-1",
-	Credentials :       aws.NewCredentialsCache(credentials.NewStaticCredentialsProvider("IgZvbove5gZJHfzX8BUyUC0irS2ENDZ", "3u22C1gb0p1P0Nwg2iQSausvihuSBClcH2F1BCovdaSuKdAZH9FgBlf0Fq1Gs1Etu")),
-})
+
+func main() {
+	customResolver := aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
+		return aws.Endpoint{
+			URL: "http://s3.hicloud.net.tw",
+			//HostnameImmutable: true,
+		}, nil
+	})
+
+	cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithEndpointResolver(customResolver))
+
+	print(err)
+	Client := s3.NewFromConfig(cfg, func(o *s3.Options) {
+		o.Region = "us-west-2"
+		o.Credentials = aws.NewCredentialsCache(credentials.NewStaticCredentialsProvider("", "", ""))
+	})
+
+}
