@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 
-	//"net/url"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
@@ -13,8 +12,7 @@ func CopyObject(arg [3]string, filePath [3]string) {
 	input := &s3.CopyObjectInput{
 		Bucket:     &arg[1],
 		CopySource: &source,
-		//aws.String(url.PathEscape(source))
-		Key: &filePath[1],
+		Key:        &filePath[1],
 	}
 
 	_, copyobject_err := Client.CopyObject(context.TODO(), input)
