@@ -11,9 +11,12 @@ func main() {
 	//userAInfo := [2]string{"","",}
 	//userAInfo := [2]string{"","",}
 	//ownerInfo := [2]string{"","",}
-	//filePath := [3]string{"castle.jpg.001","castle.jpg.002","castle.jpg.003",}
+	filePath := [3]string{"castle.jpg.001", "castle.jpg.002", "castle.jpg.003"}
 	fmt.Printf("S3 Python SDK Serial Test-\nbucketname1: %s  bucketname2: %s\n", buckets[0], buckets[1])
 	fmt.Println("-----------------------------------------------------------------------")
-	Cleanup(buckets)
-	Gun()
+	//CreateBucket(buckets)
+	PutObject(buckets, filePath)
+	CopyObject(buckets, filePath)
+	//DeleteObject(buckets, filePath)
+	//DeleteBucket(buckets)
 }
