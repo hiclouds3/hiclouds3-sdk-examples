@@ -19,7 +19,6 @@ func GetBucketAcl(arg [3]string) {
 	}
 	fmt.Println("")
 	fmt.Println("Get " + arg[0] + " ACL:")
-	fmt.Println("")
 	fmt.Println("Owner:", *result.Owner.DisplayName)
 	fmt.Println("Grants")
 
