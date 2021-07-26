@@ -14,7 +14,6 @@ func CopyObject(arg [3]string, filePath [3]string) {
 		CopySource: &source,
 		Key:        &filePath[1],
 	}
-
 	_, copyobject_err := Client.CopyObject(context.TODO(), input)
 	if copyobject_err != nil {
 		fmt.Println("Got an error copying item:")

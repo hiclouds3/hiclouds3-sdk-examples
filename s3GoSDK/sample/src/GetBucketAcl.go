@@ -21,7 +21,6 @@ func GetBucketAcl(arg [3]string) {
 	fmt.Println("Get " + arg[0] + " ACL:")
 	fmt.Println("Owner:", *result.Owner.DisplayName)
 	fmt.Println("Grants")
-
 	for _, g := range result.Grants {
 		// If we add a canned ACL, the name is nil
 		if g.Grantee.DisplayName == nil {
@@ -29,7 +28,6 @@ func GetBucketAcl(arg [3]string) {
 		} else {
 			fmt.Println("  Grantee:   ", *g.Grantee.DisplayName)
 		}
-
 		fmt.Println("  Type:      ", string(g.Grantee.Type))
 		fmt.Println("  Permission:", string(g.Permission))
 		fmt.Println("")

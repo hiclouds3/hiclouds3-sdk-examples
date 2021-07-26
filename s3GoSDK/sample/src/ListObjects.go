@@ -19,9 +19,7 @@ func ListObjects(arg [3]string) {
 			fmt.Println(listobjects_err)
 			return
 		}
-
 		fmt.Println("Objects in " + bucket + ":")
-
 		for _, item := range result.Contents {
 			fmt.Println("Name:          ", *item.Key)
 			fmt.Println("Last modified: ", *item.LastModified)
@@ -29,7 +27,6 @@ func ListObjects(arg [3]string) {
 			fmt.Println("Storage class: ", item.StorageClass)
 			fmt.Println("")
 		}
-
 		fmt.Println("Found", len(result.Contents), "items in bucket", bucket)
 		fmt.Println("")
 	}

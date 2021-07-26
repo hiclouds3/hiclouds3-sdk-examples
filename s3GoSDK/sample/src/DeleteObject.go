@@ -16,7 +16,6 @@ func DeleteObject(arg [3]string, filePath [3]string) {
 		Bucket: &arg[1],
 		Key:    &filePath[1],
 	}
-
 	_, deleteobject_err := Client.DeleteObject(context.TODO(), input)
 	if deleteobject_err != nil {
 		fmt.Println("Got an error deleting item:")
