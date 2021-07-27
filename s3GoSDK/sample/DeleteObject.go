@@ -7,14 +7,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
-func DeleteObject(arg [3]string, filePath [3]string) {
+func DeleteObject(buckets [3]string, filePaths [3]string) {
 	input := &s3.DeleteObjectInput{
-		Bucket: &arg[0],
-		Key:    &filePath[0],
+		Bucket: &buckets[0],
+		Key:    &filePaths[0],
 	}
 	input2 := &s3.DeleteObjectInput{
-		Bucket: &arg[1],
-		Key:    &filePath[1],
+		Bucket: &buckets[1],
+		Key:    &filePaths[1],
 	}
 	_, deleteobject_err := Client.DeleteObject(context.TODO(), input)
 	if deleteobject_err != nil {
@@ -28,6 +28,6 @@ func DeleteObject(arg [3]string, filePath [3]string) {
 		fmt.Println(deleteobject_err2)
 		return
 	}
-	fmt.Println("Deleted " + filePath[0] + " from " + arg[0])
-	fmt.Println("Deleted " + filePath[1] + " from " + arg[1])
+	fmt.Println("Deleted " + filePaths[0] + " from " + buckets[0])
+	fmt.Println("Deleted " + filePaths[1] + " from " + buckets[1])
 }

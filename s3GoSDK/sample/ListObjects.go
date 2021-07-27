@@ -8,8 +8,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
-func ListObjects(arg [3]string) {
-	for _, bucket := range arg {
+func ListObjects(buckets [3]string) {
+	for _, bucket := range buckets {
 		input := &s3.ListObjectsV2Input{
 			Bucket: aws.String(bucket),
 		}

@@ -7,8 +7,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
-func CreateBucket(arg [3]string) {
-	for _, bucket := range arg {
+func CreateBucket(buckets [3]string) {
+	for _, bucket := range buckets {
 		fmt.Printf("%s\n", bucket)
 		fmt.Println("-----------------------------------------------------------------------")
 		input := &s3.CreateBucketInput{

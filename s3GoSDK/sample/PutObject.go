@@ -9,17 +9,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
-func PutObject(arg [3]string, filePath [3]string) {
-	file, err := os.Open(filePath[0])
+func PutObject(buckets [3]string, filePaths [3]string) {
+	file, err := os.Open(filePaths[0])
 	if err != nil {
-		fmt.Println("Unable to open file " + filePath[0])
+		fmt.Println("Unable to open file " + filePaths[0])
 		return
 	}
 	defer file.Close()
 	input := &s3.PutObjectInput{
 		ACL:    "private",
-		Bucket: aws.String(arg[0]),
-		Key:    aws.String(filePath[0]),
+		Bucket: aws.String(buckets[0]),
+		Key:    aws.String(filePaths[0]),
 		Body:   file,
 	}
 	_, putobject_err := Client.PutObject(context.TODO(), input)

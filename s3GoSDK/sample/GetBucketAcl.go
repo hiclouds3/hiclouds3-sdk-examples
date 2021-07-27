@@ -8,17 +8,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
-func GetBucketAcl(arg [3]string) {
+func GetBucketAcl(buckets [3]string) {
 	input := &s3.GetBucketAclInput{
-		Bucket: aws.String(arg[0]),
+		Bucket: aws.String(buckets[0]),
 	}
 	result, err := Client.GetBucketAcl(context.TODO(), input)
 	if err != nil {
-		fmt.Println("Got an error retrieving ACL for " + arg[0])
+		fmt.Println("Got an error retrieving ACL for " + buckets[0])
 		return
 	}
 	fmt.Println("")
-	fmt.Println("Get " + arg[0] + " ACL:")
+	fmt.Println("Get " + buckets[0] + " ACL:")
 	fmt.Println("Owner:", *result.Owner.DisplayName)
 	fmt.Println("Grants")
 	for _, g := range result.Grants {
