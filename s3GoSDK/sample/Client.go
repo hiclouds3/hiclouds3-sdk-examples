@@ -21,7 +21,7 @@ var cfg, _ = config.LoadDefaultConfig(
 	context.TODO(),
 	config.WithRegion("us-east-1"),
 	config.WithEndpointResolver(customResolver),
-	config.WithCredentialsProvider(credentials.NewStaticCredentialsProvider("", "", "")),
+	config.WithCredentialsProvider(credentials.NewStaticCredentialsProvider("Enter your AccessKey", "Enter your SecretKey", "")),
 	config.WithAPIOptions([]func(stack *middleware.Stack) error{
 		CustomizeRequestHeaders(),
 	}),

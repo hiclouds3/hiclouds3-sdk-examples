@@ -6,7 +6,7 @@ import (
 
 func main() {
 	buckets := [3]string{
-		"yuyuman1", "yuyuman2", "yuyuman3",
+		"Enter your bucket name1", "Enter your bucket name2", "Enter your bucket name3",
 	}
 	filePath := [3]string{"castle.jpg.001", "castle.jpg.002", "castle.jpg.003"}
 	fmt.Printf("S3 GO SDK Serial Test-\nbucketname1: %s  bucketname2: %s\n", buckets[0], buckets[1])
