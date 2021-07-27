@@ -40,7 +40,8 @@ os.system('echo cleanup ')
 cleanup.main(buckets);
 time.sleep(5);
 
-'''ACLSerialTesting.main(buckets, userAInfo, userBInfo, ownerInfo)
+os.system('echo ACLSerialTesting ') 
+ACLSerialTesting.main(buckets, userAInfo, userBInfo, ownerInfo)
 time.sleep(5)
 
 os.system('echo BucketLoggingSerialTesting ') 
@@ -81,6 +82,6 @@ time.sleep(5)
 
 os.system('echo BucketTaggingSerialTesting')
 BucketTaggingSerialTesting.main(buckets);
-time.sleep(5)'''
+time.sleep(5)
 
 os.system('echo S3 Python SDK Serial Test Done!')

@@ -1,4 +1,5 @@
 ﻿from client import client
+
 #
 # 此範例程式為示範如何使用hicloud S3 PHP SDK發送基本的request至hicloud S3
 #
@@ -8,6 +9,8 @@
 #
 # 重要：在運行此範例程式前，請務必確認已將 hicloud S3 Access Key 與 Secret Key 填入client.py 檔案中
 #
+
+
 print("S3 Python SDK Serial Test\n")
 print("-----------------------------------------------------------------------")
 
