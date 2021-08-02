@@ -46,7 +46,7 @@ def main(arg, userAInfo, userBInfo, ownerInfo):
                     }
                 ],
                 'Owner': {
-                    'DisplayName': 'yoyoman0817',
+                    'DisplayName': 'test123456789',
                     'ID': ownerInfo[0]
                 }
             },
@@ -75,7 +75,7 @@ def main(arg, userAInfo, userBInfo, ownerInfo):
                     }
                 ],
                 'Owner': {
-                    'DisplayName': 'yoyoman0817',
+                    'DisplayName': 'test123456789',
                     'ID': ownerInfo[0]
                 }
             },
