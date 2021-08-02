@@ -3,10 +3,9 @@ from client import client
 
 
 # test 1. Basic putBucket
-#      2. put BucketACL
-#      3. put BucketLogging (put log Native & to target bucket)
-#      4. get BucketLogging
-#      5. Delete Bucket
+#      2. put BucketLogging (put log Native & to target bucket)
+#      3. get BucketLogging
+#      4. Delete Bucket
 def main(arg):
     try:
         client.create_bucket(

@@ -2,7 +2,7 @@ import boto3
 from botocore.exceptions import ClientError
 from client import client
 
-# test 1.Put bucket with region
+# test 1.Put Bucket with region
 #      2.Put Bucket with canned ACL
 #      3.Basic putObject
 #      4.Get bucket with parameters
