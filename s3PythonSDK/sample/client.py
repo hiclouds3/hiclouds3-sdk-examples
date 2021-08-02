@@ -1,7 +1,7 @@
 import boto3
 from botocore.config import Config
 config=Config(
-    signature_version='s3'        
+    signature_version= 's3v4'        
 )
 client = boto3.client(
     service_name='s3',
