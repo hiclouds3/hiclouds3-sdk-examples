@@ -2,30 +2,22 @@ from client import client
 from botocore.exceptions import ClientError
 
 
-def main(arg):
-
-    for i in arg:
+def main():
+    bucket = client.list_buckets()
+    for i in bucket['Buckets']:
         try:
-            client.create_bucket(
-                ACL='private' or 'public-read' or 'public-read-write' or 'authenticated-read',
-                CreateBucketConfiguration={
-                    'LocationConstraint': 'ap-southeast-1'
-                },
-                Bucket=i,
-            )
-
             #print("prepare clean bucket: " + i)
             result = client.list_objects_v2(
-                Bucket=i,
+                Bucket=i['Name'],
             )
             if 'Contents' in result:
                 for r in result['Contents']:
                     client.delete_object(
-                        Bucket=i,
+                        Bucket=i['Name'],
                         Key=r['Key']
                     )
             client.delete_bucket(
-                Bucket=i,
+                Bucket=i['Name'],
             )
         except ClientError as e:
             print("Error operation : " + e.operation_name)

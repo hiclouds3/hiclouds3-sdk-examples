@@ -46,7 +46,7 @@ def main(arg, userAInfo, userBInfo, ownerInfo):
                     }
                 ],
                 'Owner': {
-                    'DisplayName': 'yoyoman0817',
+                    'DisplayName': 'test123456789',
                     'ID': ownerInfo[0]
                 }
             },
@@ -55,6 +55,7 @@ def main(arg, userAInfo, userBInfo, ownerInfo):
             Bucket=arg[0],
         ))
         #print ("Add grant by user id:\n" + result)
+        # use email to set bucket acl
         '''client.put_bucket_acl(
             Bucket=arg[0],
             AccessControlPolicy={
@@ -75,7 +76,7 @@ def main(arg, userAInfo, userBInfo, ownerInfo):
                     }
                 ],
                 'Owner': {
-                    'DisplayName': 'yoyoman0817',
+                    'DisplayName': 'test123456789',
                     'ID': ownerInfo[0]
                 }
             },

@@ -1,7 +1,7 @@
 ﻿from client import client
 
 #
-# 此範例程式為示範如何使用hicloud S3 PHP SDK發送基本的request至hicloud S3
+# 此範例程式為示範如何使用hicloud S3 SDK發送基本的request至hicloud S3
 #
 # 前提：必須先取得hicloud S3開發所需之AccessKey與SecretKey
 # 取得AccessKey與SecretKey之流程，請參考"hicloud S3 Quick Start"文件 :
