@@ -40,3 +40,7 @@
 	```sh
 	$ python3 sample/PythonSerialTest.py
 	```
+
+## Additional Resource
+* [開發指南](documentation/hicloudS3-python-sdk-開發指南.pdf)
+* [Developer Guide](documentation/hicloudS3-python-sdk-DeveloperGuide.pdf)
