@@ -19,17 +19,13 @@ buckets = ["yuyuman1", "yuyuman2", "yuyuman3"]
 
 config = configparser.ConfigParser()
 config.read('Config.ini')
-
-# Change userA Information here, canonical ID -> e-mail
 userAInfo = [config.get('Section_A', 'userACanonicalID'),
              config.get('Section_A', 'userAMail')]
-# Change userB Information here, canonical ID -> e-mail
 userBInfo = [config.get('Section_A', 'userBCanonicalID'),
              config.get('Section_A', 'userBMail')]
-# Change owner Information here, canonical ID -> e-mail
 ownerInfo = [config.get('Section_A', 'ownerCanonicalID'),
              config.get('Section_A', 'ownerMail')]
-# FilePath
+# Change test filePath's name here
 filePath = ["castle.jpg.001","castle.jpg.002","castle.jpg.003"]
 
 print("S3 Python SDK Serial Test-\nbucketname1:" +
