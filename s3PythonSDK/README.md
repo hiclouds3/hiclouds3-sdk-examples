@@ -15,6 +15,7 @@
 		```
 * Fill in AccessKey, SecretKey in¡usample/client.py¡v
 	```python
+	import boto3
 	client = boto3.client(
 		aws_access_key_id='enter your Accesskey',
     		aws_secret_access_key='enter your secretly',
