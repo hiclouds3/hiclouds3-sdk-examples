@@ -1,4 +1,4 @@
-## Sample Code
+## hicloud S3 Python SDK
 
 ## Environment setup
 * Python3.7 ¥H¤W
@@ -37,3 +37,6 @@
 	filePath = ["enter your filePath name", "enter your filePath name", "enter your filePath name"]
 	```
 * If you run¡usample/PythonSerialTest.py¡v,all the sample programs will be run once
+	```sh
+	$ sudo python3 sample/PythonSerialTest.py
+	```
