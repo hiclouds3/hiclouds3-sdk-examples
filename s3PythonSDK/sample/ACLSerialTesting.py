@@ -55,7 +55,7 @@ def main(arg, userAInfo, userBInfo, ownerInfo):
             Bucket=arg[0],
         ))
         #print ("Add grant by user id:\n" + result)
-        #use email to set bucket acl
+        # use email to set bucket acl
         '''client.put_bucket_acl(
             Bucket=arg[0],
             AccessControlPolicy={

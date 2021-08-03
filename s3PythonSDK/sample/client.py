@@ -1,10 +1,11 @@
 import boto3
 from botocore.config import Config
-config=Config(
-    signature_version= 's3v4'        
+config = Config(
+    signature_version='s3v4'
 )
 client = boto3.client(
     service_name='s3',
+    region_name='us-east-1'
     config=config,
     endpoint_url='http://s3.hicloud.net.tw',
     aws_access_key_id='',
