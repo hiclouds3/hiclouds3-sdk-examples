@@ -6,7 +6,7 @@ config = Config(
 )
 client = boto3.client(
     service_name='s3',
-    region_name='us-east-1'
+    region_name='us-east-1',
     config=config,
     endpoint_url='http://s3.hicloud.net.tw',
     aws_access_key_id='',
