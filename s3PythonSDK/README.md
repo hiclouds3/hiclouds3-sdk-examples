@@ -1,4 +1,4 @@
-## hicloud S3 Python SDK
+# hicloud S3 Python SDK
 
 ## Environment setup
 * Python3.7 ¥H¤W
@@ -38,5 +38,5 @@
 	```
 * If you run¡usample/PythonSerialTest.py¡v,all the sample programs will be run once
 	```sh
-	$ sudo python3 sample/PythonSerialTest.py
+	$ python3 sample/PythonSerialTest.py
 	```
