@@ -14,6 +14,12 @@
  	  	)
 		```
 * Fill in AccessKey, SecretKey in¡usample/client.py¡v
+	```python
+	client = boto3.client(
+		aws_access_key_id='enter your Accesskey',
+    		aws_secret_access_key='enter your secretly'
+	)
+	```
 * Fill in user information in¡usample/PythonSerialTest.py¡v
 * Set bucketName and filePath information in¡usample/PythonSerialTest.py¡v
 * If you run¡usample/PythonSerialTest.py¡v,all the sample programs will be run once
