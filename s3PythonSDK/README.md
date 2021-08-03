@@ -21,7 +21,7 @@
     	aws_secret_access_key='enter your secretKey',
 	)
 	```
-* Fill in user information in¡usample/PythonSerialTest.py¡v
+* Fill in user information in¡usample/Config.ini¡v
 	```sh
 	[Section_A]
 	userACanonicalID = enter your id
