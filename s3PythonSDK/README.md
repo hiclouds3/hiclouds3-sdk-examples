@@ -5,10 +5,14 @@
 * pip install boto3==1.17.105
 
 ## Python SDK Serial Test Read me
-* 目前sample code是使用v4簽證 如果需要使用v2則需更改以下內容
-	* 在「sample/client.py」把's3v4'改成's3'
-* 在「sample/client.py」填入AccessKey, SecretKey資訊
-* 在「sample/PythonSerialTest.py」填入使用者資訊
-* 在「sample/PythonSerialTest.py」設定bucketName/filePath等資訊
-* 執行「sample/PythonSerialTest.py」將會將所有範例程式執行過一遍
-
+* This sample code use Signature Version 4 now. If you want to use Signature Version 2 ,you need to change the following.
+	* Change 's3v4' to 's3' in「sample/client.py」
+	* example code  
+	  	from botocore.config import Config
+ 	  	config = Config(
+    	       		signature_version= 's3' 
+ 	  	)
+* Fill in AccessKey, SecretKey in「sample/client.py」
+* Fill in user information in「sample/PythonSerialTest.py」
+* Set bucketName and filePath information in「sample/PythonSerialTest.py」
+* If you run「sample/PythonSerialTest.py」,all the sample programs will be run once
