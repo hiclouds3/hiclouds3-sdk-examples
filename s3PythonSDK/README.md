@@ -18,9 +18,22 @@
 	import boto3
 	client = boto3.client(
 		aws_access_key_id='enter your Accesskey',
-    	aws_secret_access_key='enter your secretly',
+    	aws_secret_access_key='enter your secretKey',
 	)
 	```
 * Fill in user information in¡usample/PythonSerialTest.py¡v
+	```sh
+	[Section_A]
+	userACanonicalID = enter your id
+	userAMail = enter your email
+	userBCanonicalID = enter your id
+	userBMail = enter your email
+	ownerCanonicalID = enter your id
+	ownerMail = enter your email
+	```
 * Set bucketName and filePath information in¡usample/PythonSerialTest.py¡v
+	```python
+	buckets = ["enter your bucket name", "enter your bucket name", "enter your bucket name"]
+	filePath = ["enter your filePath name", "enter your filePath name", "enter your filePath name"]
+	```
 * If you run¡usample/PythonSerialTest.py¡v,all the sample programs will be run once
