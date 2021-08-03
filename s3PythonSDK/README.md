@@ -17,7 +17,7 @@
 	```python
 	client = boto3.client(
 		aws_access_key_id='enter your Accesskey',
-    		aws_secret_access_key='enter your secretly'
+    		aws_secret_access_key='enter your secretly',
 	)
 	```
 * Fill in user information in¡usample/PythonSerialTest.py¡v
