@@ -37,7 +37,7 @@ print("S3 Python SDK Serial Test-\nbucketname1:" +
 print("-----------------------------------------------------------------------")
 
 os.system('echo cleanup ') 
-cleanup.main(buckets)
+cleanup.main()
 time.sleep(5)
 
 os.system('echo ACLSerialTesting ') 
