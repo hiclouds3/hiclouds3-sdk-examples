@@ -4,7 +4,10 @@ from client import client
 #      2.put lifecycle rules(expire in days & on date)
 #      3.get lifecycle
 #      4.delete lifecycle
-#      5.delete bucket
+#      5.put lifecycle rules(transistion in day)
+#      6.get lifecycle
+#      7.delete lifecycle
+#      8.delete bucket
 
 
 def main(arg):
@@ -13,7 +16,6 @@ def main(arg):
             CreateBucketConfiguration={'LocationConstraint': 'ap-southeast-1'},
             Bucket=arg[0],
         )
-
         client.put_bucket_lifecycle(
             Bucket=arg[0],
             LifecycleConfiguration={
@@ -37,7 +39,6 @@ def main(arg):
                 ],
             },
         )
-
         result = client.get_bucket_lifecycle(
             Bucket=arg[0],
         )
@@ -45,6 +46,33 @@ def main(arg):
         #    print("Rule ID: "+rules['ID'])
         #    print("prefix: "+rules['Prefix'])
         #    print("Expiration: "+repr(rules['Expiration']))
+        #print("Clean up..\n")
+        client.delete_bucket_lifecycle(
+            Bucket=arg[0],
+        )
+        client.put_bucket_lifecycle(
+            Bucket=arg[0],
+            LifecycleConfiguration={
+                'Rules': [
+                    {
+                        'Prefix': '/',
+                        'ID': 'testLC3',
+                        'Status': 'Enabled',
+                        'Transition': {
+                            'Days': 1,
+                            'StorageClass': 'GLACIER'
+                        },
+                    },
+                ],
+            },
+        )
+        result = client.get_bucket_lifecycle(
+            Bucket=arg[0],
+        )
+        # for rules in result['Rules']:
+        #    print("Rule ID: "+rules['ID'])
+        #    print("prefix: "+repr (rules['Prefix']))
+        #    print("Transition: "+repr(rules['Transition']))
         #print("Clean up..\n")
         client.delete_bucket_lifecycle(
             Bucket=arg[0],
