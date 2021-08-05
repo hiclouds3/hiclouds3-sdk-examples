@@ -36,72 +36,72 @@ func BucketVersioningTest(buckets [3]string, filePaths [3]string) {
 		fmt.Println("Unable to open file " + filePaths[2])
 		return
 	}
-	EnabledInput := &s3.PutBucketVersioningInput{
+	enabledInput := &s3.PutBucketVersioningInput{
 		Bucket: &buckets[0],
 		VersioningConfiguration: &types.VersioningConfiguration{
 			MFADelete: types.MFADeleteDisabled,
 			Status:    types.BucketVersioningStatusEnabled,
 		},
 	}
-	_, PutBucketVersioning_Enabled_err := Client.PutBucketVersioning(context.TODO(), EnabledInput)
-	if PutBucketVersioning_Enabled_err != nil {
+	_, putbucketversioningEnabledErr := Client.PutBucketVersioning(context.TODO(), enabledInput)
+	if putbucketversioningEnabledErr != nil {
 		fmt.Println("Got an error PutBucketVersioning item:")
-		fmt.Println(PutBucketVersioning_Enabled_err)
+		fmt.Println(putbucketversioningEnabledErr)
 		return
 	}
-	ObjectInput1 := &s3.PutObjectInput{
+	objectInput1 := &s3.PutObjectInput{
 		Bucket: &buckets[0],
 		Key:    aws.String("HelloWorld"),
 		Body:   file1,
 	}
-	_, putobject_err1 := Client.PutObject(context.TODO(), ObjectInput1)
-	if putobject_err1 != nil {
+	_, putobjectErr1 := Client.PutObject(context.TODO(), objectInput1)
+	if putobjectErr1 != nil {
 		fmt.Println("Got error uploading file:")
-		fmt.Println(putobject_err1)
+		fmt.Println(putobjectErr1)
 		return
 	}
-	ObjectInput2 := &s3.PutObjectInput{
+	objectInput2 := &s3.PutObjectInput{
 		Bucket: &buckets[0],
 		Key:    aws.String("HelloWorld"),
 		Body:   file2,
 	}
-	_, putobject_err2 := Client.PutObject(context.TODO(), ObjectInput2)
-	if putobject_err2 != nil {
+	_, putobjectErr2 := Client.PutObject(context.TODO(), objectInput2)
+	if putobjectErr2 != nil {
 		fmt.Println("Got error uploading file:")
-		fmt.Println(putobject_err2)
+		fmt.Println(putobjectErr2)
 		return
 	}
-	ObjectInput3 := &s3.PutObjectInput{
+	objectInput3 := &s3.PutObjectInput{
 		Bucket: &buckets[0],
 		Key:    aws.String("HelloWorld"),
 		Body:   file3,
 	}
-	_, putobject_err3 := Client.PutObject(context.TODO(), ObjectInput3)
-	if putobject_err3 != nil {
+	_, putobjectErr3 := Client.PutObject(context.TODO(), objectInput3)
+	if putobjectErr3 != nil {
 		fmt.Println("Got error uploading file:")
-		fmt.Println(putobject_err3)
+		fmt.Println(putobjectErr3)
 		return
 	}
-	SuspendedInput := &s3.PutBucketVersioningInput{
+	suspendedInput := &s3.PutBucketVersioningInput{
 		Bucket: &buckets[0],
 		VersioningConfiguration: &types.VersioningConfiguration{
 			MFADelete: types.MFADeleteDisabled,
 			Status:    types.BucketVersioningStatusSuspended,
 		},
 	}
-	_, PutBucketVersioning_Suspended_err := Client.PutBucketVersioning(context.TODO(), SuspendedInput)
-	if PutBucketVersioning_Suspended_err != nil {
+	_, putbucketversioningSuspendedErr := Client.PutBucketVersioning(context.TODO(), suspendedInput)
+	if putbucketversioningSuspendedErr != nil {
 		fmt.Println("Got an error PutBucketVersioning item:")
-		fmt.Println(PutBucketVersioning_Suspended_err)
+		fmt.Println(putbucketversioningSuspendedErr)
 		return
 	}
 	output := &s3.ListObjectVersionsInput{
 		Bucket: &buckets[0],
 	}
-	version, GetBucketVersioning_err := Client.ListObjectVersions(context.TODO(), output)
-	if GetBucketVersioning_err != nil {
+	version, getbucketversioningErr := Client.ListObjectVersions(context.TODO(), output)
+	if getbucketversioningErr != nil {
 		fmt.Println("Got an error GetBucketVersioning item:")
-		fmt.Println(GetBucketVersioning_err)
+		fmt.Println(getbucketversioningErr)
 		return
 	}
 	for _, ver := range version.Versions {
@@ -110,10 +110,10 @@ func BucketVersioningTest(buckets [3]string, filePaths [3]string) {
 			Key:       aws.String("HelloWorld"),
 			VersionId: ver.VersionId,
 		}
-		_, deleteobject_err := Client.DeleteObject(context.TODO(), output)
-		if deleteobject_err != nil {
+		_, deleteobjectErr := Client.DeleteObject(context.TODO(), output)
+		if deleteobjectErr != nil {
 			fmt.Println("Got an error deleting item:")
-			fmt.Println(deleteobject_err)
+			fmt.Println(deleteobjectErr)
 			return
 		}
 	}
