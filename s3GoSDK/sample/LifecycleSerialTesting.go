@@ -14,7 +14,7 @@ var (
 )
 
 func LifecycleSerialTest(buckets [3]string) {
-	ExpirationInput := &s3.PutBucketLifecycleConfigurationInput{
+	expirationInput := &s3.PutBucketLifecycleConfigurationInput{
 		Bucket: &buckets[0],
 		LifecycleConfiguration: &types.BucketLifecycleConfiguration{
 			Rules: []types.LifecycleRule{
@@ -29,13 +29,13 @@ func LifecycleSerialTest(buckets [3]string) {
 			},
 		},
 	}
-	_, PutBucketlifecycle_Expiration_err := Client.PutBucketLifecycleConfiguration(context.TODO(), ExpirationInput)
-	if PutBucketlifecycle_Expiration_err != nil {
-		fmt.Println("Got an error PutBucketlifecycle_Expiration item:")
-		fmt.Println(PutBucketlifecycle_Expiration_err)
+	_, putbucketlifecycleExpirationErr := Client.PutBucketLifecycleConfiguration(context.TODO(), expirationInput)
+	if putbucketlifecycleExpirationErr != nil {
+		fmt.Println("Got an error PutBucketLifecycle Expiration item:")
+		fmt.Println(putbucketlifecycleExpirationErr)
 		return
 	}
-	TransitionsInput := &s3.PutBucketLifecycleConfigurationInput{
+	transitionsInput := &s3.PutBucketLifecycleConfigurationInput{
 		Bucket: &buckets[1],
 		LifecycleConfiguration: &types.BucketLifecycleConfiguration{
 			Rules: []types.LifecycleRule{
@@ -53,47 +53,47 @@ func LifecycleSerialTest(buckets [3]string) {
 			},
 		},
 	}
-	_, PutBucketlifecycle_Transitions_err := Client.PutBucketLifecycleConfiguration(context.TODO(), TransitionsInput)
-	if PutBucketlifecycle_Transitions_err != nil {
-		fmt.Println("Got an error PutBucketlifecycle_Transitions item:")
-		fmt.Println(PutBucketlifecycle_Transitions_err)
+	_, putbucketlifecycleTransitionsErr := Client.PutBucketLifecycleConfiguration(context.TODO(), transitionsInput)
+	if putbucketlifecycleTransitionsErr != nil {
+		fmt.Println("Got an error PutBucketlifecycle Transitions item:")
+		fmt.Println(putbucketlifecycleTransitionsErr)
 		return
 	}
-	ExpirationOutput := &s3.GetBucketLifecycleConfigurationInput{
+	expirationOutput := &s3.GetBucketLifecycleConfigurationInput{
 		Bucket: &buckets[0],
 	}
-	result_expiration, GetBucketlifecycle_Expiration_err := Client.GetBucketLifecycleConfiguration(context.TODO(), ExpirationOutput)
-	if GetBucketlifecycle_Expiration_err != nil {
+	resultExpiration, getbucketlifecycleExpirationErr := Client.GetBucketLifecycleConfiguration(context.TODO(), expirationOutput)
+	if getbucketlifecycleExpirationErr != nil {
 		fmt.Println("Got an error GetBucketlifecycle_Expiration item:")
-		fmt.Println(GetBucketlifecycle_Expiration_err)
+		fmt.Println(getbucketlifecycleExpirationErr)
 		return
 	}
-	TransitionsOutput := &s3.GetBucketLifecycleConfigurationInput{
+	transitionsOutput := &s3.GetBucketLifecycleConfigurationInput{
 		Bucket: &buckets[1],
 	}
-	result_transitions, GetBucketlifecycle_Transitions_err := Client.GetBucketLifecycleConfiguration(context.TODO(), TransitionsOutput)
-	if GetBucketlifecycle_Transitions_err != nil {
+	resultTransitions, getbucketlifecycleTransitionsErr := Client.GetBucketLifecycleConfiguration(context.TODO(), transitionsOutput)
+	if getbucketlifecycleTransitionsErr != nil {
 		fmt.Println("Got an error GetBucketlifecycle_Transitions item:")
-		fmt.Println(GetBucketlifecycle_Transitions_err)
+		fmt.Println(getbucketlifecycleTransitionsErr)
 		return
 	}
-	for _, data_expiration := range result_expiration.Rules {
+	for _, dataExpiration := range resultExpiration.Rules {
 		fmt.Println("Get", buckets[0], "Lifecycle: ")
-		fmt.Println("  Status: ", data_expiration.Status)
-		fmt.Println("  ID: ", *data_expiration.ID)
-		fmt.Println("  Prefix: ", *data_expiration.Prefix)
+		fmt.Println("  Status: ", dataExpiration.Status)
+		fmt.Println("  ID: ", *dataExpiration.ID)
+		fmt.Println("  Prefix: ", *dataExpiration.Prefix)
 		fmt.Println("  Expiration:")
-		fmt.Println("    Day:", data_expiration.Expiration.Days)
+		fmt.Println("    Day:", dataExpiration.Expiration.Days)
 		fmt.Println("")
 	}
-	for _, data_transitions := range result_transitions.Rules {
+	for _, dataTransitions := range resultTransitions.Rules {
 		fmt.Println("Get", buckets[1], "Lifecycle: ")
-		fmt.Println("  Status: ", data_transitions.Status)
-		fmt.Println("  ID: ", *data_transitions.ID)
-		fmt.Println("  Prefix: ", *data_transitions.Prefix)
+		fmt.Println("  Status: ", dataTransitions.Status)
+		fmt.Println("  ID: ", *dataTransitions.ID)
+		fmt.Println("  Prefix: ", *dataTransitions.Prefix)
 		fmt.Println("  Transitions:")
-		fmt.Println("    Days: ", data_transitions.Transitions[0].Days)
-		fmt.Println("    StorageClass: ", data_transitions.Transitions[0].StorageClass)
+		fmt.Println("    Days: ", dataTransitions.Transitions[0].Days)
+		fmt.Println("    StorageClass: ", dataTransitions.Transitions[0].StorageClass)
 		fmt.Println("")
 	}
 }
