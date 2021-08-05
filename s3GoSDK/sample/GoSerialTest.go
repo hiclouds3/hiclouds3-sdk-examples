@@ -13,6 +13,7 @@ func main() {
 	fmt.Println("-----------------------------------------------------------------------")
 	CreateBucket(buckets)
 	ListBucket()
+	BucketLoggingTest(buckets)
 	GeneratePresignedURL(buckets, filePath)
 	GetBucketAcl(buckets)
 	LifecycleSerialTest(buckets)
