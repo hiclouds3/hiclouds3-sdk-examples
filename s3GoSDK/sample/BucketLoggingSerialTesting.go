@@ -10,6 +10,16 @@ import (
 )
 
 func BucketLoggingTest(buckets [3]string) {
+	acl := &s3.PutBucketAclInput{
+		Bucket: &buckets[0],
+		ACL:    "log-delivery-write",
+	}
+	_, PutBucketAcl_err := Client.PutBucketAcl(context.TODO(), acl)
+	if PutBucketAcl_err != nil {
+		fmt.Println("Got an error PutBucketAcl item:")
+		fmt.Println(PutBucketAcl_err)
+		return
+	}
 	input := &s3.PutBucketLoggingInput{
 		Bucket: &buckets[0],
 		BucketLoggingStatus: &types.BucketLoggingStatus{
@@ -43,7 +53,7 @@ func BucketLoggingTest(buckets [3]string) {
 		fmt.Println(GetBucketLogging_err)
 		return
 	}
-	fmt.Println("Get BucketLogging:")
+	fmt.Println("Get " + buckets[0] + " BucketLogging:")
 	fmt.Println("  TargetBucket :", *result.LoggingEnabled.TargetBucket)
 	fmt.Println("  TargetPrefix :", *result.LoggingEnabled.TargetPrefix)
 	fmt.Println("  TargetGrants :")

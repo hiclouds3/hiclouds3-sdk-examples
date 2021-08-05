@@ -10,18 +10,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
-func BucketVersionTest(buckets [3]string, filePaths [3]string) {
-	for _, createbucket := range buckets {
+func BucketVersioningTest(buckets [3]string, filePaths [3]string) {
+	for _, bucket := range buckets {
 		input := &s3.CreateBucketInput{
 			ACL:    "log-delivery-write",
-			Bucket: &createbucket,
+			Bucket: &bucket,
 		}
 		_, create_err := Client.CreateBucket(context.TODO(), input)
 		if create_err != nil {
-			fmt.Println("Could not create bucket " + createbucket)
+			fmt.Println("Could not create bucket " + bucket)
 		}
 	}
-	fmt.Println("")
 	file1, err1 := os.Open(filePaths[0])
 	if err1 != nil {
 		fmt.Println("Unable to open file " + filePaths[0])
@@ -118,14 +117,13 @@ func BucketVersionTest(buckets [3]string, filePaths [3]string) {
 			return
 		}
 	}
-	for _, deletebucket := range buckets {
+	for _, bucket := range buckets {
 		input := &s3.DeleteBucketInput{
-			Bucket: &deletebucket,
+			Bucket: &bucket,
 		}
 		_, delete_err := Client.DeleteBucket(context.TODO(), input)
 		if delete_err != nil {
-			fmt.Println("Could not delete bucket " + deletebucket)
+			fmt.Println("Could not delete bucket " + bucket)
 		}
 	}
-	fmt.Println("")
 }
