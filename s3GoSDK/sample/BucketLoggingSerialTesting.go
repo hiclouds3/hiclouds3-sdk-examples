@@ -11,7 +11,7 @@ import (
 
 func BucketLoggingTest(buckets [3]string) {
 	acl := &s3.PutBucketAclInput{
-		Bucket: &buckets[0],
+		Bucket: &buckets[1],
 		ACL:    "log-delivery-write",
 	}
 	_, putBucketAclErr := Client.PutBucketAcl(context.TODO(), acl)
