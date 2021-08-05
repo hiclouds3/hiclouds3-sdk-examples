@@ -14,10 +14,10 @@ func BucketLoggingTest(buckets [3]string) {
 		Bucket: &buckets[0],
 		ACL:    "log-delivery-write",
 	}
-	_, PutBucketAcl_err := Client.PutBucketAcl(context.TODO(), acl)
-	if PutBucketAcl_err != nil {
+	_, putBucketAclErr := Client.PutBucketAcl(context.TODO(), acl)
+	if putBucketAclErr != nil {
 		fmt.Println("Got an error PutBucketAcl item:")
-		fmt.Println(PutBucketAcl_err)
+		fmt.Println(putBucketAclErr)
 		return
 	}
 	input := &s3.PutBucketLoggingInput{
@@ -38,19 +38,19 @@ func BucketLoggingTest(buckets [3]string) {
 			},
 		},
 	}
-	_, PutBucketLogging_err := Client.PutBucketLogging(context.TODO(), input)
-	if PutBucketLogging_err != nil {
+	_, putbucketloggingErr := Client.PutBucketLogging(context.TODO(), input)
+	if putbucketloggingErr != nil {
 		fmt.Println("Got an error PutBucketLogging item:")
-		fmt.Println(PutBucketLogging_err)
+		fmt.Println(putbucketloggingErr)
 		return
 	}
 	output := &s3.GetBucketLoggingInput{
 		Bucket: &buckets[0],
 	}
-	result, GetBucketLogging_err := Client.GetBucketLogging(context.TODO(), output)
-	if GetBucketLogging_err != nil {
+	result, getbucketloggingErr := Client.GetBucketLogging(context.TODO(), output)
+	if getbucketloggingErr != nil {
 		fmt.Println("Got an error PutBucketLogging item:")
-		fmt.Println(GetBucketLogging_err)
+		fmt.Println(getbucketloggingErr)
 		return
 	}
 	fmt.Println("Get " + buckets[0] + " BucketLogging:")
