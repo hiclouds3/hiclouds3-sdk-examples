@@ -14,10 +14,10 @@ func CopyObject(buckets [3]string, filePaths [3]string) {
 		CopySource: &source,
 		Key:        &filePaths[1],
 	}
-	_, copyobject_err := Client.CopyObject(context.TODO(), input)
-	if copyobject_err != nil {
+	_, copyobjectErr := Client.CopyObject(context.TODO(), input)
+	if copyobjectErr != nil {
 		fmt.Println("Got an error copying item:")
-		fmt.Println(copyobject_err)
+		fmt.Println(copyobjectErr)
 		return
 	}
 }

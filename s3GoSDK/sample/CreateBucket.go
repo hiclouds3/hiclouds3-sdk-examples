@@ -12,12 +12,13 @@ func CreateBucket(buckets [3]string) {
 		fmt.Printf("%s\n", bucket)
 		fmt.Println("-----------------------------------------------------------------------")
 		input := &s3.CreateBucketInput{
-			ACL:    "public-read",
+			ACL:    "log-delivery-write",
 			Bucket: &bucket,
 		}
-		_, create_err := Client.CreateBucket(context.TODO(), input)
-		if create_err != nil {
+		_, createErr := Client.CreateBucket(context.TODO(), input)
+		if createErr != nil {
 			fmt.Println("Could not create bucket " + bucket)
 		}
 	}
+	fmt.Println("")
 }

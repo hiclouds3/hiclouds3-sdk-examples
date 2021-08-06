@@ -13,10 +13,10 @@ func ListObjects(buckets [3]string) {
 		input := &s3.ListObjectsV2Input{
 			Bucket: aws.String(bucket),
 		}
-		result, listobjects_err := Client.ListObjectsV2(context.TODO(), input)
-		if listobjects_err != nil {
+		result, listobjectsErr := Client.ListObjectsV2(context.TODO(), input)
+		if listobjectsErr != nil {
 			fmt.Println("Got error retrieving list of objects:")
-			fmt.Println(listobjects_err)
+			fmt.Println(listobjectsErr)
 			return
 		}
 		fmt.Println("Objects in " + bucket + ":")

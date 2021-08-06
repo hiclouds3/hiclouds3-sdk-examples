@@ -20,6 +20,7 @@ func GeneratePresignedURL(buckets [3]string, filePaths [3]string) {
 		fmt.Println(err)
 		return
 	}
-	fmt.Println("The URL: ")
+	fmt.Println("Get " + filePaths[0] + " URL: ")
 	fmt.Println(resp.URL)
+	fmt.Println("")
 }
