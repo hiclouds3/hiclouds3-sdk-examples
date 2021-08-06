@@ -121,8 +121,8 @@ func BucketVersioningTest(buckets [3]string, filePaths [3]string) {
 		input := &s3.DeleteBucketInput{
 			Bucket: &bucket,
 		}
-		_, delete_err := Client.DeleteBucket(context.TODO(), input)
-		if delete_err != nil {
+		_, deleteErr := Client.DeleteBucket(context.TODO(), input)
+		if deleteErr != nil {
 			fmt.Println("Could not delete bucket " + bucket)
 		}
 	}

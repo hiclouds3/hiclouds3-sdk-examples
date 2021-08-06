@@ -9,15 +9,16 @@ import (
 
 func ListBucket() {
 	input := &s3.ListBucketsInput{}
-	result, listbucket_err := Client.ListBuckets(context.TODO(), input)
-	if listbucket_err != nil {
+	result, listbucketErr := Client.ListBuckets(context.TODO(), input)
+	if listbucketErr != nil {
 		fmt.Println("Got an error retrieving buckets:")
-		fmt.Println(listbucket_err)
+		fmt.Println(listbucketErr)
 		return
 	}
 
-	fmt.Println("Buckets:")
+	fmt.Println("List Buckets:")
 	for _, bucket := range result.Buckets {
 		fmt.Println(*bucket.Name + ": " + bucket.CreationDate.Format("2006-01-02 15:04:05 Monday"))
 	}
+	fmt.Println("")
 }

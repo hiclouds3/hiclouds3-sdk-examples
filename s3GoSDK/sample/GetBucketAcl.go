@@ -17,19 +17,18 @@ func GetBucketAcl(buckets [3]string) {
 		fmt.Println("Got an error retrieving ACL for " + buckets[0])
 		return
 	}
-	fmt.Println("")
 	fmt.Println("Get " + buckets[0] + " ACL:")
-	fmt.Println("Owner:", *result.Owner.DisplayName)
-	fmt.Println("Grants")
+	fmt.Println("  Owner:", *result.Owner.DisplayName)
+	fmt.Println("  Grants")
 	for _, g := range result.Grants {
 		// If we add a canned ACL, the name is nil
 		if g.Grantee.DisplayName == nil {
-			fmt.Println("  Grantee:    EVERYONE")
+			fmt.Println("    Grantee:    EVERYONE")
 		} else {
-			fmt.Println("  Grantee:   ", *g.Grantee.DisplayName)
+			fmt.Println("    Grantee:   ", *g.Grantee.DisplayName)
 		}
-		fmt.Println("  Type:      ", string(g.Grantee.Type))
-		fmt.Println("  Permission:", string(g.Permission))
+		fmt.Println("    Type:      ", string(g.Grantee.Type))
+		fmt.Println("    Permission:", string(g.Permission))
 		fmt.Println("")
 	}
 }

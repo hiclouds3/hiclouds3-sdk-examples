@@ -22,10 +22,10 @@ func PutObject(buckets [3]string, filePaths [3]string) {
 		Key:    aws.String(filePaths[0]),
 		Body:   file,
 	}
-	_, putobject_err := Client.PutObject(context.TODO(), input)
-	if putobject_err != nil {
+	_, putobjectErr := Client.PutObject(context.TODO(), input)
+	if putobjectErr != nil {
 		fmt.Println("Got error uploading file:")
-		fmt.Println(putobject_err)
+		fmt.Println(putobjectErr)
 		return
 	}
 }

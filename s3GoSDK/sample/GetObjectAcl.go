@@ -18,7 +18,6 @@ func GetObjectAcl(buckets [3]string, filePaths [3]string) {
 		fmt.Println("Got an error getting ACL for " + filePaths[0])
 		return
 	}
-	fmt.Println("")
 	fmt.Println("Get " + filePaths[0] + " ACL:")
 	fmt.Println("Owner:", *result.Owner.DisplayName)
 	fmt.Println("Grants")
