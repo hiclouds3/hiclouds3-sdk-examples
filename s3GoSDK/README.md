@@ -29,3 +29,6 @@
 	$ go get
 	$ go run *.go
 	```
+## Additional Resource
+* [開發指南](documentation/hicloudS3-go-sdk-開發指南.pdf)
+* [Developer Guide](documentation/hicloudS3-go-sdk-DeveloperGuide.pdf)
