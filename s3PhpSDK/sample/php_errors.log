@@ -1,0 +1,228 @@
+[14-Mar-2014 10:37:06 Asia/Taipei] PHP Notice:  Undefined variable: bucket in D:\JAVA Work Space\PHP_SDK_Sample_For_Client\S3Sample.php on line 25
+[14-Mar-2014 10:37:06 Asia/Taipei] PHP Notice:  Undefined variable: bucketname in D:\JAVA Work Space\PHP_SDK_Sample_For_Client\S3Sample.php on line 35
+[14-Mar-2014 10:37:06 Asia/Taipei] PHP Fatal error:  Uncaught exception 'Guzzle\Service\Exception\ValidationException' with message 'Validation errors: [Bucket] is a required string' in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.php:357
+Stack trace:
+#0 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.php(236): Guzzle\Service\Command\AbstractCommand->validate()
+#1 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Client.php(201): Guzzle\Service\Command\AbstractCommand->prepare()
+#2 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Client.php(136): Guzzle\Service\Client->prepareCommand(Object(Aws\S3\Command\S3Command))
+#3 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.php(153): Guzzle\Service\Client->execute(Object(Aws\S3\Command\S3Command))
+#4 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.php(189): G in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.php on line 357
+[14-Mar-2014 10:40:11 Asia/Taipei] PHP Fatal error:  Uncaught Aws\S3\Exception\BucketAlreadyExistsException: AWS Error Code: BucketAlreadyExists, Status Code: 409, AWS Request ID: FCPD1RNDQ9R8PYEG, AWS Error Type: client, AWS Error Message: The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again., User-Agent: aws-sdk-php2/2.5.2 Guzzle/3.8.1 curl/7.30.0 PHP/5.4.19
+  thrown in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Aws/Common/Exception/NamespaceExceptionFactory.php on line 91
+[14-Mar-2014 10:41:28 Asia/Taipei] PHP Fatal error:  Uncaught Aws\S3\Exception\BucketAlreadyExistsException: AWS Error Code: BucketAlreadyExists, Status Code: 409, AWS Request ID: VUFAZB6L8GG68BVH, AWS Error Type: client, AWS Error Message: The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again., User-Agent: aws-sdk-php2/2.5.2 Guzzle/3.8.1 curl/7.30.0 PHP/5.4.19
+  thrown in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Aws/Common/Exception/NamespaceExceptionFactory.php on line 91
+[22-May-2014 14:33:47 Asia/Taipei] PHP Fatal error:  Uncaught Aws\S3\Exception\S3Exception: AWS Error Code: , Status Code: 404, AWS Request ID: , AWS Error Type: client, AWS Error Message: 404 Not Found, User-Agent: aws-sdk-php2/2.5.2 Guzzle/3.8.1 curl/7.30.0 PHP/5.4.19
+  thrown in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Aws/Common/Exception/NamespaceExceptionFactory.php on line 91
+[22-May-2014 14:36:15 Asia/Taipei] PHP Fatal error:  Uncaught Aws\S3\Exception\S3Exception: AWS Error Code: , Status Code: 404, AWS Request ID: , AWS Error Type: client, AWS Error Message: 404 Not Found, User-Agent: aws-sdk-php2/2.5.2 Guzzle/3.8.1 curl/7.30.0 PHP/5.4.19
+  thrown in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Aws/Common/Exception/NamespaceExceptionFactory.php on line 91
+[22-May-2014 14:36:57 Asia/Taipei] PHP Fatal error:  Uncaught Aws\S3\Exception\S3Exception: AWS Error Code: , Status Code: 404, AWS Request ID: , AWS Error Type: client, AWS Error Message: 404 Not Found, User-Agent: aws-sdk-php2/2.5.2 Guzzle/3.8.1 curl/7.30.0 PHP/5.4.19
+  thrown in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Aws/Common/Exception/NamespaceExceptionFactory.php on line 91
+[22-May-2014 14:57:17 Asia/Taipei] PHP Fatal error:  Uncaught Aws\S3\Exception\S3Exception: AWS Error Code: , Status Code: 404, AWS Request ID: , AWS Error Type: client, AWS Error Message: 404 Not Found, User-Agent: aws-sdk-php2/2.5.2 Guzzle/3.8.1 curl/7.30.0 PHP/5.4.19
+  thrown in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Aws/Common/Exception/NamespaceExceptionFactory.php on line 91
+[22-May-2014 15:01:18 Asia/Taipei] PHP Fatal error:  Uncaught Aws\S3\Exception\InternalErrorException: AWS Error Code: InternalError, Status Code: 500, AWS Request ID: PTW5MMMVFN43LNI9, AWS Error Type: server, AWS Error Message: Get output stream failed., User-Agent: aws-sdk-php2/2.5.2 Guzzle/3.8.1 curl/7.30.0 PHP/5.4.19
+  thrown in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Aws/Common/Exception/NamespaceExceptionFactory.php on line 91
+[22-May-2014 15:03:30 Asia/Taipei] PHP Fatal error:  Uncaught Aws\S3\Exception\BucketAlreadyExistsException: AWS Error Code: BucketAlreadyExists, Status Code: 409, AWS Request ID: 14UY4I3TTP9QP900, AWS Error Type: client, AWS Error Message: The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again., User-Agent: aws-sdk-php2/2.5.2 Guzzle/3.8.1 curl/7.30.0 PHP/5.4.19
+  thrown in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Aws/Common/Exception/NamespaceExceptionFactory.php on line 91
+[22-May-2014 15:06:20 Asia/Taipei] PHP Fatal error:  Uncaught Aws\S3\Exception\InternalErrorException: AWS Error Code: InternalError, Status Code: 500, AWS Request ID: E6KN3MCBFQITYMGV, AWS Error Type: server, AWS Error Message: Get output stream failed., User-Agent: aws-sdk-php2/2.5.2 Guzzle/3.8.1 curl/7.30.0 PHP/5.4.19
+  thrown in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Aws/Common/Exception/NamespaceExceptionFactory.php on line 91
+[22-May-2014 15:08:36 Asia/Taipei] PHP Fatal error:  Uncaught Aws\S3\Exception\BucketAlreadyExistsException: AWS Error Code: BucketAlreadyExists, Status Code: 409, AWS Request ID: SKN9AYYO4EO65DXM, AWS Error Type: client, AWS Error Message: The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again., User-Agent: aws-sdk-php2/2.5.2 Guzzle/3.8.1 curl/7.30.0 PHP/5.4.19
+  thrown in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Aws/Common/Exception/NamespaceExceptionFactory.php on line 91
+[22-May-2014 15:11:23 Asia/Taipei] PHP Fatal error:  Uncaught Aws\S3\Exception\InternalErrorException: AWS Error Code: InternalError, Status Code: 500, AWS Request ID: JLULHQBOD02TQU42, AWS Error Type: server, AWS Error Message: Get output stream failed., User-Agent: aws-sdk-php2/2.5.2 Guzzle/3.8.1 curl/7.30.0 PHP/5.4.19
+  thrown in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Aws/Common/Exception/NamespaceExceptionFactory.php on line 91
+[22-May-2014 15:12:12 Asia/Taipei] PHP Fatal error:  Uncaught Aws\S3\Exception\BucketAlreadyExistsException: AWS Error Code: BucketAlreadyExists, Status Code: 409, AWS Request ID: WB6VCQ4X7GCFI8N3, AWS Error Type: client, AWS Error Message: The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again., User-Agent: aws-sdk-php2/2.5.2 Guzzle/3.8.1 curl/7.30.0 PHP/5.4.19
+  thrown in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Aws/Common/Exception/NamespaceExceptionFactory.php on line 91
+[01-Aug-2014 11:56:14 Asia/Taipei] PHP Fatal error:  Uncaught exception 'Guzzle\Http\Exception\CurlException' with message '[curl] 7: Failed connect to allentest2.s3.hicloud.net.tw:12080; No error [url] http://allentest2.s3.hicloud.net.tw:12080' in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Http/Curl/CurlMulti.php:338
+Stack trace:
+#0 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Http/Curl/CurlMulti.php(279): Guzzle\Http\Curl\CurlMulti->isCurlException(Object(Guzzle\Http\Message\EntityEnclosingRequest), Object(Guzzle\Http\Curl\CurlHandle), Array)
+#1 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Http/Curl/CurlMulti.php(244): Guzzle\Http\Curl\CurlMulti->processResponse(Object(Guzzle\Http\Message\EntityEnclosingRequest), Object(Guzzle\Http\Curl\CurlHandle), Array)
+#2 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Http/Curl/CurlMulti.php(227): Guzzle\Http\Curl\CurlMulti->processMessages()
+#3 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Http/Curl/CurlMulti in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Aws/Common/Client/AbstractClient.php on line 286
+[21-Aug-2014 14:23:55 Asia/Taipei] PHP Fatal error:  Uncaught exception 'Guzzle\Service\Exception\ValidationException' with message 'Validation errors: [Bucket] is a required string' in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.php:357
+Stack trace:
+#0 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.php(236): Guzzle\Service\Command\AbstractCommand->validate()
+#1 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Client.php(201): Guzzle\Service\Command\AbstractCommand->prepare()
+#2 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Client.php(136): Guzzle\Service\Client->prepareCommand(Object(Aws\S3\Command\S3Command))
+#3 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.php(153): Guzzle\Service\Client->execute(Object(Aws\S3\Command\S3Command))
+#4 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.php(189): G in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.php on line 357
+[21-Aug-2014 14:24:40 Asia/Taipei] PHP Notice:  Undefined variable: bucketname in D:\JAVA Work Space\PHP_SDK_Sample_For_Client\sample\Cleanup.php on line 28
+[21-Aug-2014 14:24:40 Asia/Taipei] PHP Fatal error:  Uncaught exception 'Guzzle\Service\Exception\ValidationException' with message 'Validation errors: [Bucket] is a required string' in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.php:357
+Stack trace:
+#0 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.php(236): Guzzle\Service\Command\AbstractCommand->validate()
+#1 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Client.php(201): Guzzle\Service\Command\AbstractCommand->prepare()
+#2 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Client.php(136): Guzzle\Service\Client->prepareCommand(Object(Aws\S3\Command\S3Command))
+#3 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.php(153): Guzzle\Service\Client->execute(Object(Aws\S3\Command\S3Command))
+#4 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.php(189): G in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.php on line 357
+[21-Aug-2014 14:49:48 Asia/Taipei] PHP Fatal error:  Uncaught exception 'Aws\Common\Exception\UnexpectedValueException' with message 'The type of the grantee after setting the ID did not match the specified, expected type "AmazonCustomerByEmail" but received "CanonicalUser".' in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Aws/S3/Model/Grantee.php:94
+Stack trace:
+#0 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Aws/S3/Model/Grantee.php(65): Aws\S3\Model\Grantee->setId('allentest', 'AmazonCustomerB...')
+#1 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Aws/S3/Model/AcpBuilder.php(88): Aws\S3\Model\Grantee->__construct('allentest', NULL, 'AmazonCustomerB...')
+#2 D:\JAVA Work Space\PHP_SDK_Sample_For_Client\sample\ACLSerialTesting.php(211): Aws\S3\Model\AcpBuilder->addGrantForEmail('FULL_CONTROL', 'allentest')
+#3 D:\JAVA Work Space\PHP_SDK_Sample_For_Client\sample\ACLSerialTesting.php(323): BasicputBucket()
+#4 {main}
+  thrown in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Aws/S3/Model/Grantee.php on line 94
+[21-Aug-2014 14:53:47 Asia/Taipei] PHP Fatal error:  Uncaught exception 'Aws\Common\Exception\UnexpectedValueException' with message 'The type of the grantee after setting the ID did not match the specified, expected type "AmazonCustomerByEmail" but received "CanonicalUser".' in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Aws/S3/Model/Grantee.php:94
+Stack trace:
+#0 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Aws/S3/Model/Grantee.php(65): Aws\S3\Model\Grantee->setId('allentest', 'AmazonCustomerB...')
+#1 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Aws/S3/Model/AcpBuilder.php(88): Aws\S3\Model\Grantee->__construct('allentest', NULL, 'AmazonCustomerB...')
+#2 D:\JAVA Work Space\PHP_SDK_Sample_For_Client\sample\ACLSerialTesting.php(211): Aws\S3\Model\AcpBuilder->addGrantForEmail('FULL_CONTROL', 'allentest')
+#3 D:\JAVA Work Space\PHP_SDK_Sample_For_Client\sample\ACLSerialTesting.php(323): BasicputBucket()
+#4 {main}
+  thrown in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Aws/S3/Model/Grantee.php on line 94
+[21-Aug-2014 16:01:36 Asia/Taipei] PHP Notice:  Undefined variable: file in D:\JAVA Work Space\PHP_SDK_Sample_For_Client\sample\Cleanup.php on line 47
+[21-Aug-2014 16:01:36 Asia/Taipei] PHP Fatal error:  Uncaught exception 'Guzzle\Service\Exception\ValidationException' with message 'Validation errors: [Objects][0][Key] is a required string' in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.php:357
+Stack trace:
+#0 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.php(236): Guzzle\Service\Command\AbstractCommand->validate()
+#1 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Client.php(201): Guzzle\Service\Command\AbstractCommand->prepare()
+#2 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Client.php(136): Guzzle\Service\Client->prepareCommand(Object(Aws\S3\Command\S3Command))
+#3 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.php(153): Guzzle\Service\Client->execute(Object(Aws\S3\Command\S3Command))
+#4 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.ph in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.php on line 357
+[21-Aug-2014 16:03:13 Asia/Taipei] PHP Notice:  Undefined variable: file in D:\JAVA Work Space\PHP_SDK_Sample_For_Client\sample\Cleanup.php on line 53
+[21-Aug-2014 16:03:13 Asia/Taipei] PHP Fatal error:  Uncaught exception 'Guzzle\Service\Exception\ValidationException' with message 'Validation errors: [Objects][0][Key] is a required string' in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.php:357
+Stack trace:
+#0 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.php(236): Guzzle\Service\Command\AbstractCommand->validate()
+#1 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Client.php(201): Guzzle\Service\Command\AbstractCommand->prepare()
+#2 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Client.php(136): Guzzle\Service\Client->prepareCommand(Object(Aws\S3\Command\S3Command))
+#3 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.php(153): Guzzle\Service\Client->execute(Object(Aws\S3\Command\S3Command))
+#4 phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.ph in phar://D:/JAVA Work Space/PHP_SDK_Sample_For_Client/aws.phar/Guzzle/Service/Command/AbstractCommand.php on line 357
+[21-Aug-2014 16:12:52 Asia/Taipei] PHP Notice:  Undefined variable: s3 in D:\JAVA Work Space\PHP_SDK_Sample_For_Client\sample\Cleanup.php on line 40
+[21-Aug-2014 16:12:52 Asia/Taipei] PHP Fatal error:  Call to a member function listObjectVersions() on a non-object in D:\JAVA Work Space\PHP_SDK_Sample_For_Client\sample\Cleanup.php on line 40
+[04-May-2015 10:30:00 Asia/Taipei] PHP Notice:  Undefined index: ID in D:\Local Repo\s3PhpSDK\sample\sample\BucketCorsSerialTest.php on line 82
+[04-May-2015 10:30:00 Asia/Taipei] PHP Notice:  Array to string conversion in D:\Local Repo\s3PhpSDK\sample\sample\BucketCorsSerialTest.php on line 83
+[04-May-2015 10:30:00 Asia/Taipei] PHP Notice:  Array to string conversion in D:\Local Repo\s3PhpSDK\sample\sample\BucketCorsSerialTest.php on line 84
+[04-May-2015 10:30:00 Asia/Taipei] PHP Notice:  Array to string conversion in D:\Local Repo\s3PhpSDK\sample\sample\BucketCorsSerialTest.php on line 85
+[04-May-2015 10:30:00 Asia/Taipei] PHP Notice:  Array to string conversion in D:\Local Repo\s3PhpSDK\sample\sample\BucketCorsSerialTest.php on line 86
+[04-May-2015 10:30:00 Asia/Taipei] PHP Notice:  Undefined index: ID in D:\Local Repo\s3PhpSDK\sample\sample\BucketCorsSerialTest.php on line 82
+[04-May-2015 10:30:00 Asia/Taipei] PHP Notice:  Array to string conversion in D:\Local Repo\s3PhpSDK\sample\sample\BucketCorsSerialTest.php on line 83
+[04-May-2015 10:30:00 Asia/Taipei] PHP Notice:  Array to string conversion in D:\Local Repo\s3PhpSDK\sample\sample\BucketCorsSerialTest.php on line 84
+[04-May-2015 10:30:00 Asia/Taipei] PHP Notice:  Array to string conversion in D:\Local Repo\s3PhpSDK\sample\sample\BucketCorsSerialTest.php on line 85
+[04-May-2015 10:30:00 Asia/Taipei] PHP Notice:  Array to string conversion in D:\Local Repo\s3PhpSDK\sample\sample\BucketCorsSerialTest.php on line 86
+[04-May-2015 10:30:58 Asia/Taipei] PHP Notice:  Array to string conversion in D:\Local Repo\s3PhpSDK\sample\sample\BucketCorsSerialTest.php on line 81
+[04-May-2015 10:30:58 Asia/Taipei] PHP Notice:  Array to string conversion in D:\Local Repo\s3PhpSDK\sample\sample\BucketCorsSerialTest.php on line 82
+[04-May-2015 10:30:58 Asia/Taipei] PHP Notice:  Array to string conversion in D:\Local Repo\s3PhpSDK\sample\sample\BucketCorsSerialTest.php on line 83
+[04-May-2015 10:30:58 Asia/Taipei] PHP Notice:  Array to string conversion in D:\Local Repo\s3PhpSDK\sample\sample\BucketCorsSerialTest.php on line 84
+[04-May-2015 10:30:58 Asia/Taipei] PHP Notice:  Array to string conversion in D:\Local Repo\s3PhpSDK\sample\sample\BucketCorsSerialTest.php on line 81
+[04-May-2015 10:30:58 Asia/Taipei] PHP Notice:  Array to string conversion in D:\Local Repo\s3PhpSDK\sample\sample\BucketCorsSerialTest.php on line 82
+[04-May-2015 10:30:58 Asia/Taipei] PHP Notice:  Array to string conversion in D:\Local Repo\s3PhpSDK\sample\sample\BucketCorsSerialTest.php on line 83
+[04-May-2015 10:30:58 Asia/Taipei] PHP Notice:  Array to string conversion in D:\Local Repo\s3PhpSDK\sample\sample\BucketCorsSerialTest.php on line 84
+[04-May-2015 10:39:56 Asia/Taipei] PHP Notice:  Array to string conversion in D:\Local Repo\s3PhpSDK\sample\sample\BucketCorsSerialTest.php on line 83
+[04-May-2015 10:39:56 Asia/Taipei] PHP Notice:  Array to string conversion in D:\Local Repo\s3PhpSDK\sample\sample\BucketCorsSerialTest.php on line 84
+[04-May-2015 10:39:56 Asia/Taipei] PHP Notice:  Array to string conversion in D:\Local Repo\s3PhpSDK\sample\sample\BucketCorsSerialTest.php on line 83
+[04-May-2015 10:39:56 Asia/Taipei] PHP Notice:  Array to string conversion in D:\Local Repo\s3PhpSDK\sample\sample\BucketCorsSerialTest.php on line 84
+[29-May-2015 11:24:20 Asia/Taipei] PHP Fatal error:  Uncaught exception 'Guzzle\Http\Exception\CurlException' with message '[curl] 7: Failed connect to allentest1.s3.hicloud.net.tw:80; No error [url] http://allentest1.s3.hicloud.net.tw?versioning' in phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Http/Curl/CurlMulti.php:338
+Stack trace:
+#0 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Http/Curl/CurlMulti.php(279): Guzzle\Http\Curl\CurlMulti->isCurlException(Object(Guzzle\Http\Message\EntityEnclosingRequest), Object(Guzzle\Http\Curl\CurlHandle), Array)
+#1 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Http/Curl/CurlMulti.php(244): Guzzle\Http\Curl\CurlMulti->processResponse(Object(Guzzle\Http\Message\EntityEnclosingRequest), Object(Guzzle\Http\Curl\CurlHandle), Array)
+#2 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Http/Curl/CurlMulti.php(227): Guzzle\Http\Curl\CurlMulti->processMessages()
+#3 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Http/Curl/CurlMulti.php(211): Guzzle\Http\Curl\CurlMulti->executeHandles()
+#4 phar://D:/Loca in phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Aws/Common/Client/AbstractClient.php on line 286
+[29-May-2015 11:24:38 Asia/Taipei] PHP Warning:  array_map(): Argument #2 should be an array in D:\Local Repo\s3PhpSDK\sample\sample\Cleanup.php on line 50
+[29-May-2015 11:24:38 Asia/Taipei] PHP Fatal error:  Uncaught exception 'Guzzle\Service\Exception\ValidationException' with message 'Validation errors: [Objects] is a required array' in phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php:357
+Stack trace:
+#0 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(236): Guzzle\Service\Command\AbstractCommand->validate()
+#1 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Client.php(201): Guzzle\Service\Command\AbstractCommand->prepare()
+#2 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Client.php(136): Guzzle\Service\Client->prepareCommand(Object(Aws\S3\Command\S3Command))
+#3 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(153): Guzzle\Service\Client->execute(Object(Aws\S3\Command\S3Command))
+#4 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(189): Guzzle\Service\Command\AbstractCommand->execute()
+#5 phar://D:/Local Repo/s3PhpSDK/sample/a in phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php on line 357
+[29-May-2015 11:24:39 Asia/Taipei] PHP Warning:  array_map(): Argument #2 should be an array in D:\Local Repo\s3PhpSDK\sample\sample\Cleanup.php on line 50
+[29-May-2015 11:24:39 Asia/Taipei] PHP Fatal error:  Uncaught exception 'Guzzle\Service\Exception\ValidationException' with message 'Validation errors: [Objects] is a required array' in phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php:357
+Stack trace:
+#0 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(236): Guzzle\Service\Command\AbstractCommand->validate()
+#1 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Client.php(201): Guzzle\Service\Command\AbstractCommand->prepare()
+#2 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Client.php(136): Guzzle\Service\Client->prepareCommand(Object(Aws\S3\Command\S3Command))
+#3 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(153): Guzzle\Service\Client->execute(Object(Aws\S3\Command\S3Command))
+#4 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(189): Guzzle\Service\Command\AbstractCommand->execute()
+#5 phar://D:/Local Repo/s3PhpSDK/sample/a in phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php on line 357
+[29-May-2015 11:25:08 Asia/Taipei] PHP Warning:  array_map(): Argument #2 should be an array in D:\Local Repo\s3PhpSDK\sample\sample\Cleanup.php on line 50
+[29-May-2015 11:25:08 Asia/Taipei] PHP Fatal error:  Uncaught exception 'Guzzle\Service\Exception\ValidationException' with message 'Validation errors: [Objects] is a required array' in phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php:357
+Stack trace:
+#0 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(236): Guzzle\Service\Command\AbstractCommand->validate()
+#1 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Client.php(201): Guzzle\Service\Command\AbstractCommand->prepare()
+#2 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Client.php(136): Guzzle\Service\Client->prepareCommand(Object(Aws\S3\Command\S3Command))
+#3 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(153): Guzzle\Service\Client->execute(Object(Aws\S3\Command\S3Command))
+#4 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(189): Guzzle\Service\Command\AbstractCommand->execute()
+#5 phar://D:/Local Repo/s3PhpSDK/sample/a in phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php on line 357
+[29-May-2015 11:25:09 Asia/Taipei] PHP Warning:  array_map(): Argument #2 should be an array in D:\Local Repo\s3PhpSDK\sample\sample\Cleanup.php on line 50
+[29-May-2015 11:25:09 Asia/Taipei] PHP Fatal error:  Uncaught exception 'Guzzle\Service\Exception\ValidationException' with message 'Validation errors: [Objects] is a required array' in phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php:357
+Stack trace:
+#0 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(236): Guzzle\Service\Command\AbstractCommand->validate()
+#1 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Client.php(201): Guzzle\Service\Command\AbstractCommand->prepare()
+#2 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Client.php(136): Guzzle\Service\Client->prepareCommand(Object(Aws\S3\Command\S3Command))
+#3 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(153): Guzzle\Service\Client->execute(Object(Aws\S3\Command\S3Command))
+#4 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(189): Guzzle\Service\Command\AbstractCommand->execute()
+#5 phar://D:/Local Repo/s3PhpSDK/sample/a in phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php on line 357
+[29-May-2015 11:43:56 Asia/Taipei] PHP Fatal error:  Uncaught exception 'Guzzle\Http\Exception\CurlException' with message '[curl] 7: Failed connect to allentest.s3.hicloud.net.tw:80; No error [url] http://allentest.s3.hicloud.net.tw?versioning' in phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Http/Curl/CurlMulti.php:338
+Stack trace:
+#0 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Http/Curl/CurlMulti.php(279): Guzzle\Http\Curl\CurlMulti->isCurlException(Object(Guzzle\Http\Message\EntityEnclosingRequest), Object(Guzzle\Http\Curl\CurlHandle), Array)
+#1 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Http/Curl/CurlMulti.php(244): Guzzle\Http\Curl\CurlMulti->processResponse(Object(Guzzle\Http\Message\EntityEnclosingRequest), Object(Guzzle\Http\Curl\CurlHandle), Array)
+#2 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Http/Curl/CurlMulti.php(227): Guzzle\Http\Curl\CurlMulti->processMessages()
+#3 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Http/Curl/CurlMulti.php(211): Guzzle\Http\Curl\CurlMulti->executeHandles()
+#4 phar://D:/Local  in phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Aws/Common/Client/AbstractClient.php on line 286
+[29-May-2015 14:19:27 Asia/Taipei] PHP Notice:  Use of undefined constant userACanonicalID - assumed 'userACanonicalID' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 17
+[29-May-2015 14:19:27 Asia/Taipei] PHP Notice:  Undefined variable: config in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 17
+[29-May-2015 14:19:27 Asia/Taipei] PHP Notice:  Use of undefined constant userAMail - assumed 'userAMail' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 17
+[29-May-2015 14:19:27 Asia/Taipei] PHP Notice:  Undefined variable: config in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 17
+[29-May-2015 14:19:27 Asia/Taipei] PHP Notice:  Use of undefined constant userBCanonicalID - assumed 'userBCanonicalID' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 18
+[29-May-2015 14:19:27 Asia/Taipei] PHP Notice:  Undefined variable: config in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 18
+[29-May-2015 14:19:27 Asia/Taipei] PHP Notice:  Use of undefined constant userBMail - assumed 'userBMail' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 18
+[29-May-2015 14:19:27 Asia/Taipei] PHP Notice:  Undefined variable: config in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 18
+[29-May-2015 14:19:27 Asia/Taipei] PHP Notice:  Use of undefined constant ownerCanonicalID - assumed 'ownerCanonicalID' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 19
+[29-May-2015 14:19:27 Asia/Taipei] PHP Notice:  Undefined variable: config in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 19
+[29-May-2015 14:19:27 Asia/Taipei] PHP Notice:  Use of undefined constant ownerMail - assumed 'ownerMail' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 19
+[29-May-2015 14:19:27 Asia/Taipei] PHP Notice:  Undefined variable: config in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 19
+[29-May-2015 14:20:54 Asia/Taipei] PHP Notice:  Use of undefined constant userACanonicalID - assumed 'userACanonicalID' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 17
+[29-May-2015 14:20:54 Asia/Taipei] PHP Notice:  Use of undefined constant userAMail - assumed 'userAMail' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 17
+[29-May-2015 14:20:54 Asia/Taipei] PHP Notice:  Use of undefined constant userBCanonicalID - assumed 'userBCanonicalID' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 18
+[29-May-2015 14:20:54 Asia/Taipei] PHP Notice:  Use of undefined constant userBMail - assumed 'userBMail' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 18
+[29-May-2015 14:20:54 Asia/Taipei] PHP Notice:  Use of undefined constant ownerCanonicalID - assumed 'ownerCanonicalID' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 19
+[29-May-2015 14:20:54 Asia/Taipei] PHP Notice:  Use of undefined constant ownerMail - assumed 'ownerMail' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 19
+[29-May-2015 14:22:36 Asia/Taipei] PHP Notice:  Use of undefined constant userACanonicalID - assumed 'userACanonicalID' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 17
+[29-May-2015 14:22:36 Asia/Taipei] PHP Notice:  Use of undefined constant userAMail - assumed 'userAMail' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 17
+[29-May-2015 14:22:36 Asia/Taipei] PHP Notice:  Use of undefined constant userBCanonicalID - assumed 'userBCanonicalID' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 18
+[29-May-2015 14:22:36 Asia/Taipei] PHP Notice:  Use of undefined constant userBMail - assumed 'userBMail' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 18
+[29-May-2015 14:22:36 Asia/Taipei] PHP Notice:  Use of undefined constant ownerCanonicalID - assumed 'ownerCanonicalID' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 19
+[29-May-2015 14:22:36 Asia/Taipei] PHP Notice:  Use of undefined constant ownerMail - assumed 'ownerMail' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 19
+[29-May-2015 14:24:35 Asia/Taipei] PHP Notice:  Use of undefined constant userACanonicalID - assumed 'userACanonicalID' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 17
+[29-May-2015 14:24:35 Asia/Taipei] PHP Notice:  Use of undefined constant userAMail - assumed 'userAMail' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 17
+[29-May-2015 14:24:35 Asia/Taipei] PHP Notice:  Use of undefined constant userBCanonicalID - assumed 'userBCanonicalID' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 18
+[29-May-2015 14:24:35 Asia/Taipei] PHP Notice:  Use of undefined constant userBMail - assumed 'userBMail' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 18
+[29-May-2015 14:24:35 Asia/Taipei] PHP Notice:  Use of undefined constant ownerCanonicalID - assumed 'ownerCanonicalID' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 19
+[29-May-2015 14:24:35 Asia/Taipei] PHP Notice:  Use of undefined constant ownerMail - assumed 'ownerMail' in D:\Local Repo\s3PhpSDK\sample\PHPSerialTest.php on line 19
+[10-Sep-2015 15:34:44 Asia/Taipei] PHP Warning:  array_map(): Argument #2 should be an array in D:\Local Repo\s3PhpSDK\sample\sample\Cleanup.php on line 50
+[10-Sep-2015 15:34:44 Asia/Taipei] PHP Fatal error:  Uncaught exception 'Guzzle\Service\Exception\ValidationException' with message 'Validation errors: [Objects] is a required array' in phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php:357
+Stack trace:
+#0 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(236): Guzzle\Service\Command\AbstractCommand->validate()
+#1 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Client.php(201): Guzzle\Service\Command\AbstractCommand->prepare()
+#2 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Client.php(136): Guzzle\Service\Client->prepareCommand(Object(Aws\S3\Command\S3Command))
+#3 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(153): Guzzle\Service\Client->execute(Object(Aws\S3\Command\S3Command))
+#4 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(189): Guzzle\Service\Command\AbstractCommand->execute()
+#5 phar://D:/Local Repo/s3PhpSDK/sample/a in phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php on line 357
+[10-Sep-2015 15:43:16 Asia/Taipei] PHP Warning:  array_map(): Argument #2 should be an array in D:\Local Repo\s3PhpSDK\sample\sample\Cleanup.php on line 50
+[10-Sep-2015 15:43:16 Asia/Taipei] PHP Fatal error:  Uncaught exception 'Guzzle\Service\Exception\ValidationException' with message 'Validation errors: [Objects] is a required array' in phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php:357
+Stack trace:
+#0 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(236): Guzzle\Service\Command\AbstractCommand->validate()
+#1 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Client.php(201): Guzzle\Service\Command\AbstractCommand->prepare()
+#2 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Client.php(136): Guzzle\Service\Client->prepareCommand(Object(Aws\S3\Command\S3Command))
+#3 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(153): Guzzle\Service\Client->execute(Object(Aws\S3\Command\S3Command))
+#4 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(189): Guzzle\Service\Command\AbstractCommand->execute()
+#5 phar://D:/Local Repo/s3PhpSDK/sample/a in phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php on line 357
+[10-Sep-2015 17:07:16 Asia/Taipei] PHP Warning:  array_map(): Argument #2 should be an array in D:\Local Repo\s3PhpSDK\sample\sample\Cleanup.php on line 50
+[10-Sep-2015 17:07:16 Asia/Taipei] PHP Fatal error:  Uncaught exception 'Guzzle\Service\Exception\ValidationException' with message 'Validation errors: [Objects] is a required array' in phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php:357
+Stack trace:
+#0 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(236): Guzzle\Service\Command\AbstractCommand->validate()
+#1 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Client.php(201): Guzzle\Service\Command\AbstractCommand->prepare()
+#2 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Client.php(136): Guzzle\Service\Client->prepareCommand(Object(Aws\S3\Command\S3Command))
+#3 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(153): Guzzle\Service\Client->execute(Object(Aws\S3\Command\S3Command))
+#4 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(189): Guzzle\Service\Command\AbstractCommand->execute()
+#5 phar://D:/Local Repo/s3PhpSDK/sample/a in phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php on line 357
+[10-Sep-2015 17:11:11 Asia/Taipei] PHP Warning:  array_map(): Argument #2 should be an array in D:\Local Repo\s3PhpSDK\sample\sample\Cleanup.php on line 50
+[10-Sep-2015 17:11:11 Asia/Taipei] PHP Fatal error:  Uncaught exception 'Guzzle\Service\Exception\ValidationException' with message 'Validation errors: [Objects] is a required array' in phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php:357
+Stack trace:
+#0 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(236): Guzzle\Service\Command\AbstractCommand->validate()
+#1 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Client.php(201): Guzzle\Service\Command\AbstractCommand->prepare()
+#2 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Client.php(136): Guzzle\Service\Client->prepareCommand(Object(Aws\S3\Command\S3Command))
+#3 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(153): Guzzle\Service\Client->execute(Object(Aws\S3\Command\S3Command))
+#4 phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php(189): Guzzle\Service\Command\AbstractCommand->execute()
+#5 phar://D:/Local Repo/s3PhpSDK/sample/a in phar://D:/Local Repo/s3PhpSDK/sample/aws.phar/Guzzle/Service/Command/AbstractCommand.php on line 357
+[10-Sep-2015 17:11:33 Asia/Taipei] PHP Notice:  Undefined variable: bucket in D:\Local Repo\s3PhpSDK\sample\sample\BucketTaggingSerialTest.php on line 48
+[10-Sep-2015 17:16:12 Asia/Taipei] PHP Parse error:  syntax error, unexpected '$result' (T_VARIABLE), expecting ',' or ';' in D:\Local Repo\s3PhpSDK\sample\sample\BucketTaggingSerialTest.php on line 66
