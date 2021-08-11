@@ -1,9 +1,0 @@
-D:\Local Repo\s3NetSDK\aws-sdk-net\AWS.Extensions\bin\Debug\AWS.Extensions.xml
-D:\Local Repo\s3NetSDK\aws-sdk-net\AWS.Extensions\bin\Debug\AWS.Extensions.dll
-D:\Local Repo\s3NetSDK\aws-sdk-net\AWS.Extensions\bin\Debug\AWS.Extensions.pdb
-D:\Local Repo\s3NetSDK\aws-sdk-net\AWS.Extensions\bin\Debug\AWSSDK.dll
-D:\Local Repo\s3NetSDK\aws-sdk-net\AWS.Extensions\bin\Debug\AWSSDK.pdb
-D:\Local Repo\s3NetSDK\aws-sdk-net\AWS.Extensions\bin\Debug\AWSSDK.xml
-D:\Local Repo\s3NetSDK\aws-sdk-net\AWS.Extensions\obj\Debug\AWS.Extensions.csprojResolveAssemblyReference.cache
-D:\Local Repo\s3NetSDK\aws-sdk-net\AWS.Extensions\obj\Debug\AWS.Extensions.dll
-D:\Local Repo\s3NetSDK\aws-sdk-net\AWS.Extensions\obj\Debug\AWS.Extensions.pdb

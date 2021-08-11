@@ -1,7 +1,0 @@
-D:\Local Repo\s3NetSDK\V1 SDK\sample\TestNetSDK\TestNetSDK\bin\Release\TestNetSDK.exe.config
-D:\Local Repo\s3NetSDK\V1 SDK\sample\TestNetSDK\TestNetSDK\bin\Release\TestNetSDK.exe
-D:\Local Repo\s3NetSDK\V1 SDK\sample\TestNetSDK\TestNetSDK\bin\Release\TestNetSDK.pdb
-D:\Local Repo\s3NetSDK\V1 SDK\sample\TestNetSDK\TestNetSDK\bin\Release\AWSSDK.dll
-D:\Local Repo\s3NetSDK\V1 SDK\sample\TestNetSDK\TestNetSDK\obj\x86\Release\TestNetSDK.csprojResolveAssemblyReference.cache
-D:\Local Repo\s3NetSDK\V1 SDK\sample\TestNetSDK\TestNetSDK\obj\x86\Release\TestNetSDK.exe
-D:\Local Repo\s3NetSDK\V1 SDK\sample\TestNetSDK\TestNetSDK\obj\x86\Release\TestNetSDK.pdb
