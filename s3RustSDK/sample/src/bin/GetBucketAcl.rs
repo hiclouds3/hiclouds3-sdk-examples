@@ -1,9 +1,12 @@
 use std::process;
 
-use s3::{Client, Config, Region,Credentials};
+use s3::{Client, Config, Region, Credentials};
+
+use s3::model::{BucketCannedAcl};
 
 use aws_types::region::ProvideRegion;
 
+//use aws_sdk_s3::model;
 use structopt::StructOpt;
 use tracing_subscriber::fmt::format::FmtSpan;
 use tracing_subscriber::fmt::SubscriberBuilder;
@@ -40,7 +43,6 @@ async fn main() {
     } = Opt::from_args();
 
     let credentials = Credentials::new("","", None,None, "STATIC_CREDENTIALS");
-
     let region = default_region
         .as_ref()
         .map(|region| Region::new(region.clone()))
@@ -64,9 +66,29 @@ async fn main() {
 
     let client = Client::from_conf(config);
 
-    match client.get_bucket_acl()
+    let acl = BucketCannedAcl::from("log-delivery-write");
+
+    match client
+        .put_bucket_acl()
         .bucket(&bucket)
-        .send().await {
+        .acl(acl)
+        .send()
+        .await{
+            Ok(_) => {
+                println!("Put bucket acl ");
+            }
+            Err(e) => {
+                println!("Got an error put bucket acl:");
+                println!("{}", e);
+                process::exit(1);
+            }
+        }
+
+    match client
+        .get_bucket_acl()
+        .bucket(&bucket)
+        .send()
+        .await {
         Ok(resp) => {
             println!("{}'s Acl:",bucket);
             for grant in resp.grants.unwrap_or_default(){
