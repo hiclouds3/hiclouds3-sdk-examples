@@ -2,7 +2,6 @@ use std::process;
 
 use s3::Credentials;
 
-use s3::model::PolicyStatus;
 use s3::{Client, Config, Region};
 
 use aws_types::region::ProvideRegion;
@@ -60,15 +59,14 @@ async fn main() {
 
     match client
         .put_bucket_policy()
-        .policy("")
+        .policy("{\"Version\": \"2012-10-17\", \"Statement\": [{ \"Sid\": \"DenyPublicREAD\",\"Effect\": \"Deny\",\"Principal\": {\"AWS\": \"*\"}, \"Action\": \"s3:GetObject\", \"Resource\": [\"arn:aws:s3:::yuyuman1/*\" ] } ]}")
         .bucket(&bucket)
         .send()
         .await
     {
         Ok(_) => {
             println!("Created bucket {} policy", bucket);
-        }
-        
+        }    
         Err(e) => {
             println!("Got an error creating bucket policy:");
             println!("{}", e);
