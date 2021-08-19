@@ -70,11 +70,11 @@ async fn main() {
         .await
     {
         Ok(_) => {
-            println!("Created bucket {} policy", bucket);
+            println!("Created bucket {} version", bucket);
         }
         
         Err(e) => {
-            println!("Got an error creating bucket policy:");
+            println!("Got an error creating bucket version:");
             println!("{}", e);
             process::exit(1);
         }
