@@ -1,6 +1,6 @@
-use s3::{ByteStream, Client, Config, Region,Credentials};
+use s3::{ByteStream};
 
-use aws_types::region::ProvideRegion;
+mod client;
 
 use structopt::StructOpt;
 
@@ -11,10 +11,6 @@ use tracing_subscriber::fmt::SubscriberBuilder;
 
 #[derive(Debug, StructOpt)]
 struct Opt {
-    /// The region. Overrides environment variable AWS_DEFAULT_REGION.
-    #[structopt(short, long)]
-    default_region: Option<String>,
-
     /// Specifies the bucket
     #[structopt(short, long)]
     bucket: String,
@@ -41,22 +37,12 @@ struct Opt {
 async fn main() -> Result<(), Box<dyn Error>> {
     let Opt {
         bucket,
-        default_region,
         key,
         verbose,
     } = Opt::from_args();
 
-    let credentials = Credentials::new("","", None,None, "STATIC_CREDENTIALS");
-
-    let region = default_region
-        .as_ref()
-        .map(|region| Region::new(region.clone()))
-        .or_else(|| aws_types::region::default_provider().region())
-        .unwrap_or_else(|| Region::new("us-west-2"));
-
     if verbose {
         println!("S3 client version: {}\n", s3::PKG_VERSION);
-        println!("Region:            {:?}", &region);
         println!("Bucket:            {}", bucket);
         println!("Key:               {}", key);
 
@@ -66,14 +52,10 @@ async fn main() -> Result<(), Box<dyn Error>> {
             .init();
     }
 
-    let conf = Config::builder()
-        .credentials_provider(credentials)
-        .region(region)
-        .build();
-
-    let client = Client::from_conf(conf);
-
-    let resp = client.list_buckets().send().await?;
+    let resp = client::client()
+        .list_buckets()
+        .send()
+        .await?;
 
     for bucket in resp.buckets.unwrap_or_default() {
         println!("bucket: {:?}", bucket.name.expect("buckets have names"))
@@ -81,7 +63,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     let body = ByteStream::from_path(Path::new("HelloWorld.txt")).await?;
 
-    let resp = client
+    let resp = client::client()
         .put_object()
         .bucket(&bucket)
         .key(&key)
@@ -91,7 +73,12 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     println!("Upload success. Version: {:?}", resp.version_id);
 
-    let resp = client.get_object().bucket(bucket).key(key).send().await?;
+    let resp = client::client()
+        .get_object()
+        .bucket(bucket)
+        .key(key)
+        .send()
+        .await?;
     let data = resp.body.collect().await?;
     println!("data: {:?}", data.into_bytes());
     Ok(())

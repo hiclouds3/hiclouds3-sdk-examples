@@ -1,30 +1,23 @@
 use std::process;
 
-use s3::Credentials;
-
-use s3::{Client, Config, Region};
-
-use aws_types::region::ProvideRegion;
+mod client;
 
 use structopt::StructOpt;
 use tracing_subscriber::fmt::format::FmtSpan;
 use tracing_subscriber::fmt::SubscriberBuilder;
+
 #[derive(Debug, StructOpt)]
 struct Opt {
-    /// The default region
-    #[structopt(short, long)]
-    default_region: Option<String>,
-
     /// The name of the bucket
     #[structopt(short, long)]
-    name: String,
+    bucket: String,
 
     /// Whether to display additional information
     #[structopt(short, long)]
     verbose: bool,
 }
 
-/// Creates an Amazon S3 bucket
+/// Lists the objects in an Amazon S3 bucket.
 /// # Arguments
 ///
 /// * `-n NAME` - The name of the bucket.
@@ -35,22 +28,12 @@ struct Opt {
 #[tokio::main]
 async fn main() {
     let Opt {
-        default_region,
-        name,
+        bucket,
         verbose,
     } = Opt::from_args();
 
-    let credentials = Credentials::new("","", None,None, "STATIC_CREDENTIALS");
-    
-    let region = default_region
-        .as_ref()
-        .map(|region| Region::new(region.clone()))
-        .or_else(|| aws_types::region::default_provider().region())
-        .unwrap_or_else(|| Region::new("us-west-2"));
-
     if verbose {
         println!("S3 client version: {}", s3::PKG_VERSION);
-        println!("Region:            {:?}", &region);
 
         SubscriberBuilder::default()
             .with_env_filter("info")
@@ -58,27 +41,21 @@ async fn main() {
             .init();
     }
 
-    let config = Config::builder()
-        .credentials_provider(credentials)
-        .region(&region)
-        .build();
-
-    let client = Client::from_conf(config);
-
-    match client
-        .delete_bucket()
-        .bucket(&name)
+    match client::client()
+        .list_objects()
+        .bucket(&bucket)
         .send()
-        .await
-    {
-        Ok(_) => {
-            println!("Deleted bucket {}", name);
+        .await {
+        Ok(resp) => {
+            println!("Objects:");
+            for object in resp.contents.unwrap_or_default() {
+                println!(" {}", object.key.expect("objects have keys"));
+            }
         }
-        
         Err(e) => {
-            println!("Got an error deleting bucket:");
+            println!("Got an error retrieving objects for bucket:");
             println!("{}", e);
             process::exit(1);
         }
-    };
+    }
 }

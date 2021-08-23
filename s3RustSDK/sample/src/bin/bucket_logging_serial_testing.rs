@@ -1,12 +1,8 @@
 use std::process;
 
-use s3::Credentials;
+mod client;
 
 use s3::model::{BucketLoggingStatus, LoggingEnabled, TargetGrant, Grantee,BucketLogsPermission,Type};
-
-use s3::{Client, Config, Region};
-
-use aws_types::region::ProvideRegion;
 
 use structopt::StructOpt;
 use tracing_subscriber::fmt::format::FmtSpan;
@@ -14,10 +10,6 @@ use tracing_subscriber::fmt::SubscriberBuilder;
 
 #[derive(Debug, StructOpt)]
 struct Opt {
-    /// The default region
-    #[structopt(short, long)]
-    default_region: Option<String>,
-
     /// The name of the bucket
     #[structopt(short, long)]
     bucket: String,
@@ -38,21 +30,12 @@ struct Opt {
 #[tokio::main]
 async fn main() {
     let Opt {
-        default_region,
         bucket,
         verbose,
     } = Opt::from_args();
-
-    let credentials = Credentials::new("","", None,None, "STATIC_CREDENTIALS");
-    let region = default_region
-        .as_ref()
-        .map(|region| Region::new(region.clone()))
-        .or_else(|| aws_types::region::default_provider().region())
-        .unwrap_or_else(|| Region::new("us-west-2"));
-
+   
     if verbose {
         println!("S3 client version: {}", s3::PKG_VERSION);
-        println!("Region:            {:?}", &region);
 
         SubscriberBuilder::default()
             .with_env_filter("info")
@@ -60,17 +43,10 @@ async fn main() {
             .init();
     }
 
-    let config = Config::builder()
-        .credentials_provider(credentials)    
-        .region(&region)
-        .build();
-
-    let client = Client::from_conf(config);
-
     let r#type = Type::CanonicalUser;
 
     let grantee=Grantee::builder()
-        .id("")
+        .id("d1e8b71ffe12661ac2df52d5a96fbf5d6188dace9657d120c8253a61394bc51d")
         .r#type(r#type)
         .build();
 
@@ -91,7 +67,7 @@ async fn main() {
         .logging_enabled(loggingenable)
         .build();
 
-    match client
+    match client::client()
         .put_bucket_logging()
         .bucket_logging_status(bucketloggingstatus)
         .bucket(&bucket)
