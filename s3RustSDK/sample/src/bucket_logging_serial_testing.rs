@@ -2,10 +2,10 @@ use std::process;
 use s3::model::{BucketLoggingStatus, LoggingEnabled, TargetGrant, Grantee,BucketLogsPermission,Type};
 use s3::Client;
 
-pub async fn bucketloggingserialtesting(client:Client,bucket:String) {
+pub async fn bucketloggingserialtesting(client:Client,bucket1:String,bucket2:String) {
     let r#type = Type::CanonicalUser;
     let grantee=Grantee::builder()
-        .id("d1e8b71ffe12661ac2df52d5a96fbf5d6188dace9657d120c8253a61394bc51d")
+        .id("tester20210713")
         .r#type(r#type)
         .build();
     let premission = BucketLogsPermission::FullControl;
@@ -14,7 +14,7 @@ pub async fn bucketloggingserialtesting(client:Client,bucket:String) {
         .permission(premission)
         .build();
     let loggingenable=LoggingEnabled::builder()
-        .target_bucket("yuyuman2")
+        .target_bucket(bucket2)
         .target_grants(targetgrant)
         .target_prefix("MyBucketLogs/")
         .build();
@@ -24,12 +24,12 @@ pub async fn bucketloggingserialtesting(client:Client,bucket:String) {
     match client
         .put_bucket_logging()
         .bucket_logging_status(bucketloggingstatus)
-        .bucket(&bucket)
+        .bucket(&bucket1)
         .send()
         .await 
     {
         Ok(_) => {
-            println!("Created {} Logging\n", bucket);
+            println!("Created {} Logging\n", bucket1);
         }
         Err(e) => {
             println!("Got an error creating bucket Logging");
