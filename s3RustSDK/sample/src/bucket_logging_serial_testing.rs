@@ -5,7 +5,7 @@ use s3::Client;
 pub async fn bucketloggingserialtesting(client:Client,bucket1:String,bucket2:String) {
     let r#type = Type::CanonicalUser;
     let grantee=Grantee::builder()
-        .id("tester20210713")
+        .id("Enter your id")
         .r#type(r#type)
         .build();
     let premission = BucketLogsPermission::FullControl;

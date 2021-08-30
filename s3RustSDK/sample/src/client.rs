@@ -3,7 +3,7 @@ use s3::{Client, Config, Region, Endpoint};
 use http::Uri;
 
 pub fn client() -> Client {
-    let credentials = Credentials::new("","", None,None, "STATIC_CREDENTIALS");
+    let credentials = Credentials::new("Enter you access key id","Enter you secret access key", None,None, "STATIC_CREDENTIALS");
     let region = region();
     let uri = "http://s3.hicloud.net.tw".parse::<Uri>().unwrap();
     let endpoint= Endpoint::mutable(uri);

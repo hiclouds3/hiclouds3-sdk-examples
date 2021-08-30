@@ -15,9 +15,9 @@ use s3_code_examples::get_object_acl::getobjectacl;
 
 #[tokio::main]
 async fn main(){
-    let bucket1="yuyuman1";
-    let bucket2="yuyuman2";
-    let key="HelloWorld.txt";
+    let bucket1="Enter your bucket1 name";
+    let bucket2="Enter your bucket2 name";
+    let key="Enter your key name";
     createbucket(client::client(),client::region(),String::from(bucket1)).await;
     createbucket(client::client(),client::region(),String::from(bucket2)).await;
     listbucket(client::client()).await;
