@@ -1,7 +1,7 @@
-use std::process;
 use s3::Client;
+use std::process;
 
-pub async fn deleteobject(client:Client,bucket:String,key:String) {
+pub async fn deleteobject(client: Client, bucket: String, key: String) {
     match client
         .delete_object()
         .bucket(&bucket)
@@ -10,7 +10,7 @@ pub async fn deleteobject(client:Client,bucket:String,key:String) {
         .await
     {
         Ok(_) => {
-            println!("Deleted object {}/{}\n" ,bucket ,key);
+            println!("Deleted object {}/{}\n", bucket, key);
         }
         Err(e) => {
             println!("Got an error deleting object");

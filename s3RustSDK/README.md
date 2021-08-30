@@ -12,7 +12,7 @@
 * Fill in user ID in「sample/src/bucket_logging_serial_testing.rs」
 	```rust
 	let grantee=Grantee::builder()
-        .id("Enter your id")
+        .id("Enter the canonical user ID of the grantee")
 	```
 * Set bucketName and filePath information in「sample/src/main.rs」
 	```rust

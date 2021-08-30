@@ -1,28 +1,33 @@
-use std::process;
 use s3::Client;
+use std::process;
 
-pub async fn getobjectacl(client:Client,bucket:String,key:String) {
+pub async fn getobjectacl(client: Client, bucket: String, key: String) {
     match client
         .get_object_acl()
         .bucket(&bucket)
         .key(&key)
-        .send().await {
+        .send()
+        .await
+    {
         Ok(resp) => {
-            println!("{}'s Acl:",key);
-            for owner in resp.owner{
-                println!(" Owner:      {}", owner.display_name.expect("owner have display_name"));
+            println!("{}'s Acl:", key);
+            for owner in resp.owner {
+                println!(
+                    " Owner:      {}",
+                    owner.display_name.expect("owner have display_name")
+                );
             }
             println!(" Grants:");
-            for grant in resp.grants.unwrap_or_default(){
-                for grantee in grant.grantee{
-                    for display in grantee.display_name{
+            for grant in resp.grants.unwrap_or_default() {
+                for grantee in grant.grantee {
+                    for display in grantee.display_name {
                         println!("  Display_name:{}", display.as_str());
                     }
-                    for r#type in grantee.r#type{
+                    for r#type in grantee.r#type {
                         println!("  Type:      {}", r#type.as_str());
                     }
                 }
-                for permission in grant.permission{
+                for permission in grant.permission {
                     println!("  Permission:{}\n", permission.as_str());
                 }
             }

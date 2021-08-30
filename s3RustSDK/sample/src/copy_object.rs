@@ -1,12 +1,12 @@
-use std::process;
 use s3::Client;
+use std::process;
 
-pub async fn copyobject(client:Client,bucket1:String,bucket2:String,key:String){
+pub async fn copyobject(client: Client, bucket1: String, bucket2: String, key: String) {
     match client
         .copy_object()
         .bucket(&bucket2)
         .key(&key)
-        .copy_source(bucket1+"/"+&key)
+        .copy_source(bucket1 + "/" + &key)
         .send()
         .await
     {

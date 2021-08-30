@@ -1,9 +1,9 @@
-use std::process;
+use s3::model::{MfaDelete, VersioningConfiguration};
 use s3::Client;
-use s3::model::{VersioningConfiguration,MfaDelete};
+use std::process;
 
-pub async fn versionserialtesting(client:Client,bucket:String) {        
-    let cfg=VersioningConfiguration::builder()
+pub async fn versionserialtesting(client: Client, bucket: String) {
+    let cfg = VersioningConfiguration::builder()
         .mfa_delete(MfaDelete::Disabled)
         .status(s3::model::BucketVersioningStatus::Enabled)
         .build();
