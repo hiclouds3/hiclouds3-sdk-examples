@@ -14,12 +14,12 @@ pub async fn listbucket(client:Client) {
                 match &bucket.name {
                     None => {}
                     Some(b) => {
-                        println!("  {}", b);
+                        println!(" {}", b);
                         num_buckets += 1;
                     }
                 }
             }
-            println!("  Found {} buckets globally\n", num_buckets);
+            println!(" Found {} buckets globally\n", num_buckets);
         }
         Err(e) => {
             println!("Got an error list buckets");
