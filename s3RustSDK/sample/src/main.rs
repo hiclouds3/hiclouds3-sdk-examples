@@ -15,25 +15,28 @@ use s3_code_examples::get_object_acl::getobjectacl;
 
 #[tokio::main]
 async fn main(){
-    createbucket(client::client(),client::region(),String::from("yuyuman1")).await;
-    createbucket(client::client(),client::region(),String::from("yuyuman2")).await;
+    let bucket1="yuyuman1";
+    let bucket2="yuyuman2";
+    let key="HelloWorld.txt";
+    createbucket(client::client(),client::region(),String::from(bucket1)).await;
+    createbucket(client::client(),client::region(),String::from(bucket2)).await;
     listbucket(client::client()).await;
-    getbucketacl(client::client(),String::from("yuyuman1")).await;
-    getbucketacl(client::client(),String::from("yuyuman2")).await;
-    bucketloggingserialtesting(client::client(),String::from("yuyuman1")).await;
-    lifecycleserialtesting(client::client(),String::from("yuyuman1")).await;
-    putobject(client::client(),String::from("yuyuman1"),String::from("HelloWorld.txt")).await;
-    copyobject(client::client(),String::from("yuyuman2"),String::from("HelloWorld.txt"),String::from("yuyuman1/HelloWorld.txt")).await;
-    listobject(client::client(),String::from("yuyuman1")).await;
-    listobject(client::client(),String::from("yuyuman2")).await;
-    getobjectacl(client::client(),String::from("yuyuman1"),String::from("HelloWorld.txt")).await;
-    getobjectacl(client::client(),String::from("yuyuman2"),String::from("HelloWorld.txt")).await;
-    policyserialtesting(client::client(),String::from("yuyuman1")).await;
-    deleteobject(client::client(),String::from("yuyuman1"),String::from("HelloWorld.txt")).await;
-    deleteobject(client::client(),String::from("yuyuman2"),String::from("HelloWorld.txt")).await;
-    deletebucket(client::client(),String::from("yuyuman1")).await;
-    deletebucket(client::client(),String::from("yuyuman2")).await;
-    createbucket(client::client(),client::region(),String::from("yuyuman1")).await;
-    versionserialtesting(client::client(),String::from("yuyuman1")).await;
-    deletebucket(client::client(),String::from("yuyuman1")).await;
+    getbucketacl(client::client(),String::from(bucket1)).await;
+    getbucketacl(client::client(),String::from(bucket2)).await;
+    bucketloggingserialtesting(client::client(),String::from(bucket1),String::from(bucket2)).await;
+    lifecycleserialtesting(client::client(),String::from(bucket1)).await;
+    putobject(client::client(),String::from(bucket1),String::from(key)).await;
+    copyobject(client::client(),String::from(bucket1),String::from(bucket2),String::from(key)).await;
+    listobject(client::client(),String::from(bucket1)).await;
+    listobject(client::client(),String::from(bucket2)).await;
+    getobjectacl(client::client(),String::from(bucket1),String::from(key)).await;
+    getobjectacl(client::client(),String::from(bucket2),String::from(key)).await;
+    policyserialtesting(client::client(),String::from(bucket1)).await;
+    deleteobject(client::client(),String::from(bucket1),String::from(key)).await;
+    deleteobject(client::client(),String::from(bucket2),String::from(key)).await;
+    deletebucket(client::client(),String::from(bucket1)).await;
+    deletebucket(client::client(),String::from(bucket2)).await;
+    createbucket(client::client(),client::region(),String::from(bucket1)).await;
+    versionserialtesting(client::client(),String::from(bucket1)).await;
+    deletebucket(client::client(),String::from(bucket1)).await;
 }
