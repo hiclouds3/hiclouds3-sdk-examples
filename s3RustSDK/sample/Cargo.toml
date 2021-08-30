@@ -1,0 +1,20 @@
+[package]
+name = "s3_code_examples"
+version = "1.0.0"
+authors = [""]
+edition = "2018"
+
+[dependencies]
+s3 = { git = "https://github.com/awslabs/aws-sdk-rust", tag = "v0.0.15-alpha", package = "aws-sdk-s3" }
+aws-types = { git = "https://github.com/awslabs/aws-sdk-rust", tag = "v0.0.15-alpha", package = "aws-types" }
+
+tokio = { version = "1", features = ["full"] }
+
+structopt = { version = "0.3", default-features = false }
+tracing-subscriber = "0.2.18"
+
+[dependencies.http]
+version = "0.2"
+
+[profile.dev]
+split-debuginfo = "unpacked"
