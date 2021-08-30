@@ -11,7 +11,7 @@ pub async fn getbucketacl(client:Client,bucket:String) {
         .send()
         .await{
             Ok(_) => {
-                println!("Put bucket acl is log-delivery-write");
+                println!("Put bucket's acl is log-delivery-write");
             }
             Err(e) => {
                 println!("Got an error put bucket acl");
@@ -28,12 +28,15 @@ pub async fn getbucketacl(client:Client,bucket:String) {
             println!("{}'s Acl:",bucket);
             for grant in resp.grants.unwrap_or_default(){
                 for grantee in grant.grantee{
+                    for display in grantee.display_name{
+                        println!(" Display_name:{}", display.as_str());
+                    }
                     for r#type in grantee.r#type{
-                        println!(" Type:      {}", r#type.as_str());
+                        println!(" Type:        {}", r#type.as_str());
                     }
                 }
                 for permission in grant.permission{
-                    println!(" Permission:{}\n", permission.as_str());
+                    println!(" Permission:  {}\n", permission.as_str());
                 }
             }
         }

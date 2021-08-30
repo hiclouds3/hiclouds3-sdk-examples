@@ -15,6 +15,9 @@ pub async fn getobjectacl(client:Client,bucket:String,key:String) {
             println!(" Grants:");
             for grant in resp.grants.unwrap_or_default(){
                 for grantee in grant.grantee{
+                    for display in grantee.display_name{
+                        println!("  Display_name:{}", display.as_str());
+                    }
                     for r#type in grantee.r#type{
                         println!("  Type:      {}", r#type.as_str());
                     }
