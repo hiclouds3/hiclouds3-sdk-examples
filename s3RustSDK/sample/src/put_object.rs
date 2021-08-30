@@ -3,7 +3,7 @@ use std::process;
 use std::path::Path;
 
 pub async fn putobject(client:Client,bucket:String,key:String) {
-    let body= ByteStream::from_path(Path::new("HelloWorld.txt")).await.unwrap_or_default();
+    let body= ByteStream::from_path(Path::new(&key)).await.unwrap_or_default();
     match client
         .put_object()
         .bucket(&bucket)
