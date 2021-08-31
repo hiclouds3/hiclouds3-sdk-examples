@@ -1,4 +1,5 @@
 pub mod bucket_logging_serial_testing;
+pub mod cleanup;
 pub mod client;
 pub mod copy_object;
 pub mod create_bucket;
