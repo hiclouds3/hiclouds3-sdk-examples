@@ -1,4 +1,5 @@
 use s3_code_examples::bucket_logging_serial_testing::bucketloggingserialtesting;
+use s3_code_examples::cleanup::cleanup;
 use s3_code_examples::client;
 use s3_code_examples::copy_object::copyobject;
 use s3_code_examples::create_bucket::createbucket;
@@ -18,6 +19,7 @@ async fn main() {
     let bucket1 = "Enter your bucket1 name";
     let bucket2 = "Enter your bucket2 name";
     let key = "Enter your key name";
+    cleanup(client::client()).await;
     createbucket(client::client(), client::region(), String::from(bucket1)).await;
     createbucket(client::client(), client::region(), String::from(bucket2)).await;
     listbucket(client::client()).await;
