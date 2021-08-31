@@ -9,6 +9,7 @@ func main() {
 	filePath := [3]string{"castle.jpg.001", "castle.jpg.002", "castle.jpg.003"}
 	fmt.Printf("S3 GO SDK Serial Test-\nbucketname1: %s  bucketname2: %s\n", buckets[0], buckets[1])
 	fmt.Println("-----------------------------------------------------------------------")
+	CleanUp()
 	CreateBucket(buckets)
 	ListBucket()
 	GetBucketAcl(buckets)
