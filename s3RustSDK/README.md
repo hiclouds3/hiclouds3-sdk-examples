@@ -9,7 +9,7 @@
 	```rust
 	let credentials = Credentials::new("Enter you access key id","Enter you secret access key", None,None, "STATIC_CREDENTIALS");
 	```
-* Fill in user ID in「sample/src/bucket_logging_serial_testing.rs」
+* Fill in canonical user ID in「sample/src/bucket_logging_serial_testing.rs」
 	```rust
 	let grantee=Grantee::builder()
         .id("Enter the canonical user ID of the grantee")
@@ -22,9 +22,6 @@
 	```
 * If you run「sample/src/main.rs」,all the sample programs will be run
 	```sh
-	$ cd sampel/src/
+	$ cd sample/
 	$ cargo run
 	```
-## Additional Resource
-* [開發指南](documentation/hicloudS3-rust-sdk-開發指南.pdf)
-* [Developer Guide](documentation/hicloudS3-rust-sdk-DeveloperGuide.pdf)
