@@ -63,14 +63,14 @@ public class PreSignedURL {
       request.setExpiration(new Date(System.currentTimeMillis() + (120 * 60 * 1000)));
       URL preSignUrl = s3.generatePresignedUrl(request);
       System.out.println(preSignUrl.toString());
-      // UploadObject(preSignUrl);
+      UploadObject(preSignUrl);
 
       // 產生preSignedURL，並用此URL下載Object
       request = new GeneratePresignedUrlRequest(args[0], args[2], HttpMethod.GET);
       request.setExpiration(new Date(System.currentTimeMillis() + (120 * 60 * 1000)));
       preSignUrl = s3.generatePresignedUrl(request);
       System.out.println(preSignUrl.toString());
-      // DownloadObject(preSignUrl);
+      DownloadObject(preSignUrl);
 
 
       // 產生preSignedURL，並用此URL刪除Object
@@ -78,7 +78,7 @@ public class PreSignedURL {
       request.setExpiration(new Date(System.currentTimeMillis() + (120 * 60 * 1000)));
       preSignUrl = s3.generatePresignedUrl(request);
       System.out.println(preSignUrl.toString());
-      // deleteObject(preSignUrl);
+      deleteObject(preSignUrl);
 
       s3.deleteBucket(args[0]);
     } catch (AmazonServiceException ase) {
