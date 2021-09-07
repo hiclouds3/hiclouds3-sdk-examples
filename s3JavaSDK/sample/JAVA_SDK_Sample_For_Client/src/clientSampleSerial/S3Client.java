@@ -14,8 +14,8 @@ public class S3Client {
     AWSCredentials credentials =
         new PropertiesCredentials(S3Client.class.getResourceAsStream("AwsCredentials.properties"));
     ClientConfiguration clientConfiguration = new ClientConfiguration();
-    clientConfiguration.setProxyHost("10.160.3.88");
-    clientConfiguration.setProxyPort(8080);
+//    clientConfiguration.setProxyHost("---your-proxy-host---");
+//    clientConfiguration.setProxyPort(8080);
 
     AmazonS3 s3 = new AmazonS3Client(credentials, clientConfiguration);
     s3.setEndpoint("s3.hicloud.net.tw");
@@ -28,8 +28,8 @@ public class S3Client {
     AWSCredentials credentials =
         new PropertiesCredentials(S3Client.class.getResourceAsStream("AwsCredentials.properties"));
     ClientConfiguration clientConfiguration = new ClientConfiguration();
-    clientConfiguration.setProxyHost("10.160.3.88");
-    clientConfiguration.setProxyPort(8080);
+//    clientConfiguration.setProxyHost("---your-proxy-host---");
+//    clientConfiguration.setProxyPort(8080);
 
     AmazonS3 s3 = new AmazonS3EncryptionClient(credentials, encryptionMaterials);
     s3.setEndpoint("s3.hicloud.net.tw");
