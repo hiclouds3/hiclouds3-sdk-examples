@@ -137,40 +137,40 @@ public class ClientSideEncryption {
     // Specify values in KeyPairSampleEncryptAndUploadDataToS3.properties file.
     AmazonS3 s3 = S3Client.getClient();
 
-    // // Generate a key pair. In a typical scenario, you would just generate this once.
-    // KeyPairGenerator keyGenerator = KeyPairGenerator.getInstance(encryptionAlgorithm);
-    // keyGenerator.initialize(1024, new SecureRandom());
-    // KeyPair myKeyPair = keyGenerator.generateKeyPair();
-    //
-    // // Save key pair so we can use key later.
-    // saveKeyPair(downloadDir, myKeyPair);
-    //
-    // // Create encryption materials and instantiate client.
-    // EncryptionMaterials encryptionMaterials = new EncryptionMaterials(myKeyPair);
-    // AmazonS3 encryptedS3Client = S3Client.getEncryptionClient(encryptionMaterials);
-    //
-    // // Create Bucket and Upload a test file.
-    // System.out.println("Upload a file");
-    // s3.createBucket(args[0]);
-    // encryptedS3Client.putObject(new PutObjectRequest(args[0], key,createSampleFile()));
-    //
-    // // Load the test key from file to show that key was saved correctly.
-    // KeyPair myKeyPairRetrieved = loadKeyPair(downloadDir,encryptionAlgorithm);
-    //
-    // // Create new encryption materials using the retrieved key pair and a
-    // // new client based on the new materials.
-    // encryptionMaterials = new EncryptionMaterials(myKeyPairRetrieved);
-    // AmazonS3 encryptedS3Client2 = S3Client.getEncryptionClient(encryptionMaterials);
-    //
-    // // Download the object.
-    // // When you use the getObject method with the encrypted client,
-    // // the data retrieved from Amazon S3 is automatically decrypted on the fly.
-    // System.out.println("Download a file");
-    // S3Object downloadedObject = encryptedS3Client2.getObject(new GetObjectRequest(args[0], key));
-    // SaveS3ObjectContent(downloadedObject, downloadDir, key);
+    // Generate a key pair. In a typical scenario, you would just generate this once.
+    KeyPairGenerator keyGenerator = KeyPairGenerator.getInstance(encryptionAlgorithm);
+    keyGenerator.initialize(1024, new SecureRandom());
+    KeyPair myKeyPair = keyGenerator.generateKeyPair();
 
-    // s3.deleteObject(args[0], key);
-    // s3.deleteBucket(args[0]);
+    // Save key pair so we can use key later.
+    saveKeyPair(downloadDir, myKeyPair);
+
+    // Create encryption materials and instantiate client.
+    EncryptionMaterials encryptionMaterials = new EncryptionMaterials(myKeyPair);
+    AmazonS3 encryptedS3Client = S3Client.getEncryptionClient(encryptionMaterials);
+
+    // Create Bucket and Upload a test file.
+    System.out.println("Upload a file");
+    s3.createBucket(args[0]);
+    encryptedS3Client.putObject(new PutObjectRequest(args[0], key, createSampleFile()));
+
+    // Load the test key from file to show that key was saved correctly.
+    KeyPair myKeyPairRetrieved = loadKeyPair(downloadDir, encryptionAlgorithm);
+
+    // Create new encryption materials using the retrieved key pair and a
+    // new client based on the new materials.
+    encryptionMaterials = new EncryptionMaterials(myKeyPairRetrieved);
+    AmazonS3 encryptedS3Client2 = S3Client.getEncryptionClient(encryptionMaterials);
+
+    // Download the object.
+    // When you use the getObject method with the encrypted client,
+    // the data retrieved from Amazon S3 is automatically decrypted on the fly.
+    System.out.println("Download a file");
+    S3Object downloadedObject = encryptedS3Client2.getObject(new GetObjectRequest(args[0], key));
+    SaveS3ObjectContent(downloadedObject, downloadDir, key);
+
+    s3.deleteObject(args[0], key);
+    s3.deleteBucket(args[0]);
 
     System.out.println("END");
   }
