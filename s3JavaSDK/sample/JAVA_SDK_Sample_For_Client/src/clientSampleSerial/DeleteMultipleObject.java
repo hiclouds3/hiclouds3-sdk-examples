@@ -42,7 +42,7 @@ public class DeleteMultipleObject{
     {
     	System.out.println("basic put bucket");
 
-		AmazonS3 s3 = new AmazonS3Client(new PropertiesCredentials(DeleteMultipleObject.class.getResourceAsStream("AwsCredentials.properties")));
+		AmazonS3 s3 = S3Client.getClient();
 		try
 		{
 			System.out.println("Creating bucket " + bucketName + "\n");
@@ -66,7 +66,7 @@ public class DeleteMultipleObject{
     
     private static String basicPutObject(String bucketName, String fileName) throws IOException
     {
-		AmazonS3 s3 = new AmazonS3Client(new PropertiesCredentials(DeleteMultipleObject.class.getResourceAsStream("AwsCredentials.properties")));
+		AmazonS3 s3 = S3Client.getClient();
 		try
 		{
             System.out.println("Uploading a new object to S3 from a file\n");
@@ -94,7 +94,7 @@ public class DeleteMultipleObject{
 	
     private static void basicDeleteMultipleObject(String bucketName, String object1, String object2, String object3) throws IOException
     {
-		AmazonS3 s3 = new AmazonS3Client(new PropertiesCredentials(DeleteMultipleObject.class.getResourceAsStream("AwsCredentials.properties")));
+      AmazonS3 s3 = S3Client.getClient();
 		
 		DeleteObjectsRequest multiObjectDeleteRequest = new DeleteObjectsRequest(bucketName);
 
@@ -134,7 +134,7 @@ public class DeleteMultipleObject{
 	{
 		System.out.println("basic delete bucket");
 		
-		AmazonS3 s3 = new AmazonS3Client(new PropertiesCredentials(DeleteMultipleObject.class.getResourceAsStream("AwsCredentials.properties")));
+		AmazonS3 s3 = S3Client.getClient();
 		try
 		{
 			System.out.println("Deleting bucket " + bucketName + "\n");
@@ -161,7 +161,7 @@ public class DeleteMultipleObject{
 	{
 		System.out.println("hello world");
 		//創建Bucket
-		createBucket(args[0]);
+        createBucket(args[0]);
 		//上傳3個Object
 		basicPutObject(args[0],args[2]);
 		basicPutObject(args[0],args[3]);

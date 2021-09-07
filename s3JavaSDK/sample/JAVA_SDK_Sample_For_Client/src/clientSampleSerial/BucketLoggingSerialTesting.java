@@ -22,24 +22,23 @@ public class BucketLoggingSerialTesting{
 	
 	private static void basicPutBucketandACL(String bucketName, String bucketName2) throws IOException
 	{	    	
-		AmazonS3 s3 = new AmazonS3Client(new PropertiesCredentials(BucketLoggingSerialTesting.class.getResourceAsStream("AwsCredentials.properties")));
+		AmazonS3 s3 = S3Client.getClient();
 		Properties prop = new Properties();  
 		prop.load(ACLSerialTesting.class.getResourceAsStream("config.properties"));  
-		
-		//創建將開啟Log功能的Bucket
-		System.out.println("Creating source bucket " + bucketName + "\n");
-        s3.createBucket(bucketName);
-		
-		//創建Log存放的Bucket
-		System.out.println("Creating target bucket " + bucketName2 + "\n");
-	    s3.createBucket(bucketName2);
-		AccessControlList acl = new AccessControlList();
-		Owner owner = new Owner();
-		owner.setDisplayName(prop.getProperty("ownerDisplayName"));
-		owner.setId(prop.getProperty("ownerUserID"));
-		
 		try
-		{
+        {
+    		//創建將開啟Log功能的Bucket
+    		System.out.println("Creating source bucket " + bucketName + "\n");
+            s3.createBucket(bucketName);
+    		
+    		//創建Log存放的Bucket
+    		System.out.println("Creating target bucket " + bucketName2 + "\n");
+    	    s3.createBucket(bucketName2);
+    		AccessControlList acl = new AccessControlList();
+    		Owner owner = new Owner();
+    		owner.setDisplayName(prop.getProperty("ownerDisplayName"));
+    		owner.setId(prop.getProperty("ownerUserID"));
+
 			acl.setOwner(owner);
 			acl.grantPermission(GroupGrantee.LogDelivery, Permission.ReadAcp);
 			acl.grantPermission(GroupGrantee.LogDelivery, Permission.Write);
@@ -65,7 +64,7 @@ public class BucketLoggingSerialTesting{
 	
     private static void basicPutBucketLogging(String bucketName, String bucketName2) throws IOException
     {
-		AmazonS3 s3 = new AmazonS3Client(new PropertiesCredentials(BucketLoggingSerialTesting.class.getResourceAsStream("AwsCredentials.properties")));
+		AmazonS3 s3 = S3Client.getClient();
 		       
 		//Log Config設定	   
         BucketLoggingConfiguration config = new BucketLoggingConfiguration();
@@ -107,7 +106,7 @@ public class BucketLoggingSerialTesting{
     
     private static void basicDisableBucketLogging(String bucketName, String bucketName2) throws IOException
     {
-		AmazonS3 s3 = new AmazonS3Client(new PropertiesCredentials(BucketLoggingSerialTesting.class.getResourceAsStream("AwsCredentials.properties")));
+		AmazonS3 s3 = S3Client.getClient();
 		       
         BucketLoggingConfiguration config = new BucketLoggingConfiguration();
         config.setDestinationBucketName(null);
