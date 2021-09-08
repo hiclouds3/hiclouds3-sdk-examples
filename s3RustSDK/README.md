@@ -1,8 +1,10 @@
 # hicloud S3 Rust SDK
 
-## Environment setup
-* cargo >= 1.53.0
-* rustc >= 1.53.0
+## Prerequisites
+* Rust
+* Cargo
+
+See https://doc.rust-lang.org/book/ch01-01-installation.html
 
 ## Rust SDK Serial Test Read me
 * Fill in AccessKey, SecretKey in「sample/src/client.rs」
