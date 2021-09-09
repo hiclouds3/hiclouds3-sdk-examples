@@ -2,6 +2,7 @@ package hicloud.s3.sample;
 
 
 import java.io.IOException;
+import java.io.InputStream;
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
@@ -24,7 +25,9 @@ public class ServerSideEncryption {
       System.out.println("Uploading a object to S3 with Server Side Encryption\n");
       ObjectMetadata metadata = new ObjectMetadata();
       metadata.setSSEAlgorithm("AES256");
-      s3.putObject(new PutObjectRequest(bucketName, objectName, Utils.getSampleFileIS(resourceName), metadata));
+      try (InputStream is = Utils.getSampleFileIS(resourceName)) {
+        s3.putObject(new PutObjectRequest(bucketName, objectName, is, metadata));
+      }
     } catch (AmazonServiceException ase) {
       System.out.println("Caught an AmazonServiceException, which means your request made it "
           + "to Amazon S3, but was rejected with an error response for some reason.");
@@ -41,8 +44,7 @@ public class ServerSideEncryption {
     }
   }
 
-  private static void SSEGetObject(String bucketName, String objectName)
-      throws IOException {
+  private static void SSEGetObject(String bucketName, String objectName) throws IOException {
     System.out.println("SSE GetObject...");
 
     AmazonS3 s3 = S3Client.getClient();
@@ -51,8 +53,7 @@ public class ServerSideEncryption {
       S3Object object = s3.getObject(bucketName, objectName);
       System.out.println("ObjectName: " + object.getKey());
       System.out.println("ETag: " + object.getObjectMetadata().getETag());
-      System.out
-          .println("ServerSideEncryption: " + object.getObjectMetadata().getSSEAlgorithm());
+      System.out.println("ServerSideEncryption: " + object.getObjectMetadata().getSSEAlgorithm());
       // displayTextInputStream(object.getObjectContent()); //Optional
       System.out.println();
 

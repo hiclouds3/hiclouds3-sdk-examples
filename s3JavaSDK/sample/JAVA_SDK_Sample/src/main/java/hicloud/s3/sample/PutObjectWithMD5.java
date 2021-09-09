@@ -63,10 +63,13 @@ public class PutObjectWithMD5 {
       System.out.println("Creating bucket " + bucketName + "\n");
       s3.createBucket(bucketName);
 
-
       System.out.println("Uploading a object to S3 with MD5\n");
-      metadata.setContentMD5(calculateMD5(Utils.getSampleFileIS(resourceName)));
-      s3.putObject(new PutObjectRequest(bucketName, fileName, Utils.getSampleFileIS(resourceName), metadata));
+      try (InputStream is = Utils.getSampleFileIS(resourceName)) {
+        metadata.setContentMD5(calculateMD5(is));
+      }
+      try (InputStream is = Utils.getSampleFileIS(resourceName)) {
+        s3.putObject(new PutObjectRequest(bucketName, fileName, is, metadata));
+      }
 
       // tear down
       System.out.println("tear down");

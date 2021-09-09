@@ -38,26 +38,24 @@ public class UploadBigFileByMPU {
 
       System.out.println("Upload Part");
 
-      InputStream is = Utils.getSampleFileIS(resourceName);
       long contentLength = 6270544;
       long partSize = 5 * 1024 * 1024; // Set part size to 5 MB.
       long filePosition = 0;
+      try (InputStream is = Utils.getSampleFileIS(resourceName)) {
+        for (int i = 1; filePosition < contentLength; i++) {
+          // Last part can be less than 5 MB. Adjust part size.
+          partSize = Math.min(partSize, (contentLength - filePosition));
 
-      for (int i = 1; filePosition < contentLength; i++) {
-        // Last part can be less than 5 MB. Adjust part size.
-        partSize = Math.min(partSize, (contentLength - filePosition));
+          // Create request to upload a part.
+          UploadPartRequest uploadRequest = new UploadPartRequest().withBucketName(bucketName)
+              .withKey(fileName).withUploadId(UploadID).withPartNumber(i).withInputStream(is)
+              .withPartSize(partSize);
 
-        // Create request to upload a part.
-        UploadPartRequest uploadRequest = new UploadPartRequest().withBucketName(bucketName)
-            .withKey(fileName).withUploadId(UploadID).withPartNumber(i).withInputStream(is)
-            .withPartSize(partSize);
-
-        // Upload part and add response to our list.
-        partETags.add(s3.uploadPart(uploadRequest).getPartETag());
-        filePosition += partSize;
+          // Upload part and add response to our list.
+          partETags.add(s3.uploadPart(uploadRequest).getPartETag());
+          filePosition += partSize;
+        }
       }
-
-
 
       // Complete MPU
       System.out.println("basic Complete MPU");

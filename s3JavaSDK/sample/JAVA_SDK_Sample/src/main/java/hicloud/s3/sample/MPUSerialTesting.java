@@ -44,6 +44,7 @@ public class MPUSerialTesting {
     UploadPartRequest config = new UploadPartRequest().withBucketName(bucketName).withKey(fileName)
         .withPartNumber(partNumber).withUploadId(uploadID).withPartSize(6270544)
         .withInputStream(bis);
+    bis.close();
 
     AmazonS3 s3 = S3Client.getClient();
     try {
@@ -393,6 +394,7 @@ public class MPUSerialTesting {
       PutObjectResult object =
           s3.putObject(new PutObjectRequest(sbucketName, sfileName, bis, metadata));
       System.out.println(object.getETag());
+      bis.close();
 
       System.out.println("basic initial MPU");
       InitiateMultipartUploadResult initRequest = s3.initiateMultipartUpload(config);
