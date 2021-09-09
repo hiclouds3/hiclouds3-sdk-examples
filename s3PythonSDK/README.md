@@ -1,19 +1,28 @@
 # hicloud S3 Python SDK
 
-## Environment setup
-* Python3.7 •H§W
-* pip install boto3==1.17.105
+## Prerequisites
 
-## Python SDK Serial Test Read me
-* This sample code use Signature Version 4 now. If you want to use Signature Version 2 ,you need to change the following.
-	* Change 's3v4' to 's3' in°usample/client.py°v
+* Python >= 3.6
+
+* Install python package dependencies
+	
+	```$ pip install -r requirements.txt```
+
+## Getting Started
+
+### Setup
+
+* Signature Version 4 is used as default. If you want to use Signature Version 2,you need to change the following lines.
+	* Change 's3v4' to 's3' in„Äåsample/client.py„Äç
 		```python
 	  	from botocore.config import Config
  	  	config = Config(
-    	       	    signature_version= 's3' 
+    	    signature_version= 's3' 
  	  	)
 		```
-* Fill in AccessKey, SecretKey in°usample/client.py°v
+
+* Fill in AccessKey, SecretKey in„Äåsample/client.py„Äç
+
 	```python
 	import boto3
 	client = boto3.client(
@@ -21,7 +30,8 @@
     	aws_secret_access_key='enter your secretKey',
 	)
 	```
-* Fill in user information in°usample/Config.ini°v
+
+* Fill in user information in„Äåsample/Config.ini„Äç
 	```sh
 	[Section_A]
 	userACanonicalID = enter your id
@@ -31,16 +41,27 @@
 	ownerCanonicalID = enter your id
 	ownerMail = enter your email
 	```
-* Set bucketName and filePath information in°usample/PythonSerialTest.py°v
+
+* Set bucketName and filePath information in„Äåsample/PythonSerialTest.py„Äç
 	```python
 	buckets = ["enter your bucket name", "enter your bucket name", "enter your bucket name"]
 	filePath = ["enter your filePath name", "enter your filePath name", "enter your filePath name"]
 	```
-* If you run°usample/PythonSerialTest.py°v,all the sample programs will be run once
+
+### Running
+
+- S3Sample: Demo of simple S3 operations
+
+    ```sh
+	$ python3 sample/S3Sample.py
+	```
+
+- SerialTest
+
 	```sh
 	$ python3 sample/PythonSerialTest.py
 	```
 
 ## Additional Resource
-* [∂}µo´¸´n](documentation/hicloudS3-python-sdk-∂}µo´¸´n.pdf)
+* [ÈñãÁôºÊåáÂçó](documentation/hicloudS3-python-sdk-ÈñãÁôºÊåáÂçó.pdf)
 * [Developer Guide](documentation/hicloudS3-python-sdk-DeveloperGuide.pdf)
