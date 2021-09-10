@@ -6,7 +6,7 @@ def object_serial_testing(s3, buckets)
   })
 
   # from an IO object
-  File.open(File.expand_path("hinet1.jpg", ""), "rb") do |file|
+  File.open("hinet1.jpg", "rb") do |file|
     resp = s3.put_object({
       body: file,
       bucket: buckets[0],

@@ -30,8 +30,6 @@ def acl_serial_testing(s3, buckets, creds)
     bucket: buckets[0], # required
   })
 
-  creds = JSON.load(File.read("config.json"))
-
   s3.put_bucket_acl({
     bucket: buckets[0],
     access_control_policy: {
