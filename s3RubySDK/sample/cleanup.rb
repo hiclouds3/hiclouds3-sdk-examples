@@ -1,15 +1,30 @@
-
-def cleanup
-  creds = JSON.load(File.read('config.json'))
-  s3 = Aws::S3::Resource.new(
-    credentials: Aws::Credentials.new(creds['Access Key ID'], creds['Secret Access Key']),
-    region: 'ap-northeast-1',
-    endpoint: "http://s3.hicloud.net.tw", 
-    signature_version: 's3'
-  )
-  s3.buckets.each do |bucket|
-    puts "delete #{bucket.name}"
-    bucket.delete! #Deletes all objects and then delete bucket
+def cleanup(s3, buckets)
+  puts "===============cleanup==============="
+  buckets.each do |bucket|
+    resp = s3.list_object_versions({
+      bucket: bucket,
+    })
+    resp.versions.each do |obj|
+      puts "delete object: #{bucket}/#{obj.key} #{obj.version_id} "
+      s3.delete_object({
+        bucket: bucket,
+        key: obj.key,
+        version_id: obj.version_id,
+      })
+    end
+    resp.delete_markers.each do |marker|
+      puts "Rm delete marker: #{bucket}/#{marker.key} #{marker.version_id} "
+      s3.delete_object({
+        bucket: bucket,
+        key: marker.key,
+        version_id: marker.version_id,
+      })
+    end
+    puts "delete bucket: #{bucket}"
+    s3.delete_bucket({
+      bucket: bucket,
+    })
     puts "delete success"
+  rescue Aws::S3::Errors::NoSuchBucket => e
   end
 end
