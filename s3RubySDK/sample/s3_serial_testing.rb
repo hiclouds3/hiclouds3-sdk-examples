@@ -29,10 +29,10 @@ puts "-----------------------------------------------------------------------"
 buckets = ["testrubybucket1", "testrubybucket2"]
 creds = JSON.load(File.read("config.json"))
 
-# new client
-# signature_version: choose 'v4' to use V4 Singing, or 's3' to use V2 Signing (V4 Signing are not supported)
-s3 = Aws::S3::Client.new(region: "ap-northeast-1", require_https_for_sse_cpk: false,
-                         access_key_id: creds["Access Key ID"], secret_access_key: creds["Secret Access Key"], endpoint: "http://s3.hicloud.net.tw", signature_version: "s3",
+# S3 client
+# signature_version: choose 'v4' to use V4 Singing, or 's3' to use V2 Signing
+s3 = Aws::S3::Client.new(region: "us-east-1", require_https_for_sse_cpk: false,
+                         access_key_id: creds["Access Key ID"], secret_access_key: creds["Secret Access Key"], endpoint: "http://s3.hicloud.net.tw", signature_version: "v4",
                          http_idle_timeout: 5, http_open_timeout: 3, log_level: "debug")
 
 begin
