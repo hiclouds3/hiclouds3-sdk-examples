@@ -3,9 +3,9 @@
 ## Prerequisites
 
 - Ruby
-- Install [AWS SDK for Ruby - Version 3](https://github.com/aws/aws-sdk-ruby)
+- Install [AWS SDK for Ruby - Version 3](https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-s3)
 
-  - ```gem install aws-sdk --version '~> 3'```
+  - ```gem install aws-sdk-s3 --version '~> 1'```
 
 ## Getting Started
 

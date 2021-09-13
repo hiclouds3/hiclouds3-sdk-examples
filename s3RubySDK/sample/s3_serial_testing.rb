@@ -1,10 +1,9 @@
 #!/usr/bin/env ruby
 
 # Gemfile
-gem "aws-sdk", "~> 3"
+gem "aws-sdk-s3", "~> 1"
 
-require "aws-sdk"
-require "aws-sdk-core"
+require "aws-sdk-s3"
 require "io/console"
 require "json"
 Aws.use_bundled_cert!
