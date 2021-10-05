@@ -1,5 +1,7 @@
 import os
 import time
+import configparser
+
 import ACLSerialTesting
 import BucketLoggingSerialTesting
 import BucketSerialTesting
@@ -12,10 +14,9 @@ import WebsiteSerialTesting
 import BucketCorsSerialTesting
 import BucketTaggingSerialTesting
 import cleanup
-import configparser
 
 # Change test buckets' name here
-buckets = ["yuyuman1", "yuyuman2", "yuyuman3"]
+buckets = ["testpythonbucket1", "testpythonbucket2", "testpythonbucket3"]
 
 config = configparser.ConfigParser()
 config.read('Config.ini')
@@ -32,52 +33,52 @@ print("S3 Python SDK Serial Test-\nbucketname1:" +
       buckets[0] + " ,bucketname2: " + buckets[1])
 print("-----------------------------------------------------------------------")
 
-os.system('echo cleanup ') 
+print('cleanup') 
 cleanup.main()
 time.sleep(5)
 
-os.system('echo ACLSerialTesting ') 
+print('ACLSerialTesting') 
 ACLSerialTesting.main(buckets, userAInfo, userBInfo, ownerInfo)
 time.sleep(5)
 
-os.system('echo BucketLoggingSerialTesting ') 
-BucketLoggingSerialTesting.main(buckets, ownerInfo);
+print('BucketLoggingSerialTesting') 
+BucketLoggingSerialTesting.main(buckets, ownerInfo)
 time.sleep(5)
 
-os.system('echo BucketSerialTesting ')
+print('BucketSerialTesting')
 BucketSerialTesting.main(buckets)
 time.sleep(5)
 
-os.system('echo LifecycleSerialTesting ') 
-LifecycleSerialTesting.main(buckets);
+print('LifecycleSerialTesting') 
+LifecycleSerialTesting.main(buckets)
 time.sleep(5)
     
-os.system('echo MPUSerialTesting ') 
-MPUSerialTesting.main(buckets, filePath);
+print('MPUSerialTesting') 
+MPUSerialTesting.main(buckets, filePath)
 time.sleep(5)
    
-os.system('echo ObjectSerialTesting ') 
-ObjectSerialTesting.main(buckets);
+print('ObjectSerialTesting') 
+ObjectSerialTesting.main(buckets)
 time.sleep(5)
     
-os.system('echo PolicySerialTesting ') 
-PolicySerialTesting.main(buckets);
+print('PolicySerialTesting') 
+PolicySerialTesting.main(buckets)
 time.sleep(5)
     
-os.system('echo VersioningSerialTesting ')
-VersioningSerialTesting.main(buckets);
+print('VersioningSerialTesting')
+VersioningSerialTesting.main(buckets)
 time.sleep(5)
   
-os.system('echo WebsiteSerialTesting ') 
-WebsiteSerialTesting.main(buckets);
+print('WebsiteSerialTesting') 
+WebsiteSerialTesting.main(buckets)
 time.sleep(5)
   
-os.system('echo CorsSerialTesting ') 
-BucketCorsSerialTesting.main(buckets);
+print('CorsSerialTesting') 
+BucketCorsSerialTesting.main(buckets)
 time.sleep(5)
 
-os.system('echo BucketTaggingSerialTesting')
-BucketTaggingSerialTesting.main(buckets);
+print('BucketTaggingSerialTesting')
+BucketTaggingSerialTesting.main(buckets)
 time.sleep(5)
 
-os.system('echo S3 Python SDK Serial Test Done!')
+print('S3 Python SDK Serial Test Done!')
