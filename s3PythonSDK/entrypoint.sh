@@ -7,6 +7,7 @@ done
 echo ''
 echo 'Staas Server started!'
 
+echo 'Started running PythonSerialTest...'
 cd sample/
 python PythonSerialTest.py
 
