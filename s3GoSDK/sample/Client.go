@@ -22,7 +22,7 @@ var cfg, _ = config.LoadDefaultConfig(
 	config.WithRegion("us-east-1"),
 	config.WithEndpointResolver(customResolver),
 	config.WithCredentialsProvider(
-		credentials.NewStaticCredentialsProvider("Enter_your_AccessKey", "Enter_your_SecretKey", "")
+		credentials.NewStaticCredentialsProvider("Enter_your_AccessKey", "Enter_your_SecretKey", ""),
 	),
 	config.WithAPIOptions([]func(stack *middleware.Stack) error{
 		CustomizeRequestHeaders(),
