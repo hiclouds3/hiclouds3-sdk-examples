@@ -8,9 +8,6 @@ echo ''
 echo 'Staas Server started!'
 
 echo 'Started running go serial test...'
-cd sample/
-go mod init gosdktest
-go get
 go run *.go
 
 echo "Finished all tests... (infinite loop)"
