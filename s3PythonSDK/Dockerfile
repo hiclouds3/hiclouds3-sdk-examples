@@ -1,4 +1,6 @@
-FROM python:3.8
+FROM python:3.8-alpine
+
+RUN apk --no-cache add curl
 
 COPY requirements.txt entrypoint.sh /opt/
 RUN pip install -r /opt/requirements.txt
