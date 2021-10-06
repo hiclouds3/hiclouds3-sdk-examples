@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 printf 'Waiting for staas server.'
 until $(curl --output /dev/null --silent --head --fail http://s3.hicloud.net.tw); do
     printf '.'

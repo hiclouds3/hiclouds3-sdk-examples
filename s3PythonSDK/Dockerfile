@@ -1,6 +1,8 @@
-FROM python:3.8-alpine
+FROM python:3.8-slim
 
-RUN apk --no-cache add curl
+RUN apt update && \
+  apt install -y curl && \
+  apt clean all
 
 COPY requirements.txt entrypoint.sh /opt/
 RUN pip install -r /opt/requirements.txt
