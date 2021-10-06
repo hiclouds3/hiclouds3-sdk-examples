@@ -49,8 +49,7 @@ begin
   bucket_logging_serial_testing(s3, buckets, creds)
   presigned_url(s3, buckets)
 rescue Aws::S3::Errors::ServiceError => e
-  puts e.message
-  puts e.backtrace.join("\n")
+  puts "Error: %s" % e.message
 end
 
 puts "S3 Ruby SDK Serial Test Done!"
