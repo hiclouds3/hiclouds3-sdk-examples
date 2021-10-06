@@ -28,7 +28,7 @@ func BucketLoggingTest(buckets [3]string) {
 				TargetGrants: []types.TargetGrant{
 					{
 						Grantee: &types.Grantee{
-							ID:   aws.String("tester20210713"),
+							ID:   aws.String("Enter_your_canonical_ID"),
 							Type: "CanonicalUser",
 						},
 						Permission: "FULL_CONTROL",
