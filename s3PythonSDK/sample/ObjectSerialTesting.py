@@ -32,7 +32,6 @@ def main(arg):
             Body=content,
             ACL='public-read',
             Bucket=arg[0],
-            CacheControl='no-cache',
             ContentDisposition='attachment;filename=\'default.txt\'',
             ContentEncoding='UTF-8',
             ContentType='text/plain',
@@ -46,7 +45,6 @@ def main(arg):
             Bucket=arg[0],
             Key='test.txt',
         )
-        #print("Cache-Control: " + repr(response['ResponseMetadata']['HTTPHeaders']['cache-control']))
         # print("Content-Type"+repr(response['ResponseMetadata']['HTTPHeaders']['content-type']))
         #print("Content-Encoding: "+repr(response['ResponseMetadata']['HTTPHeaders']['content-encoding']))
         #print("Content-Disposition: "+repr(response['ResponseMetadata']['HTTPHeaders']['content-disposition']))
