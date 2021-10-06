@@ -1,4 +1,4 @@
-FROM ruby:2.7-alpine
+FROM ruby:2.7-alpine3.13
 
 RUN apk --no-cache add curl
 RUN gem install aws-sdk-s3 --version '~> 1'
