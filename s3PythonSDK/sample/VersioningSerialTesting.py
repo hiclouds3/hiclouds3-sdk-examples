@@ -124,6 +124,4 @@ def main(arg):
         print("Versioning Serial Test Done !\n")
 
     except ClientError as e:
-        print("Error operation : " + e.operation_name)
-        print("Error code : " + e.response['Code'])
-        print("Error response : " + e.response['Message'])
+        print(e)
