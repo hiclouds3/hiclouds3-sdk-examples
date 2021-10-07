@@ -31,4 +31,4 @@ Currently, we provide code samples tested on the SDKs as follows:
 - PHP https://github.com/aws/aws-sdk-php/releases/tag/2.4.12
 - Python3 https://github.com/boto/boto3/releases/tag/1.17.105
 - Ruby https://github.com/aws/aws-sdk-ruby/tree/version-3
-- Rust https://github.com/awslabs/aws-sdk-rust/tree/v0.0.17-alpha
+- Rust https://github.com/awslabs/aws-sdk-rust/tree/v0.0.19-alpha
