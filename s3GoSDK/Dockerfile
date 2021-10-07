@@ -5,5 +5,5 @@ COPY sample /opt/sample
 RUN ["chmod", "+x", "/opt/entrypoint.sh"]
 RUN cd /opt/sample/ && go mod init mys3test && go get
 
-WORKDIR /opt/sample
+WORKDIR /opt
 ENTRYPOINT ["/opt/entrypoint.sh"]
