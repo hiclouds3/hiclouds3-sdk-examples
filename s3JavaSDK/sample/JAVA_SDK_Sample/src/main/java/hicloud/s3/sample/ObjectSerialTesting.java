@@ -165,7 +165,6 @@ public class ObjectSerialTesting {
       metadata.setContentLength(108);
       metadata.setContentEncoding("UTF-8");
       metadata.setContentDisposition("attachment; filename=\"default.txt\"");
-      metadata.setCacheControl("no-cache");
       metadata.setContentMD5("aSsJ8P/c05f2r0JDoSWbHg=="); // hello.txt
 
       System.out.println("Uploading a new object to S3 from a file\n");
