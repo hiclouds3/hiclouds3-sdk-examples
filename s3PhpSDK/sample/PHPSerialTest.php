@@ -1,4 +1,3 @@
-<pre>
 <?php
 
 /**
@@ -15,12 +14,12 @@ require 'config.php';
 error_reporting(0);
 
 //Change test buckets' name here
-$bucket = array("allentest1","allentest2","allentest");
+$bucket = array("testphpbucket1","testphpbucket2","testphpbucket3");
 $userAInfo = array($config[userACanonicalID],$config[userAMail]);
 $userBInfo = array($config[userBCanonicalID],$config[userBMail]);
 $ownerInfo = array($config[ownerCanonicalID],$config[ownerMail]);
 
-echo "S3 PHP SDK Serial Test-\nbucketname1: ".$bucket[0]." ,bucketname2: ".$bucket[1]." ,bucketname3: ".$bucket[2];
+echo "S3 PHP SDK Serial Test\nbucketname1: ".$bucket[0]." ,bucketname2: ".$bucket[1]." ,bucketname3: ".$bucket[2];
 echo "\n-----------------------------------------------------------------------\n";
 
 system("php ./Cleanup.php $bucket[0]");
@@ -28,8 +27,8 @@ system("php ./Cleanup.php $bucket[1]");
 system("php ./Cleanup.php $bucket[2]");
 sleep(5);
 
-// system("php ./ACLSerialTesting.php $bucket[0] $bucket[1] $bucket[2] $userAInfo[1] $ownerInfo[0]");
-// sleep(5);
+system("php ./ACLSerialTesting.php $bucket[0] $bucket[1] $bucket[2] $userAInfo[1] $ownerInfo[0]");
+sleep(5);
 
 // system("php ./BucketLoggingSerialTesting.php $bucket[0] $bucket[1] $bucket[2] $ownerInfo[0]");
 // sleep(5);
@@ -64,6 +63,5 @@ sleep(5);
 // system("php ./BucketTaggingSerialTest.php $bucket[0] $bucket[1] $bucket[2]");
 // sleep(5);
 
-echo "\nS3 PHP SDK Serial Test Done!";
+echo "\nS3 PHP SDK Serial Test Done!\n";
 ?>
-</pre>
