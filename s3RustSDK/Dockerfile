@@ -7,7 +7,9 @@ RUN apt update && \
 COPY entrypoint.sh /opt/
 COPY sample /opt/sample
 RUN ["chmod", "+x", "/opt/entrypoint.sh"]
-RUN cd /opt/sample && cargo build
+RUN cd /opt/sample && \
+  cargo install --path . && \
+  cargo clean
 
 WORKDIR /opt
 ENTRYPOINT ["/opt/entrypoint.sh"]

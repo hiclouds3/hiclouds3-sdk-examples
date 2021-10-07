@@ -8,8 +8,7 @@ echo ''
 echo 'Staas Server started!'
 
 echo 'Started running rust serial test...'
-cd sample/
-cargo run
+s3_code_examples
 
 echo "Finished all tests... (infinite loop)"
 while true; do sleep 15 ; printf "."; done
