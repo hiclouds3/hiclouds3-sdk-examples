@@ -16,7 +16,7 @@ require 'client.php';
 
 function ExpectException($e,$statuscode){
 	if($e->getStatusCode()!=$statuscode){
-		echo "<font color=red>¡I</font>Expected Status Code : $statuscode , get another Exception...<br>";
+		echo "Expected Status Code : $statuscode , get another Exception...";
 		echo "Error Message:    " . $e->getMessage()."<br>";
 		echo "HTTP Status Code: " . $e->getStatusCode()."<br>";
 		echo "AWS Error Code:   " . $e->getExceptionCode()."<br>";
@@ -34,6 +34,7 @@ function cleanBucket($bucketname)
 		//Disable Bucket Version
 		$client->putBucketVersioning(array(
 				'Bucket' => $bucketname,
+				'MFADelete ' => 'Disabled',
 				'Status' => 'Suspended'
 		));
 	

@@ -1,5 +1,6 @@
 <?php
-require 'sample/client.php';
+require './vendor/autoload.php';
+require './client.php';
 
 use Aws\S3\S3Client;
 use Aws\S3\Enum\CannedAcl;
@@ -70,16 +71,14 @@ $client->putObject(array(
 		'Bucket' => $bucketname,
 		'Key'    => $objName,
 		'Body'   => createSampleFile(),
-		'ACL'	 => CannedAcl::PUBLIC_READ,
+		'ACL'	 => 'public-read',
 		'command.headers' => array(
 				'x-amz-meta-flower' => 'lily',
 				'x-amz-meta-color' => "pink"
 		),
 		'ContentType' => "text/plain",
 		'ContentLength' => '150',
-		'ContentEncoding' => "UTF-8",
 		'ContentDisposition'=> "attachment; filename=\"default.txt\"",
-		'CacheControl' => "no-cache",
 		'ContentMD5'=>'movf4FeaK/4LQyz5FP1oiQ=='
 ));
 
@@ -143,6 +142,6 @@ catch (ExceptionCollection $e) {
 	echo "Validation Error:". $e->getMessage() ."<br><br>" ;
 }
 
-echo "\nS3 PHP SDK Serial Test Done!";
+echo "\nS3 PHP SDK Serial Test Done!\n";
 
 ?>
