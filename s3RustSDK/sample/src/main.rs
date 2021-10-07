@@ -16,9 +16,9 @@ use s3_code_examples::version_serial_testing::versionserialtesting;
 
 #[tokio::main]
 async fn main() {
-    let bucket1 = "Enter your bucket1 name";
-    let bucket2 = "Enter your bucket2 name";
-    let key = "Enter your key name";
+    let bucket1 = "testrustbucket1";
+    let bucket2 = "testrustbucket2";
+    let key = "testrustobj";
     cleanup(client::client()).await;
     createbucket(client::client(), client::region(), String::from(bucket1)).await;
     createbucket(client::client(), client::region(), String::from(bucket2)).await;

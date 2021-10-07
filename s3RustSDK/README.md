@@ -16,12 +16,7 @@ See https://doc.rust-lang.org/book/ch01-01-installation.html
 	let grantee=Grantee::builder()
         .id("Enter the canonical user ID of the grantee")
 	```
-* Set bucketName and filePath information in「sample/src/main.rs」
-	```rust
-	let bucket1="Enter your bucket1 name";
-    let bucket2="Enter your bucket2 name";
-    let key="Enter your key name";
-	```
+
 * If you run「sample/src/main.rs」,all the sample programs will be run
 	```sh
 	$ cd sample/
