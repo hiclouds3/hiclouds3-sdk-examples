@@ -33,8 +33,8 @@ sleep(5);
 system("php ./BucketLoggingSerialTesting.php $bucket[0] $bucket[1] $bucket[2] $ownerInfo[0]");
 sleep(5);
 
-// system("php ./BucketSerialTesting.php $bucket[0] $bucket[1] $bucket[2]");
-// sleep(5);
+system("php ./BucketSerialTesting.php $bucket[0] $bucket[1] $bucket[2]");
+sleep(5);
 
 // system("php ./LifecycleSerialTesting.php $bucket[0] $bucket[1] $bucket[2]");
 // sleep(5);
