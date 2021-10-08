@@ -60,8 +60,8 @@ sleep(5);
 system("php ./BucketCorsSerialTest.php $bucket[0] $bucket[1] $bucket[2]");
 sleep(5);
 
-// system("php ./BucketTaggingSerialTest.php $bucket[0] $bucket[1] $bucket[2]");
-// sleep(5);
+system("php ./BucketTaggingSerialTest.php $bucket[0] $bucket[1] $bucket[2]");
+sleep(5);
 
 echo "\nS3 PHP SDK Serial Test Done!\n";
 ?>

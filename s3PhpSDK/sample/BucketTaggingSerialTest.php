@@ -1,4 +1,3 @@
-<pre>
 <?php
 /*
  * test 1. put Bucket
@@ -9,78 +8,51 @@
  */
 
 use Aws\S3\Exception\S3Exception;
-use Guzzle\Service\Exception\ValidationException;
 
-//require './aws-autoloader.php';
 require 'client.php';
 
 $bucketname=$argv[2];
-$id='testLC';
-$id2='testLC2';
-$prefix='test.txt';
-$datetime = new DateTime('17 Oct 2020');
 
-try
-{
-echo "BucketTagging Serial testing...<br>";
-	
-$client->createBucket(array(
-	'Bucket' => $bucketname
-));
-
-/*$result = $client->putBucketTagging([
-    'Bucket' => $bucketname, // REQUIRED
-    'Tagging' => [ // REQUIRED
-        'TagSet' => [ // REQUIRED
-            [
-                'Key' => 'Jan', // REQUIRED
-                'Value' => 'pink', // REQUIRED
-            ],
-            [
-                'Key' => 'Dec', 
-                'Value' => 'blue', 
-            ]
-        ]
-    ],
-]);
-*/
-$result = $client->putBucketTagging(array(
-                'Bucket' => $bucketname,
-                'TagSet' => array(
-                        array(
-                                'Key' => 'Jan',
-                                'Value' => 'pink'
-                        ),array(
-                                'Key' => 'Dec',
-                                'Value' => 'blue'
-                        )
-                        
-                )
-        ));
+try {
+    echo "BucketTagging Serial testing...\n";
         
-$result = $client->getBucketTagging([
-    'Bucket' => $bucketname // REQUIRED
-]);
-#echo $result;
+    $client->createBucket(array(
+        'Bucket' => $bucketname
+    ));
 
-$result = $client->deleteBucketTagging([
-    'Bucket' => $bucketname // REQUIRED
-]);
+    $result = $client->putBucketTagging(array(
+                        'Bucket' => $bucketname,
+                        'Tagging' => [
+                            'TagSet' => array(
+                                    array(
+                                            'Key' => 'Jan',
+                                            'Value' => 'pink'
+                                    ),array(
+                                            'Key' => 'Dec',
+                                            'Value' => 'blue'
+                                    )
+                                    
+                            )
+                        ]
+            ));
+            
+    $result = $client->getBucketTagging([
+        'Bucket' => $bucketname // REQUIRED
+    ]);
+    #echo $result;
 
-$client->deleteBucket(array(
-		'Bucket' => $bucketname
-));
+    $result = $client->deleteBucketTagging([
+        'Bucket' => $bucketname // REQUIRED
+    ]);
 
-}catch(ValidationException $e){
-		echo $e->getMessage();
+    $client->deleteBucket(array(
+            'Bucket' => $bucketname
+    ));
 } catch (S3Exception $e) {
-	echo "<font color=red>¡I</font>Caught an AmazonServiceException.<br>";
-	echo "Error Message:    " . $e->getMessage()."<br>";
-	echo "HTTP Status Code: " . $e->getStatusCode()."<br>";
-	echo "AWS Error Code:   " . $e->getExceptionCode()."<br>";
-	echo "Error Type:       " . $e->getExceptionType()."<br>";
-	echo "Request ID:       " . $e->getRequestId()."<br>";
+    echo "Caught an AmazonServiceException.", "\n";
+    echo "Error Message:    " . $e->getAWSErrorMessage(). "\n";
+    echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
+    echo "AWS Error Code:   " . $e->getAwsErrorCode(). "\n";
+    echo "Error Type:       " . $e->getAwsErrorType(). "\n";
+    echo "Request ID:       " . $e->getAwsRequestId(). "\n";
 }
-
-?>
-</pre>
