@@ -25,7 +25,7 @@ function showResult($result)
 }
 
 try {
-    echo "Versioning Serial Testing...";
+    echo "Versioning Serial Testing...\n";
     $bucketname=$argv[1];
     
     $client->createBucket(array(
