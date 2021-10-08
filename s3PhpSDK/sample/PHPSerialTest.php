@@ -36,8 +36,8 @@ sleep(5);
 system("php ./BucketSerialTesting.php $bucket[0] $bucket[1] $bucket[2]");
 sleep(5);
 
-// system("php ./LifecycleSerialTesting.php $bucket[0] $bucket[1] $bucket[2]");
-// sleep(5);
+system("php ./LifecycleSerialTesting.php $bucket[0] $bucket[1] $bucket[2]");
+sleep(5);
 
 // system("php ./ObjectSerialTesting.php $bucket[0] $bucket[1] $bucket[2]");
 // sleep(5);

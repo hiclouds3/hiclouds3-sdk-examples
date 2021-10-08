@@ -1,4 +1,3 @@
-<pre>
 <?php
 /*
  * test 1. putBucket
@@ -9,7 +8,6 @@
  */
 
 use Aws\S3\Exception\S3Exception;
-use Guzzle\Service\Exception\ValidationException;
 
 require 'client.php';
 
@@ -23,118 +21,113 @@ $datetime = new DateTime('17 Oct 2020');
 
 function createSampleFile()
 {
-	$temp = tmpfile();
-	$content = "abcdefghijklmnopqrstuvwxyz<br>01234567890112345678901234<br>!@#$%^&*()-=[]{};':',.<>/?<br>01234567890112345678901234<br>abcdefghijklmnopqrstuvwxyz<br>";
-	fwrite($temp, $content);
-	fseek($temp, 0);
-	return $temp;
-	fclose($temp); // this removes the file
+    $temp = tmpfile();
+    $content = "abcdefghijklmnopqrstuvwxyz<br>01234567890112345678901234<br>!@#$%^&*()-=[]{};':',.<>/?<br>01234567890112345678901234<br>abcdefghijklmnopqrstuvwxyz<br>";
+    fwrite($temp, $content);
+    fseek($temp, 0);
+    return $temp;
+    fclose($temp); // this removes the file
 }
 
-try
-{
-echo "Lifecycle Serial testing...<br>";
+try {
+    echo "Lifecycle Serial testing...", "\n";
 
 
-$client->createBucket(array(
-	'Bucket' => $bucketname
-));
-$result = $client->putObject(array(
-		'Bucket' => $bucketname,
-		'Key'    => $prefix,
-		'Body'   => createSampleFile()
-	));
+    $client->createBucket(array(
+    'Bucket' => $bucketname
+    ));
+    $result = $client->putObject(array(
+        'Bucket' => $bucketname,
+        'Key'    => $prefix,
+        'Body'   => createSampleFile()
+    ));
 
+    $client->putBucketLifecycle(array(
+        'Bucket' => $bucketname ,
+        'LifecycleConfiguration' => [
+            'Rules' => array(
+                array(
+                    'Expiration'=> array(
+                        'Days' => 1,
+                    ),
+                    'ID' => $id ,
+                    'Prefix' => $prefix ,
+                    'Status' => 'Enabled',
+                ),
+            )
+        ]
+    ));
 
-$client->putBucketLifecycle(array(
-		'Bucket' => $bucketname ,
-		'Rules' => array(
-			array(
-				'Expiration'=> array( 
-					'Days' => 1,
-				),
-				'ID' => $id ,
-				'Prefix' => $prefix ,
-				'Status' => 'Enabled',
-			),
-		)
-	));
-
-$client->putBucketLifecycle(array(
-		'Bucket' => $bucketname ,
-		'Rules' => array(
+    $client->putBucketLifecycle(array(
+        'Bucket' => $bucketname ,
+        'LifecycleConfiguration' => [
+            'Rules' => array(
+                array(
+                    'Expiration'=> array(
+                        'Date' => "GMT ".$datetime->format('c'),
+                    ),
+                    'ID' => $id2 ,
+                    'Prefix' => $prefix ,
+                    'Status' => 'Enabled',
+                ),
 				array(
-						'Expiration'=> array(
-								'Date' => "GMT ".$datetime->format('c'),
-						),
-						'ID' => $id2 ,
-						'Prefix' => $prefix ,
-						'Status' => 'Enabled',
-				),
-		)
-));
+                    'Transition'=> array(
+                        'Days' => 30,
+						'StorageClass' => 'GLACIER'
+                    ),
+                    'ID' => 'transition1' ,
+                    'Prefix' => $prefix ,
+                    'Status' => 'Enabled',
+                ),
+            )
+        ]
+    ));
 
+    $result = $client->getBucketLifecycle(array(
+        'Bucket' => $bucketname,
+    ));
 
-$result = $client->getBucketLifecycle(array(
-	'Bucket' => $bucketname,
-));
+    echo "Listing Rules...\n";
+    foreach ($result['Rules'] as $rule) {
+		echo json_encode($rule), "\n";
+    }
 
-echo "Listing Rules...\n";			
-foreach($result['Rules'] as $rule){
-	echo "--------------------------\n";
-	echo "[ID]" . $rule['ID']." \n".
-         "[Prefix]".$rule['Prefix']." \n".
-         "[Status]".$rule['Status']." \n";
-    	if(empty($rule['Expiration']['Date']))     
-			echo"[Expiration] in ".$rule['Expiration']['Days']." days \n";
-    	else 
-    		echo"[Expiration] on ".$rule['Expiration']['Date']." \n";
-}
+    $client->putBucketLifecycle(array(
+        'Bucket' => $bucketname ,
+        'LifecycleConfiguration' => [
+            'Rules' => array(
+                array(
+                    'Expiration'=> array(
+                            'Days' => 1,
+                    ),
+                    'ID' => $id ,
+                    'Prefix' => $prefix ,
+                    'Status' => 'Disabled',
+                ),
+            )
+        ]
+    ));
 
-$client->putBucketLifecycle(array(
-		'Bucket' => $bucketname ,
-		'Rules' => array(
-				array(
-						'Expiration'=> array(
-								'Days' => 1,
-						),
-						'ID' => $id ,
-						'Prefix' => $prefix ,
-						'Status' => 'Disabled',
-				),
-		)
-));
+    $result = $client->getBucketLifecycle(array(
+        'Bucket' => $bucketname,
+    ));
 
-$result = $client->getBucketLifecycle(array(
-		'Bucket' => $bucketname,
-));
+    $client->deleteBucketLifecycle(array(
+        'Bucket' => $bucketname,
+    ));
 
-$client->deleteBucketLifecycle(array(
-		'Bucket' => $bucketname,
-));
-
-$client->deleteObject(array(
-		'Bucket' => $bucketname,
-		'Key'	=> $prefix 
-));
-$client->deleteBucket(array(
-		'Bucket' => $bucketname
-));
-
-
-
-
-
-}catch(ValidationException $e){
-		echo $e->getMessage();
+    $client->deleteObject(array(
+        'Bucket' => $bucketname,
+        'Key'	=> $prefix
+    ));
+    $client->deleteBucket(array(
+        'Bucket' => $bucketname
+    ));
 } catch (S3Exception $e) {
-	echo "<font color=red>¡I</font>Caught an AmazonServiceException.<br>";
-	echo "Error Message:    " . $e->getMessage()."<br>";
-	echo "HTTP Status Code: " . $e->getStatusCode()."<br>";
-	echo "AWS Error Code:   " . $e->getExceptionCode()."<br>";
-	echo "Error Type:       " . $e->getExceptionType()."<br>";
-	echo "Request ID:       " . $e->getRequestId()."<br>";
+    echo "Caught an AmazonServiceException.", "\n";
+    echo "Error Message:    " . $e->getAWSErrorMessage(). "\n";
+    echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
+    echo "AWS Error Code:   " . $e->getAwsErrorCode(). "\n";
+    echo "Error Type:       " . $e->getAwsErrorType(). "\n";
+    echo "Request ID:       " . $e->getAwsRequestId(). "\n";
 }
-
-?>
-</pre>
