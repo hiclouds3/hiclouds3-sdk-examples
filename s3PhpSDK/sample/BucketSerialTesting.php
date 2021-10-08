@@ -22,12 +22,12 @@ function createBucket($bucketname)
                 'Bucket' => $bucketname
         ));
     } catch (S3Exception $e) {
-        echo "Caught an AmazonServiceException, which means your request made it to Amazon S3, but was rejected with an error response for some reason.<br>";
-        echo "Error Message:    " . $e->getMessage()."<br>";
-        echo "HTTP Status Code: " . $e->getStatusCode()."<br>";
-        echo "AWS Error Code:   " . $e->getExceptionCode()."<br>";
-        echo "Error Type:       " . $e->getExceptionType()."<br>";
-        echo "Request ID:       " . $e->getRequestId()."<br>";
+		echo "Caught an AmazonServiceException.", "\n";
+		echo "Error Message:    " . $e->getAWSErrorMessage(). "\n";
+		echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
+		echo "AWS Error Code:   " . $e->getAwsErrorCode(). "\n";
+		echo "Error Type:       " . $e->getAwsErrorType(). "\n";
+		echo "Request ID:       " . $e->getAwsRequestId(). "\n";
     }
 }
 
@@ -107,12 +107,12 @@ function delBucket($bucketname)
     try {
         $client->deleteBucket(array('Bucket' => $bucketname));
     } catch (S3Exception $e) {
-        echo "<font color=red>¡I</font>Caught an AmazonServiceException, which means your request made it to Amazon S3, but was rejected with an error response for some reason.<br>";
-        echo "Error Message:    " . $e->getMessage()."<br>";
-        echo "HTTP Status Code: " . $e->getStatusCode()."<br>";
-        echo "AWS Error Code:   " . $e->getExceptionCode()."<br>";
-        echo "Error Type:       " . $e->getExceptionType()."<br>";
-        echo "Request ID:       " . $e->getRequestId()."<br>";
+		echo "Caught an AmazonServiceException.", "\n";
+		echo "Error Message:    " . $e->getAWSErrorMessage(). "\n";
+		echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
+		echo "AWS Error Code:   " . $e->getAwsErrorCode(). "\n";
+		echo "Error Type:       " . $e->getAwsErrorType(). "\n";
+		echo "Request ID:       " . $e->getAwsRequestId(). "\n";
     }
 }
 

@@ -1,13 +1,5 @@
 <?php
-use Aws\S3\Model\AcpBuilder;
-use Aws\S3\Model\Grantee;
-use Aws\S3\Enum\GranteeType;
-use Aws\S3\Exception\InvalidArgumentException;
-use Aws\S3\Enum\Group;
-use Guzzle\Http\Exception\RequestException;
-use Aws\S3\Model\ClearBucket;
-use Aws\S3\S3Client;
-use Guzzle\Plugin\Log\LogPlugin;
+
 use Aws\S3\Exception\S3Exception;
 
 require 'client.php';
@@ -60,7 +52,7 @@ function showObjectACL($bucketname, $file)
             'Bucket' => $bucketname,
             'Key' => $file
     ));
-	echo "\n";
+    echo "\n";
     echo "<br><br>Owner DisplayName: " . $result['Owner']['DisplayName'] . "<br>";
     echo "Owner ID: " . $result['Owner']['ID'] . "<br>";
     foreach ($result['Grants'] as $Grantee) {
@@ -80,7 +72,7 @@ function showObjectACL($bucketname, $file)
             echo  "Grantee Permission: " . $Grantee['Permission']."<br><br>";
         }
     }
-	echo "\n";
+    echo "\n";
 }
 
 function showBucketACL($bucketname)
@@ -89,7 +81,7 @@ function showBucketACL($bucketname)
     $result=$client->getBucketAcl(array(
         'Bucket' => $bucketname
     ));
-	echo "\n";
+    echo "\n";
     echo "<br><br>Owner DisplayName: " . $result['Owner']['DisplayName'] . "<br>";
     echo "Owner ID: " . $result['Owner']['ID'] . "<br>";
     foreach ($result['Grants'] as $Grantee) {
@@ -109,7 +101,7 @@ function showBucketACL($bucketname)
             echo  "Grantee Permission: " . $Grantee['Permission']."<br><br>";
         }
     }
-	echo "\n";
+    echo "\n";
 }
 
 function BasicputBucket()
@@ -160,7 +152,7 @@ function BasicputBucket()
             'ACL'	 => 'public-read'
     ));
     
-	showBucketACL($bucketname);
+    showBucketACL($bucketname);
     //DeleteBucket
     $client->deleteBucket(array('Bucket' => $bucketname));
 }
@@ -178,57 +170,57 @@ function putBucketV()
         
     //Enable Bucket Version
     $client->putBucketVersioning(array(
-		'Bucket' => $bucketname,
-		'VersioningConfiguration' => [
-			'MFADelete' => 'Disabled',
-			'Status' => 'Enabled',
-		],
-	));
+        'Bucket' => $bucketname,
+        'VersioningConfiguration' => [
+            'MFADelete' => 'Disabled',
+            'Status' => 'Enabled',
+        ],
+    ));
     
     //PutObject
     putObject($bucketname, $file, createSampleFile());
     
     //GetObject
     $result=$client->getObject(array(
-                'Bucket' => $bucketname,
-                'Key'	 => $file
-        ));
+        'Bucket' => $bucketname,
+        'Key'	 => $file
+    ));
         
     //SetObjectACL
     $client->putObjectAcl(array(
-                'Bucket' => $bucketname ,
-                'Key'	 => $file ,
-                'AccessControlPolicy' => [
-					'Grants' => [
-						[
-							'Grantee' => [
-								'ID' => "{$ownerCanonicalId}",
-								'Type' => 'CanonicalUser',
-							],
-							'Permission' => 'FULL_CONTROL',
-						],
-						[
-							'Grantee' => [
-								'EmailAddress' => "{$userAEmail}",
-								'Type' => 'AmazonCustomerByEmail',
-							],
-							'Permission' => 'FULL_CONTROL',
-						],
-						[
-							'Grantee' => [
-								'Type' => 'Group',
-								'URI' => 'http://acs.amazonaws.com/groups/global/AllUsers'
-							],
-							'Permission' => 'FULL_CONTROL',
-						],
-					],
-					'Owner' => [
-						'ID' => "{$ownerCanonicalId}"
-					],
-				],
-        ));
+        'Bucket' => $bucketname ,
+        'Key'	 => $file ,
+        'AccessControlPolicy' => [
+            'Grants' => [
+                [
+                    'Grantee' => [
+                        'ID' => "{$ownerCanonicalId}",
+                        'Type' => 'CanonicalUser',
+                    ],
+                    'Permission' => 'FULL_CONTROL',
+                ],
+                [
+                    'Grantee' => [
+                        'EmailAddress' => "{$userAEmail}",
+                        'Type' => 'AmazonCustomerByEmail',
+                    ],
+                    'Permission' => 'FULL_CONTROL',
+                ],
+                [
+                    'Grantee' => [
+                        'Type' => 'Group',
+                        'URI' => 'http://acs.amazonaws.com/groups/global/AllUsers'
+                    ],
+                    'Permission' => 'FULL_CONTROL',
+                ],
+            ],
+            'Owner' => [
+                'ID' => "{$ownerCanonicalId}"
+            ],
+        ],
+    ));
 
-	showObjectACL($bucketname, $file);
+    showObjectACL($bucketname, $file);
         
     //List all versions in your bucket
     $result=$client->listObjectVersions(array(
@@ -250,14 +242,14 @@ function putBucketV()
         array_push($objs, array( 'Key' => $file, 'VersionId' => $a[$i]));
     }
 
-	if (count($objs) > 0) {
-		$result = $client->deleteObjects(array(
-			'Bucket' => $bucketname,
-			'Delete' => [
-				'Objects' => $objs
-			]
-		));
-	}
+    if (count($objs) > 0) {
+        $result = $client->deleteObjects(array(
+            'Bucket' => $bucketname,
+            'Delete' => [
+                'Objects' => $objs
+            ]
+        ));
+    }
         
     //DeleteBucket
     $client->deleteBucket(array('Bucket' => $bucketname));
@@ -286,12 +278,10 @@ try {
      */
     putBucketV();
 } catch (S3Exception $e) {
-    echo "Caught an AmazonServiceException, which means your request made it to Amazon S3, but was rejected with an error response for some reason.";
-    echo "Error Message:    " . $e->getMessage()."<br>";
-    echo "HTTP Status Code: " . $e->getStatusCode()."<br>";
-    echo "AWS Error Code:   " . $e->getExceptionCode()."<br>";
-    echo "Error Type:       " . $e->getExceptionType()."<br>";
-    echo "Request ID:       " . $e->getRequestId()."<br>";
-} catch (RequestException $e) {
-    echo $e->getMessage();
+    echo "Caught an AmazonServiceException.", "\n";
+    echo "Error Message:    " . $e->getAWSErrorMessage(). "\n";
+    echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
+    echo "AWS Error Code:   " . $e->getAwsErrorCode(). "\n";
+    echo "Error Type:       " . $e->getAwsErrorType(). "\n";
+    echo "Request ID:       " . $e->getAwsRequestId(). "\n";
 }

@@ -6,12 +6,12 @@ require 'client.php';
 function ExpectException($e, $statuscode)
 {
     if ($e->getStatusCode()!=$statuscode) {
-        echo "Expected Status Code : $statuscode , get another Exception...";
-        echo "Error Message:    " . $e->getMessage()."<br>";
-        echo "HTTP Status Code: " . $e->getStatusCode()."<br>";
-        echo "AWS Error Code:   " . $e->getExceptionCode()."<br>";
-        echo "Error Type:       " . $e->getExceptionType()."<br>";
-        echo "Request ID:       " . $e->getRequestId()."<br>";
+		echo "Caught an AmazonServiceException.", "\n";
+		echo "Error Message:    " . $e->getAWSErrorMessage(). "\n";
+		echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
+		echo "AWS Error Code:   " . $e->getAwsErrorCode(). "\n";
+		echo "Error Type:       " . $e->getAwsErrorType(). "\n";
+		echo "Request ID:       " . $e->getAwsRequestId(). "\n";
     }
 }
 
