@@ -1,10 +1,10 @@
 <?php 
 $config = array(
-    'userACanonicalID' => 'canonicalidannyren',
-    'userAMail'   => 'annyren@test.com',
-    'userBCanonicalID' => 'canonicalidhrchu',
-    'userBMail'   => 'hrchu@test.com',
-    'ownerCanonicalID' => '719d8f98c20242d8a2888a5462dba64d',
-    'ownerMail'   => 'HN55011602',
+    'userACanonicalID' => 'enter your id',
+    'userAMail'   => 'enter your email',
+    'userBCanonicalID' => 'enter your id',
+    'userBMail'   => 'enter your email',
+    'ownerCanonicalID' => 'enter your id',
+    'ownerMail'   => 'enter your email',
 );
 ?>
