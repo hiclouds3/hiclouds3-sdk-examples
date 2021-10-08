@@ -1,4 +1,3 @@
-<pre>
 <?php
 /*
  * test 1. Basic putBucket
@@ -13,7 +12,7 @@ require 'client.php';
 $bucketname=$argv[1];
 
 try{
-	echo "Website Serial Testing...<br>";
+	echo "Website Serial Testing...\n";
 	$client->createBucket(array(
 		'Bucket' => $bucketname,
 		'ACL' 	 => 'public-read'	
@@ -35,13 +34,14 @@ try{
 	));
 	$client->putBucketWebsite(array(
 			'Bucket' => $bucketname,
-			'ContentMD5' => 'false',
-			'ErrorDocument' => array(
-				'Key' => 'error.html'
-				),
-			'IndexDocument' => array(
-				'Suffix' => 'index.html'
-				),
+			'WebsiteConfiguration' => [
+				'ErrorDocument' => array(
+					'Key' => 'error.html'
+					),
+				'IndexDocument' => array(
+					'Suffix' => 'index.html'
+					),
+			]
 	));
 	
 	$result=$client->getBucketWebsite( array(
@@ -51,19 +51,21 @@ try{
 	//apply routing rules, may take some time for applying new rules  
 	$client->putBucketWebsite(array(
 			'Bucket' => $bucketname,
-			'ErrorDocument' => array(
-					'Key' => 'error.html'
-			),
-			'IndexDocument' => array(
-					'Suffix' => 'index.html'
-			),
-			'RoutingRules' => array(
-					'RoutingRule' =>array(
-							'Redirect' =>array(
-									'HostName' => 'www.google.com'
-							),
-					),
-			),
+			'WebsiteConfiguration' => [
+				'ErrorDocument' => array(
+						'Key' => 'error.html'
+				),
+				'IndexDocument' => array(
+						'Suffix' => 'index.html'
+				),
+				'RoutingRules' => array(
+						'RoutingRule' =>array(
+								'Redirect' =>array(
+										'HostName' => 'www.google.com'
+								),
+						),
+				),
+			]
 	));
 	
 	$result=$client->getBucketWebsite( array(
@@ -74,20 +76,6 @@ try{
 			'Bucket' => $bucketname
 	));
 	
-	
-	$client->deleteObjects(array(
-			'Bucket' => $bucketname,
-			'Objects' => array(
-					array(
-						'Key' => 'error.html'
-					),
-					array(
-						'Key' => 'index.html'
-					)
-			),
-	));
-	
-	//暫時用這個
 	$client->deleteObject(array(
 			'Bucket' => $bucketname,
 			'Key'	 => 'error.html'
@@ -101,12 +89,10 @@ try{
 			'Bucket' => $bucketname
 	));
 }catch (S3Exception $e) {
-		echo "<font color=red>！</font>Caught an AmazonServiceException<br>";
-		echo "Error Message:    " . $e->getMessage()."<br>";
-		echo "HTTP Status Code: " . $e->getStatusCode()."<br>";
-		echo "AWS Error Code:   " . $e->getExceptionCode()."<br>";
-		echo "Error Type:       " . $e->getExceptionType()."<br>";
-		echo "Request ID:       " . $e->getRequestId()."<br>";
+    echo "Caught an AmazonServiceException.", "\n";
+    echo "Error Message:    " . $e->getAWSErrorMessage(). "\n";
+    echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
+    echo "AWS Error Code:   " . $e->getAwsErrorCode(). "\n";
+    echo "Error Type:       " . $e->getAwsErrorType(). "\n";
+    echo "Request ID:       " . $e->getAwsRequestId(). "\n";
 }
-?>
-</pre>
