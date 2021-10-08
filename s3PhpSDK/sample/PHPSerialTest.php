@@ -54,8 +54,8 @@ sleep(5);
 system("php ./MPUSerialTesting.php $bucket[0] $bucket[1] $bucket[2] $userAInfo[1] $userBInfo[0] $ownerInfo[0]");
 sleep(5);
 
-// system("php ./DeleteMultipleObjects.php $bucket[0] $bucket[1] $bucket[2]");
-// sleep(5);
+system("php ./DeleteMultipleObjects.php $bucket[0] $bucket[1] $bucket[2]");
+sleep(5);
 
 // system("php ./BucketCorsSerialTest.php $bucket[0] $bucket[1] $bucket[2]");
 // sleep(5);
