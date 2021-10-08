@@ -28,7 +28,7 @@ Currently, we provide code samples tested on the SDKs as follows:
 - Java https://github.com/aws/aws-sdk-java/releases/1.12.61
 - Javascript https://github.com/aws/aws-sdk-js/releases/tag/v2.1.39
 - .NET https://github.com/aws/aws-sdk-net/tree/aws-sdk-net-v1
-- PHP https://github.com/aws/aws-sdk-php/releases/tag/2.4.12
+- PHP https://github.com/aws/aws-sdk-php/releases/tag/3.197.1
 - Python3 https://github.com/boto/boto3/releases/tag/1.17.105
 - Ruby https://github.com/aws/aws-sdk-ruby/tree/version-3
 - Rust https://github.com/awslabs/aws-sdk-rust/tree/v0.0.19-alpha
