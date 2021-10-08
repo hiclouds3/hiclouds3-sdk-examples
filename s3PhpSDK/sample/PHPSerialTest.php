@@ -42,8 +42,8 @@ sleep(5);
 system("php ./ObjectSerialTesting.php $bucket[0] $bucket[1] $bucket[2]");
 sleep(5);
 
-// system("php ./PolicySerialTesting.php $bucket[0] $bucket[1] $bucket[2]");
-// sleep(5);
+system("php ./PolicySerialTesting.php $bucket[0] $bucket[1] $bucket[2]");
+sleep(5);
 
 // system("php ./VersioningSerialTesting.php $bucket[0] $bucket[1] $bucket[2]");
 // sleep(5);
