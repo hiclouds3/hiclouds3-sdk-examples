@@ -7,7 +7,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/credentials"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/aws/smithy-go/middleware"
 )
 
 var customResolver = aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
@@ -24,8 +23,5 @@ var cfg, _ = config.LoadDefaultConfig(
 	config.WithCredentialsProvider(
 		credentials.NewStaticCredentialsProvider("Enter_your_AccessKey", "Enter_your_SecretKey", ""),
 	),
-	config.WithAPIOptions([]func(stack *middleware.Stack) error{
-		CustomizeRequestHeaders(),
-	}),
 )
 var Client = s3.NewFromConfig(cfg)
