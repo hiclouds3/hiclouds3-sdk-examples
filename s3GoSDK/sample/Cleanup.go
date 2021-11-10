@@ -2,9 +2,12 @@ package main
 
 import (
 	"context"
+	"errors"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/smithy-go"
+
 )
 
 func CleanUp(buckets [3]string) {
@@ -14,8 +17,11 @@ func CleanUp(buckets [3]string) {
 		}
 		obj, listobjectsErr := Client.ListObjects(context.TODO(), input2)
 		if listobjectsErr != nil {
-			fmt.Println("Could not list object " + bucket)
-			fmt.Println(listobjectsErr)
+			fmt.Printf("Could not list object in " + bucket +": ")
+			var ae smithy.APIError
+			if errors.As(listobjectsErr, &ae) {
+				fmt.Println(ae.ErrorCode())
+			}
 			continue
 		}
 		for _, object := range obj.Contents {
