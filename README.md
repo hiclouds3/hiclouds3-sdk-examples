@@ -1,4 +1,4 @@
-# hicloud S3 SDK & Sample Codes
+# hicloud S3 Sample Codes
 
 This repository intends to demonstrate how to perform several S3-compatible operations on **[hicloud S3](http://hicloud.hinet.net/hicloud_s3_about.html)** using AWS SDKs for various languages.
 
