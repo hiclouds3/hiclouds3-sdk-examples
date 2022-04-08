@@ -1,4 +1,4 @@
-# hicloud S3 Java SDK
+# hicloud S3 Java SDK Examples
 
 ## Prerequisites
 - Apache Maven 3+

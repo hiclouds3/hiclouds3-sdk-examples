@@ -1,4 +1,4 @@
-# hicloud S3 Python SDK
+# hicloud S3 Python SDK Examples
 
 ## Prerequisites
 

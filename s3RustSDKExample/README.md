@@ -1,4 +1,4 @@
-# hicloud S3 Rust SDK
+# hicloud S3 Rust SDK Examples
 
 ## Prerequisites
 * Rust

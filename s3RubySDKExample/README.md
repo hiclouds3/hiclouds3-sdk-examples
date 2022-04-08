@@ -1,4 +1,4 @@
-# hicloud S3 Ruby SDK
+# hicloud S3 Ruby SDK Examples
 
 ## Prerequisites
 

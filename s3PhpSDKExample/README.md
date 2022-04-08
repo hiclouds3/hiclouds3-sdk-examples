@@ -1,4 +1,4 @@
-# hicloud S3 PHP SDK
+# hicloud S3 PHP SDK Examples
 
 ## Prerequisites
 - PHP

@@ -1,4 +1,4 @@
-# hicloud S3 Go SDK
+# hicloud S3 Go SDK Examples
 
 ## Environment setup
 * Go >= 1.15
