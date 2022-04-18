@@ -11,13 +11,13 @@ use Aws\S3\Enum\Permission;
 use Aws\S3\Enum\GranteeType;
 
 /**
- * ¶πΩd®“µ{¶°¨∞•‹Ωd¶p¶Û®œ•Œhicloud S3 PHP SDKµo∞e∞Ú•ª™∫request¶‹hicloud S3
+ * Ê≠§ÁØÑ‰æãÁ®ãÂºèÁÇ∫Á§∫ÁØÑÂ¶Ç‰Ωï‰ΩøÁî®hicloud S3 PHP SDKÁôºÈÄÅÂü∫Êú¨ÁöÑrequestËá≥hicloud S3
  *
- * ´e¥£°G•≤∂∑•˝®˙±ohicloud S3∂}µo©“ª›§ßAccessKeyªPSecretKey
- * ®˙±oAccessKeyªPSecretKey§ß¨yµ{°AΩ–∞—¶“"hicloud S3 Quick Start"§Â•Û :
+ * ÂâçÊèêÔºöÂøÖÈ†àÂÖàÂèñÂæóhicloud S3ÈñãÁôºÊâÄÈúÄ‰πãAccessKeyËàáSecretKey
+ * ÂèñÂæóAccessKeyËàáSecretKey‰πãÊµÅÁ®ãÔºåË´ãÂèÉËÄÉ"hicloud S3 Quick Start"Êñá‰ª∂ :
  * https://userportal.hicloud.hinet.net/cloud/document/files/hicloud-S3-QuickStart.pdf
  *
- * ≠´≠n°G¶bπB¶Ê¶πΩd®“µ{¶°´e°AΩ–∞»•≤ΩTª{§w±N hicloud S3 Access Key ªP Secret Key ∂Ò§J sample/client.php ¿…Æ◊§§
+ * ÈáçË¶ÅÔºöÂú®ÈÅãË°åÊ≠§ÁØÑ‰æãÁ®ãÂºèÂâçÔºåË´ãÂãôÂøÖÁ¢∫Ë™çÂ∑≤Â∞á hicloud S3 Access Key Ëàá Secret Key Â°´ÂÖ• sample/client.php Ê™îÊ°à‰∏≠
  */
 
 echo "S3 PHP SDK Serial Test";
@@ -25,7 +25,7 @@ echo "\n-----------------------------------------------------------------------\
 
 
 /**
- * ´ÿ•ﬂº»¶s¿…°A•Œ©ÛΩd®“§§§W∂«¶‹hicloud S3
+ * Âª∫Á´ãÊö´Â≠òÊ™îÔºåÁî®ÊñºÁØÑ‰æã‰∏≠‰∏äÂÇ≥Ëá≥hicloud S3
  */
 function createSampleFile()
 {
@@ -43,7 +43,7 @@ $bucketname = "usertest1";
 $objName="test.txt";
 
 /**
-* ≥–´ÿBucket - Bucket ¶W∫Ÿ•≤∂∑¨O∞ﬂ§@°A≠Y Bucket ¶W∫Ÿ§w≥Q®‰•L®œ•Œ™Ã©“®œ•ŒÆ…°A±NµL™k¶®•\´ÿ•ﬂ¨€¶P¶W∫Ÿ™∫Bucket
+* ÂâµÂª∫Bucket - Bucket ÂêçÁ®±ÂøÖÈ†àÊòØÂîØ‰∏ÄÔºåËã• Bucket ÂêçÁ®±Â∑≤Ë¢´ÂÖ∂‰ªñ‰ΩøÁî®ËÄÖÊâÄ‰ΩøÁî®ÊôÇÔºåÂ∞áÁÑ°Ê≥ïÊàêÂäüÂª∫Á´ãÁõ∏ÂêåÂêçÁ®±ÁöÑBucket
 */
 echo "Create Bucket\n";
 $client->createBucket(array(
@@ -51,7 +51,7 @@ $client->createBucket(array(
 ));
 
 /**
-* ¶C•X±b∏π§U©“¶≥™∫Bucket
+* ÂàóÂá∫Â∏≥Ëôü‰∏ãÊâÄÊúâÁöÑBucket
 */
 echo "List All My Bucket\n";
 $result = $client->listBuckets();
@@ -63,8 +63,8 @@ foreach ($result['Buckets'] as $bucket) {
 }
 
 /**
-* §W∂«Object®Ï©“´ÿ•ﬂ™∫Bucket
-* ¶b§W∂«¿…Æ◊™∫¶PÆ…°A§]Ø‡∞˜≥]©w≠”§H§∆metadata°A¶pcontent-type°Bcontent-encodingµ•metadata
+* ‰∏äÂÇ≥ObjectÂà∞ÊâÄÂª∫Á´ãÁöÑBucket
+* Âú®‰∏äÂÇ≥Ê™îÊ°àÁöÑÂêåÊôÇÔºå‰πüËÉΩÂ§†Ë®≠ÂÆöÂÄã‰∫∫ÂåñmetadataÔºåÂ¶Çcontent-type„ÄÅcontent-encodingÁ≠âmetadata
 */
 echo "Upload Object\n";
 $client->putObject(array(
@@ -83,9 +83,9 @@ $client->putObject(array(
 ));
 
 /**
-* §U∏¸Object - ∑Ì§U∏¸ObjectÆ…°A∑|±NObject¨€√ˆmetadata§ŒObject§∫Æe≥£§U∏¸¶^®”
+* ‰∏ãËºâObject - Áï∂‰∏ãËºâObjectÊôÇÔºåÊúÉÂ∞áObjectÁõ∏ÈóúmetadataÂèäObjectÂÖßÂÆπÈÉΩ‰∏ãËºâÂõû‰æÜ
 *
-* GetObjectRequest§]¥£®—±¯•Û§U∏¸™∫øÔ∂µ°A¶p•iøÔæ‹Object≠◊ßÔÆ…∂°¶b¨YÆ…∂°´·™∫Object§U∏¸°A©ŒøÔæ‹ØS©wETags™∫Object§U∏¸°A©Œ•u§U∏¸≥°§¿Object
+* GetObjectRequest‰πüÊèê‰æõÊ¢ù‰ª∂‰∏ãËºâÁöÑÈÅ∏È†ÖÔºåÂ¶ÇÂèØÈÅ∏ÊìáObject‰øÆÊîπÊôÇÈñìÂú®ÊüêÊôÇÈñìÂæåÁöÑObject‰∏ãËºâÔºåÊàñÈÅ∏ÊìáÁâπÂÆöETagsÁöÑObject‰∏ãËºâÔºåÊàñÂè™‰∏ãËºâÈÉ®ÂàÜObject
 */
 echo "Download Object\n";
 $result=$client->getObject(array(
@@ -96,7 +96,7 @@ $a=str_replace('"', "", $result['ETag']);
 echo "Object ETag: ".$a."\n";
 
 /**
-* ¶C•XBucket§§©“¶≥Prefix¨∞"Te"™∫Object
+* ÂàóÂá∫Bucket‰∏≠ÊâÄÊúâPrefixÁÇ∫"Te"ÁöÑObject
 */
 echo "List Object start with \"te\" \n";
 $prefix="te";
@@ -114,7 +114,16 @@ if($result['Contents'] != null){
 echo "Total: $count objects\n";
 
 /**
-* ßR∞£Object - ∞£´D¶bVersioningæ˜®Ó∂}±“™∫±°™p§U°A•Ù¶ÛßR∞£Object™∫∞ ß@≥£¨OµL™k¶^¥_™∫°A¶]¶π•≤∂∑¬‘∑V™∫øÔæ‹±˝ßR∞£™∫Object
+* Creating a Pre-Signed URL
+*/
+$cmd = $client->getCommand('GetObject', [ 'Bucket' => $bucketname, 'Key' => $objName ]);
+$request = $client->createPresignedRequest($cmd, '+20 minutes');
+$presignedUrl = (string)$request->getUri();
+
+echo "Pre-signed Url: $presignedUrl\n";
+
+/**
+* Âà™Èô§Object - Èô§ÈùûÂú®VersioningÊ©üÂà∂ÈñãÂïüÁöÑÊÉÖÊ≥Å‰∏ãÔºå‰ªª‰ΩïÂà™Èô§ObjectÁöÑÂãï‰ΩúÈÉΩÊòØÁÑ°Ê≥ïÂõûÂæ©ÁöÑÔºåÂõ†Ê≠§ÂøÖÈ†àË¨πÊÖéÁöÑÈÅ∏ÊìáÊ¨≤Âà™Èô§ÁöÑObject
 */
 echo "Delete Object\n";
 $client->deleteObject(array(
@@ -123,7 +132,7 @@ $client->deleteObject(array(
 ));
 
 /**
-* ßR∞£Bucket - ±˝ßR∞£Bucket°A¶πBucket•≤∂∑¨O§w≤M™≈™∫°A¶]¶π±˝ßR∞£Bucket´eΩ–•˝ΩTª{Bucket§§¨Oß_§¥¶s¶b•Ù¶ÛObject
+* Âà™Èô§Bucket - Ê¨≤Âà™Èô§BucketÔºåÊ≠§BucketÂøÖÈ†àÊòØÂ∑≤Ê∏ÖÁ©∫ÁöÑÔºåÂõ†Ê≠§Ê¨≤Âà™Èô§BucketÂâçË´ãÂÖàÁ¢∫Ë™çBucket‰∏≠ÊòØÂê¶‰ªçÂ≠òÂú®‰ªª‰ΩïObject
 */
 try
 {
@@ -131,7 +140,7 @@ try
 	$client->deleteBucket(array('Bucket' => $bucketname));
 }
 catch (S3Exception $e) {
-	echo "<font color=red>°I</font>Caught an AmazonServiceException, which means your request made it to Amazon S3, but was rejected with an error response for some reason.<br>";
+	echo "<font color=red>ÔºÅ</font>Caught an AmazonServiceException, which means your request made it to Amazon S3, but was rejected with an error response for some reason.<br>";
 	echo "Error Message:    " . $e->getMessage()."<br>";
 	echo "HTTP Status Code: " . $e->getStatusCode()."<br>";
 	echo "AWS Error Code:   " . $e->getExceptionCode()."<br>";
