@@ -27,64 +27,87 @@ try {
     
     //log_delievery group must have WRITE & READ_ACP Permission
     $acp = [
-        'Grants' => [
-            [
-                'Grantee' => [
-                    'Type' => 'Group',
-                    'URI' => 'http://acs.amazonaws.com/groups/global/LogDelivery'
-                ],
-                'Permission' => 'WRITE',
-            ],
-            [
-                'Grantee' => [
-                    'Type' => 'Group',
-                    'URI' => 'http://acs.amazonaws.com/groups/global/LogDelivery'
-                ],
-                'Permission' => 'READ_ACP',
-            ],
-            [
-                'Grantee' => [
-                    'Type' => 'CanonicalUser',
-                    'ID' => $ownerCanonicalId,
-                ],
-                'Permission' => 'FULL_CONTROL',
-            ],
-        ],
-        'Owner' => [
-            'ID' => "{$ownerCanonicalId}"
-        ],
+        
     ];
     
     //SetBucketACL
     $client->putBucketAcl(array(
             'Bucket' => $bucketname,
-            'AccessControlPolicy' => $acp
+            'Grants' => [
+                [
+                    'Grantee' => [
+                        'Type' => 'Group',
+                        'URI' => 'http://acs.amazonaws.com/groups/global/LogDelivery'
+                    ],
+                    'Permission' => 'WRITE',
+                ],
+                [
+                    'Grantee' => [
+                        'Type' => 'Group',
+                        'URI' => 'http://acs.amazonaws.com/groups/global/LogDelivery'
+                    ],
+                    'Permission' => 'READ_ACP',
+                ],
+                [
+                    'Grantee' => [
+                        'Type' => 'CanonicalUser',
+                        'ID' => $ownerCanonicalId,
+                    ],
+                    'Permission' => 'FULL_CONTROL',
+                ],
+            ],
+            'Owner' => [
+                'ID' => "{$ownerCanonicalId}"
+            ]
     ));
     
     $client->putBucketAcl(array(
             'Bucket' => $bucketname2,
-            'AccessControlPolicy'	 => $acp
+            'Grants' => [
+                [
+                    'Grantee' => [
+                        'Type' => 'Group',
+                        'URI' => 'http://acs.amazonaws.com/groups/global/LogDelivery'
+                    ],
+                    'Permission' => 'WRITE',
+                ],
+                [
+                    'Grantee' => [
+                        'Type' => 'Group',
+                        'URI' => 'http://acs.amazonaws.com/groups/global/LogDelivery'
+                    ],
+                    'Permission' => 'READ_ACP',
+                ],
+                [
+                    'Grantee' => [
+                        'Type' => 'CanonicalUser',
+                        'ID' => $ownerCanonicalId,
+                    ],
+                    'Permission' => 'FULL_CONTROL',
+                ],
+            ],
+            'Owner' => [
+                'ID' => "{$ownerCanonicalId}"
+            ]
     ));
     
     //SetBucketLogging
     $client->putBucketLogging(
         array(
             'Bucket' => $bucketname,
-            'BucketLoggingStatus' => [
-                'LoggingEnabled' => array(
-                    'TargetBucket' => $bucketname2,
-                    'TargetGrants' => array(
-                        [
-                            'Grantee' => array(
-                                'Type' => 'CanonicalUser',
-                                'ID' => $ownerCanonicalId,
-                            ),
-                            'Permission' => 'FULL_CONTROL',
-                        ]
-                    ),
-                    'TargetPrefix' => 'log-'
-                )
-            ]
+            'LoggingEnabled' => array(
+                'TargetBucket' => $bucketname2,
+                'TargetGrants' => array(
+                    [
+                        'Grantee' => array(
+                            'Type' => 'CanonicalUser',
+                            'ID' => $ownerCanonicalId,
+                        ),
+                        'Permission' => 'FULL_CONTROL',
+                    ]
+                ),
+                'TargetPrefix' => 'log-'
+            )
         ),
     );
     
@@ -130,11 +153,11 @@ try {
     ));
 } catch (S3Exception $e) {
     echo "Caught an AmazonServiceException.", "\n";
-    echo "Error Message:    " . $e->getAWSErrorMessage(). "\n";
+    echo "Error Message:    " . $e->getMessage(). "\n";
     echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
-    echo "AWS Error Code:   " . $e->getAwsErrorCode(). "\n";
-    echo "Error Type:       " . $e->getAwsErrorType(). "\n";
-    echo "Request ID:       " . $e->getAwsRequestId(). "\n";
+    echo "AWS Error Code:   " . $e->getExceptionCode(). "\n";
+    echo "Error Type:       " . $e->getExceptionType(). "\n";
+    echo "Request ID:       " . $e->getRequestId(). "\n";
 } catch (MalformedXMLException $e) {
     echo $e->__toString();
 }

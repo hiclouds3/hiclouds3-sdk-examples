@@ -1,6 +1,7 @@
 <?php
 require 'client.php';
 
+use Aws\S3\Enum\CannedAcl;
 use Aws\S3\Exception\S3Exception;
 
 function createSampleFile()
@@ -23,15 +24,15 @@ function createBucket($bucketname)
         ));
     } catch (S3Exception $e) {
 		echo "Caught an AmazonServiceException.", "\n";
-		echo "Error Message:    " . $e->getAWSErrorMessage(). "\n";
+		echo "Error Message:    " . $e->getMessage(). "\n";
 		echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
-		echo "AWS Error Code:   " . $e->getAwsErrorCode(). "\n";
-		echo "Error Type:       " . $e->getAwsErrorType(). "\n";
-		echo "Request ID:       " . $e->getAwsRequestId(). "\n";
+		echo "AWS Error Code:   " . $e->getExceptionCode(). "\n";
+		echo "Error Type:       " . $e->getExceptionType(). "\n";
+		echo "Request ID:       " . $e->getRequestId(). "\n";
     }
 }
 
-function putObject($bucketname, $objName, $tmpfile, $ACL = 'private')
+function putObject($bucketname, $objName, $tmpfile, $ACL = CannedAcl::PRIVATE_ACCESS)
 {
     global $client;
     $result = $client->putObject(array(
@@ -108,11 +109,11 @@ function delBucket($bucketname)
         $client->deleteBucket(array('Bucket' => $bucketname));
     } catch (S3Exception $e) {
 		echo "Caught an AmazonServiceException.", "\n";
-		echo "Error Message:    " . $e->getAWSErrorMessage(). "\n";
+		echo "Error Message:    " . $e->getMessage(). "\n";
 		echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
-		echo "AWS Error Code:   " . $e->getAwsErrorCode(). "\n";
-		echo "Error Type:       " . $e->getAwsErrorType(). "\n";
-		echo "Request ID:       " . $e->getAwsRequestId(). "\n";
+		echo "AWS Error Code:   " . $e->getExceptionCode(). "\n";
+		echo "Error Type:       " . $e->getExceptionType(). "\n";
+		echo "Request ID:       " . $e->getRequestId(). "\n";
     }
 }
 

@@ -1,13 +1,13 @@
 <?php
 
 /**
- * ¦¹½d¨Òµ{¦¡¬°¥Ü½d¦p¦ó¨Ï¥Îhicloud S3 PHP SDKµo°e°ò¥»ªºrequest¦Ühicloud S3
+ * æ­¤ç¯„ä¾‹ç¨‹å¼ç‚ºç¤ºç¯„å¦‚ä½•ä½¿ç”¨hicloud S3 PHP SDKç™¼é€åŸºæœ¬çš„requestè‡³hicloud S3
  *
- * «e´£¡G¥²¶·¥ý¨ú±ohicloud S3¶}µo©Ò»Ý¤§AccessKey»PSecretKey
- * ¨ú±oAccessKey»PSecretKey¤§¬yµ{¡A½Ð°Ñ¦Ò"hicloud S3 Quick Start"¤å¥ó :
+ * å‰æï¼šå¿…é ˆå…ˆå–å¾—hicloud S3é–‹ç™¼æ‰€éœ€ä¹‹AccessKeyèˆ‡SecretKey
+ * å–å¾—AccessKeyèˆ‡SecretKeyä¹‹æµç¨‹ï¼Œè«‹åƒè€ƒ"hicloud S3 Quick Start"æ–‡ä»¶ :
  * https://userportal.hicloud.hinet.net/cloud/document/files/hicloud-S3-QuickStart.pdf
  *
- * ­«­n¡G¦b¹B¦æ¦¹½d¨Òµ{¦¡«e¡A½Ð°È¥²½T»{¤w±N hicloud S3 Access Key »P Secret Key ¶ñ¤J test/client.php ÀÉ®×¤¤
+ * é‡è¦ï¼šåœ¨é‹è¡Œæ­¤ç¯„ä¾‹ç¨‹å¼å‰ï¼Œè«‹å‹™å¿…ç¢ºèªå·²å°‡ hicloud S3 Access Key èˆ‡ Secret Key å¡«å…¥ test/client.php æª”æ¡ˆä¸­
  */
 require 'config.php';
 

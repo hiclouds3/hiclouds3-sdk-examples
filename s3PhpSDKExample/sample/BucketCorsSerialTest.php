@@ -13,11 +13,11 @@ function createBucket($bucketname)
         ));
     } catch (S3Exception $e) {
         echo "Caught an AmazonServiceException.", "\n";
-        echo "Error Message:    " . $e->getAWSErrorMessage(). "\n";
+        echo "Error Message:    " . $e->getMessage(). "\n";
         echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
-        echo "AWS Error Code:   " . $e->getAwsErrorCode(). "\n";
-        echo "Error Type:       " . $e->getAwsErrorType(). "\n";
-        echo "Request ID:       " . $e->getAwsRequestId(). "\n";
+        echo "AWS Error Code:   " . $e->getExceptionCode(). "\n";
+        echo "Error Type:       " . $e->getExceptionType(). "\n";
+        echo "Request ID:       " . $e->getRequestId(). "\n";
     }
 }
 
@@ -29,32 +29,30 @@ function setBucketCORS($bucketname)
         $result = $client->putBucketCors(array(
                 // Bucket is required
                 'Bucket' => $bucketname,
-                'CORSConfiguration' => [
-                    'CORSRules' => array( //ID Parameter NOT Support
-                            array(
-                                    'AllowedHeaders' => array('content-type', 'content-encoding'),
-                                    'AllowedMethods' => array('POST', 'PUT'),
-                                    'AllowedOrigins' => array('http://tw.yahoo.com.tw'),
-                                    'ExposeHeaders' => array('x-amz-*'),
-                                    'MaxAgeSeconds' => 100,
-                            ),
-                            array(
-                                    'AllowedHeaders' => array('connection', 'content-encoding'),
-                                    'AllowedMethods' => array('DELETE', 'HEAD'),
-                                    'AllowedOrigins' => array('http://hello.world'),
-                                    'ExposeHeaders' => array('request-id'),
-                                    'MaxAgeSeconds' => 10,
-                            )
-                    ),
-                ]
+                'CORSRules' => array( //ID Parameter NOT Support
+                        array(
+                                'AllowedHeaders' => array('content-type', 'content-encoding'),
+                                'AllowedMethods' => array('POST', 'PUT'),
+                                'AllowedOrigins' => array('http://tw.yahoo.com.tw'),
+                                'ExposeHeaders' => array('x-amz-*'),
+                                'MaxAgeSeconds' => 100,
+                        ),
+                        array(
+                                'AllowedHeaders' => array('connection', 'content-encoding'),
+                                'AllowedMethods' => array('DELETE', 'HEAD'),
+                                'AllowedOrigins' => array('http://hello.world'),
+                                'ExposeHeaders' => array('request-id'),
+                                'MaxAgeSeconds' => 10,
+                        )
+                )
         ));
     } catch (S3Exception $e) {
         echo "Caught an AmazonServiceException.", "\n";
-        echo "Error Message:    " . $e->getAWSErrorMessage(). "\n";
+        echo "Error Message:    " . $e->getMessage(). "\n";
         echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
-        echo "AWS Error Code:   " . $e->getAwsErrorCode(). "\n";
-        echo "Error Type:       " . $e->getAwsErrorType(). "\n";
-        echo "Request ID:       " . $e->getAwsRequestId(). "\n";
+        echo "AWS Error Code:   " . $e->getExceptionCode(). "\n";
+        echo "Error Type:       " . $e->getExceptionType(). "\n";
+        echo "Request ID:       " . $e->getRequestId(). "\n";
     }
 }
 
@@ -80,11 +78,11 @@ function getBucketCORS($bucketname)
         }
     } catch (S3Exception $e) {
         echo "Caught an AmazonServiceException.", "\n";
-        echo "Error Message:    " . $e->getAWSErrorMessage(). "\n";
+        echo "Error Message:    " . $e->getMessage(). "\n";
         echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
-        echo "AWS Error Code:   " . $e->getAwsErrorCode(). "\n";
-        echo "Error Type:       " . $e->getAwsErrorType(). "\n";
-        echo "Request ID:       " . $e->getAwsRequestId(). "\n";
+        echo "AWS Error Code:   " . $e->getExceptionCode(). "\n";
+        echo "Error Type:       " . $e->getExceptionType(). "\n";
+        echo "Request ID:       " . $e->getRequestId(). "\n";
     }
 }
 
@@ -99,11 +97,11 @@ function deleteBucketCORS($bucketname)
         ));
     } catch (S3Exception $e) {
         echo "Caught an AmazonServiceException.", "\n";
-        echo "Error Message:    " . $e->getAWSErrorMessage(). "\n";
+        echo "Error Message:    " . $e->getMessage(). "\n";
         echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
-        echo "AWS Error Code:   " . $e->getAwsErrorCode(). "\n";
-        echo "Error Type:       " . $e->getAwsErrorType(). "\n";
-        echo "Request ID:       " . $e->getAwsRequestId(). "\n";
+        echo "AWS Error Code:   " . $e->getExceptionCode(). "\n";
+        echo "Error Type:       " . $e->getExceptionType(). "\n";
+        echo "Request ID:       " . $e->getRequestId(). "\n";
     }
 }
 
@@ -114,11 +112,11 @@ function delBucket($bucketname)
         $client->deleteBucket(array('Bucket' => $bucketname));
     } catch (S3Exception $e) {
         echo "Caught an AmazonServiceException.", "\n";
-        echo "Error Message:    " . $e->getAWSErrorMessage(). "\n";
+        echo "Error Message:    " . $e->getMessage(). "\n";
         echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
-        echo "AWS Error Code:   " . $e->getAwsErrorCode(). "\n";
-        echo "Error Type:       " . $e->getAwsErrorType(). "\n";
-        echo "Request ID:       " . $e->getAwsRequestId(). "\n";
+        echo "AWS Error Code:   " . $e->getExceptionCode(). "\n";
+        echo "Error Type:       " . $e->getExceptionType(). "\n";
+        echo "Request ID:       " . $e->getRequestId(). "\n";
     }
 }
 

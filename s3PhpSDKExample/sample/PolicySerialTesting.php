@@ -37,9 +37,9 @@ try {
 	));
 } catch (S3Exception $e) {
     echo "Caught an AmazonServiceException.", "\n";
-    echo "Error Message:    " . $e->getAWSErrorMessage(). "\n";
+    echo "Error Message:    " . $e->getMessage(). "\n";
     echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
-    echo "AWS Error Code:   " . $e->getAwsErrorCode(). "\n";
-    echo "Error Type:       " . $e->getAwsErrorType(). "\n";
-    echo "Request ID:       " . $e->getAwsRequestId(). "\n";
+    echo "AWS Error Code:   " . $e->getExceptionCode(). "\n";
+    echo "Error Type:       " . $e->getExceptionType(). "\n";
+    echo "Request ID:       " . $e->getRequestId(). "\n";
 }

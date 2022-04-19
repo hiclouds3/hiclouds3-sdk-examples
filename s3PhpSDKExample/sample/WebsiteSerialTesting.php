@@ -34,14 +34,12 @@ try{
 	));
 	$client->putBucketWebsite(array(
 			'Bucket' => $bucketname,
-			'WebsiteConfiguration' => [
-				'ErrorDocument' => array(
-					'Key' => 'error.html'
-					),
-				'IndexDocument' => array(
-					'Suffix' => 'index.html'
-					),
-			]
+			'ErrorDocument' => array(
+				'Key' => 'error.html'
+				),
+			'IndexDocument' => array(
+				'Suffix' => 'index.html'
+				),
 	));
 	
 	$result=$client->getBucketWebsite( array(
@@ -51,21 +49,19 @@ try{
 	//apply routing rules, may take some time for applying new rules  
 	$client->putBucketWebsite(array(
 			'Bucket' => $bucketname,
-			'WebsiteConfiguration' => [
-				'ErrorDocument' => array(
-						'Key' => 'error.html'
-				),
-				'IndexDocument' => array(
-						'Suffix' => 'index.html'
-				),
-				'RoutingRules' => array(
-						'RoutingRule' =>array(
-								'Redirect' =>array(
-										'HostName' => 'www.google.com'
-								),
-						),
-				),
-			]
+			'ErrorDocument' => array(
+					'Key' => 'error.html'
+			),
+			'IndexDocument' => array(
+					'Suffix' => 'index.html'
+			),
+			'RoutingRules' => array(
+					'RoutingRule' =>array(
+							'Redirect' =>array(
+									'HostName' => 'www.google.com'
+							),
+					),
+			),
 	));
 	
 	$result=$client->getBucketWebsite( array(
@@ -90,9 +86,9 @@ try{
 	));
 }catch (S3Exception $e) {
     echo "Caught an AmazonServiceException.", "\n";
-    echo "Error Message:    " . $e->getAWSErrorMessage(). "\n";
+    echo "Error Message:    " . $e->getMessage(). "\n";
     echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
-    echo "AWS Error Code:   " . $e->getAwsErrorCode(). "\n";
-    echo "Error Type:       " . $e->getAwsErrorType(). "\n";
-    echo "Request ID:       " . $e->getAwsRequestId(). "\n";
+    echo "AWS Error Code:   " . $e->getExceptionCode(). "\n";
+    echo "Error Type:       " . $e->getExceptionType(). "\n";
+    echo "Request ID:       " . $e->getRequestId(). "\n";
 }

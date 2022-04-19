@@ -37,11 +37,8 @@ try {
     ));
     
     $client->putBucketVersioning(array(
-            'Bucket' => $bucketname,
-            'VersioningConfiguration' => [
-                'MFADelete' => 'Disabled',
-                'Status' => 'Enabled',
-            ],
+        'Bucket' => $bucketname,
+        'Status' => 'Enabled'
     ));
     
     $result=$client->getBucketVersioning(array(
@@ -122,22 +119,17 @@ try {
 
     $client->putBucketVersioning(array(
         'Bucket' => $bucketname,
-        'VersioningConfiguration' => [
-            'MFADelete' => 'Disabled',
-            'Status' => 'Suspended',
-        ],
+        'Status' => 'Suspended'
     ));
 
     $client->deleteObjects(array(
         'Bucket' => $bucketname,
-        'Delete' => [
-            'Objects' => array_map(function ($version) {
-                return array(
-                        'Key'       => $version['Key'],
-                        'VersionId' => $version['VersionId']
-                );
-            }, $result['Versions']),
-        ]
+        'Objects' => array_map(function ($version) {
+            return array(
+                    'Key'       => $version['Key'],
+                    'VersionId' => $version['VersionId']
+            );
+        }, $result['Versions'])
     ));
 
     $client->deleteBucket(array(
@@ -145,9 +137,9 @@ try {
     ));
 } catch (S3Exception $e) {
     echo "Caught an AmazonServiceException.", "\n";
-    echo "Error Message:    " . $e->getAWSErrorMessage(). "\n";
+    echo "Error Message:    " . $e->getMessage(). "\n";
     echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
-    echo "AWS Error Code:   " . $e->getAwsErrorCode(). "\n";
-    echo "Error Type:       " . $e->getAwsErrorType(). "\n";
-    echo "Request ID:       " . $e->getAwsRequestId(). "\n";
+    echo "AWS Error Code:   " . $e->getExceptionCode(). "\n";
+    echo "Error Type:       " . $e->getExceptionType(). "\n";
+    echo "Request ID:       " . $e->getRequestId(). "\n";
 }

@@ -7,11 +7,11 @@ function ExpectException($e, $statuscode)
 {
     if ($e->getStatusCode()!=$statuscode) {
 		echo "Caught an AmazonServiceException.", "\n";
-		echo "Error Message:    " . $e->getAWSErrorMessage(). "\n";
+		echo "Error Message:    " . $e->getMessage(). "\n";
 		echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
-		echo "AWS Error Code:   " . $e->getAwsErrorCode(). "\n";
-		echo "Error Type:       " . $e->getAwsErrorType(). "\n";
-		echo "Request ID:       " . $e->getAwsRequestId(). "\n";
+		echo "AWS Error Code:   " . $e->getExceptionCode(). "\n";
+		echo "Error Type:       " . $e->getExceptionType(). "\n";
+		echo "Request ID:       " . $e->getRequestId(). "\n";
     }
 }
 
@@ -23,10 +23,7 @@ function cleanBucket($bucketname)
         //Disable Bucket Version
         $client->putBucketVersioning(array(
             'Bucket' => $bucketname,
-            'VersioningConfiguration' => [
-                'MFADelete' => 'Disabled',
-                'Status' => 'Suspended',
-            ],
+            'Status' => 'Suspended'
         ));
     
         $versions = $client->listObjectVersions(array('Bucket' => $bucketname))->getPath('Versions');
@@ -35,14 +32,12 @@ function cleanBucket($bucketname)
         if (!is_null($versions)) {
             $result = $client->deleteObjects(array(
                 'Bucket' => $bucketname,
-                'Delete' => [
-                    'Objects' => array_map(function ($version) {
-                        return array(
-                                'Key'       => $version['Key'],
-                                'VersionId' => $version['VersionId']
-                        );
-                    }, $versions),
-                ]
+                'Objects' => array_map(function ($version) {
+                    return array(
+                            'Key'       => $version['Key'],
+                            'VersionId' => $version['VersionId']
+                    );
+                }, $versions)
             ));
         }
         

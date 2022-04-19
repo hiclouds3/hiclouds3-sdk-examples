@@ -1,4 +1,5 @@
 <?php
+use Aws\S3\Enum\CannedAcl;
 use Aws\S3\Exception\S3Exception;
 
 require 'client.php';
@@ -60,9 +61,7 @@ function BasicMPU()
             'Bucket' => $bucketname,
             'Key'	 => 'castle.jpg',
             'UploadId'=> $uploadID,
-			'MultipartUpload' => [
-            	'Parts'	 => $parts
-			]
+            'Parts'	 => $parts
     ));
     
     
@@ -85,7 +84,7 @@ function AbortMPU()
     ));
     
     $result=$client->createMultipartUpload(array(
-            'ACL'	=>'public-read-write',
+            'ACL'	=>CannedAcl::PUBLIC_READ_WRITE,
             'StorageClass'=>'STANDARD',
             'Bucket' => $bucketname,
             'Key'	 => 'castle.jpg'
@@ -336,9 +335,9 @@ try {
     ListMPU();
 } catch (S3Exception $e) {
     echo "Caught an AmazonServiceException.", "\n";
-    echo "Error Message:    " . $e->getAWSErrorMessage(). "\n";
+    echo "Error Message:    " . $e->getMessage(). "\n";
     echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
-    echo "AWS Error Code:   " . $e->getAwsErrorCode(). "\n";
-    echo "Error Type:       " . $e->getAwsErrorType(). "\n";
-    echo "Request ID:       " . $e->getAwsRequestId(). "\n";
+    echo "AWS Error Code:   " . $e->getExceptionCode(). "\n";
+    echo "Error Type:       " . $e->getExceptionType(). "\n";
+    echo "Request ID:       " . $e->getRequestId(). "\n";
 }

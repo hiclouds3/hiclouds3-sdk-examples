@@ -71,7 +71,7 @@ $client->putObject(array(
 		'Bucket' => $bucketname,
 		'Key'    => $objName,
 		'Body'   => createSampleFile(),
-		'ACL'	 => 'public-read',
+		'ACL'	 => 'private',
 		'command.headers' => array(
 				'x-amz-meta-flower' => 'lily',
 				'x-amz-meta-color' => "pink"
@@ -116,9 +116,12 @@ echo "Total: $count objects\n";
 /**
 * Creating a Pre-Signed URL
 */
-$cmd = $client->getCommand('GetObject', [ 'Bucket' => $bucketname, 'Key' => $objName ]);
-$request = $client->createPresignedRequest($cmd, '+20 minutes');
-$presignedUrl = (string)$request->getUri();
+$cmd = $client->getCommand('GetObject', array(
+	'Bucket' => $bucketname,
+	'Key' => $objName,
+	'ResponseCacheControl' => '0'
+));
+$presignedUrl = $cmd->createPresignedUrl('+20 minutes');
 
 echo "Pre-signed Url: $presignedUrl\n";
 

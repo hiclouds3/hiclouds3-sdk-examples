@@ -44,43 +44,39 @@ try {
 
     $client->putBucketLifecycle(array(
         'Bucket' => $bucketname ,
-        'LifecycleConfiguration' => [
-            'Rules' => array(
-                array(
-                    'Expiration'=> array(
-                        'Days' => 1,
-                    ),
-                    'ID' => $id ,
-                    'Prefix' => $prefix ,
-                    'Status' => 'Enabled',
+        'Rules' => array(
+            array(
+                'Expiration'=> array(
+                    'Days' => 1,
                 ),
-            )
-        ]
+                'ID' => $id ,
+                'Prefix' => $prefix ,
+                'Status' => 'Enabled',
+            ),
+        )
     ));
 
     $client->putBucketLifecycle(array(
         'Bucket' => $bucketname ,
-        'LifecycleConfiguration' => [
-            'Rules' => array(
-                array(
-                    'Expiration'=> array(
-                        'Date' => "GMT ".$datetime->format('c'),
-                    ),
-                    'ID' => $id2 ,
-                    'Prefix' => $prefix ,
-                    'Status' => 'Enabled',
+        'Rules' => array(
+            array(
+                'Expiration'=> array(
+                    'Date' => "GMT ".$datetime->format('c'),
                 ),
-				array(
-                    'Transition'=> array(
-                        'Days' => 30,
-						'StorageClass' => 'GLACIER'
-                    ),
-                    'ID' => 'transition1' ,
-                    'Prefix' => $prefix ,
-                    'Status' => 'Enabled',
+                'ID' => $id2 ,
+                'Prefix' => $prefix ,
+                'Status' => 'Enabled',
+            ),
+            array(
+                'Transition'=> array(
+                    'Days' => 30,
+                    'StorageClass' => 'GLACIER'
                 ),
-            )
-        ]
+                'ID' => 'transition1' ,
+                'Prefix' => $prefix ,
+                'Status' => 'Enabled',
+            ),
+        )
     ));
 
     $result = $client->getBucketLifecycle(array(
@@ -94,18 +90,16 @@ try {
 
     $client->putBucketLifecycle(array(
         'Bucket' => $bucketname ,
-        'LifecycleConfiguration' => [
-            'Rules' => array(
-                array(
-                    'Expiration'=> array(
-                            'Days' => 1,
-                    ),
-                    'ID' => $id ,
-                    'Prefix' => $prefix ,
-                    'Status' => 'Disabled',
+        'Rules' => array(
+            array(
+                'Expiration'=> array(
+                        'Days' => 1,
                 ),
-            )
-        ]
+                'ID' => $id ,
+                'Prefix' => $prefix ,
+                'Status' => 'Disabled',
+            ),
+        )
     ));
 
     $result = $client->getBucketLifecycle(array(
@@ -125,9 +119,9 @@ try {
     ));
 } catch (S3Exception $e) {
     echo "Caught an AmazonServiceException.", "\n";
-    echo "Error Message:    " . $e->getAWSErrorMessage(). "\n";
+    echo "Error Message:    " . $e->getMessage(). "\n";
     echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
-    echo "AWS Error Code:   " . $e->getAwsErrorCode(). "\n";
-    echo "Error Type:       " . $e->getAwsErrorType(). "\n";
-    echo "Request ID:       " . $e->getAwsRequestId(). "\n";
+    echo "AWS Error Code:   " . $e->getExceptionCode(). "\n";
+    echo "Error Type:       " . $e->getExceptionType(). "\n";
+    echo "Request ID:       " . $e->getRequestId(). "\n";
 }

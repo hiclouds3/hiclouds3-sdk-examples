@@ -1,5 +1,6 @@
 <?php
 
+use Aws\S3\Enum\CannedAcl;
 use Aws\S3\Exception\S3Exception;
 
 require 'client.php';
@@ -34,7 +35,7 @@ function createBucket($bucketname, $loc=null)
     }
 }
 
-function putObject($bucketname, $objName, $tmpfile, $ACL = 'private')
+function putObject($bucketname, $objName, $tmpfile, $ACL = CannedAcl::PRIVATE_ACCESS)
 {
     global $client;
     $result = $client->putObject(array(
@@ -116,34 +117,32 @@ function BasicputBucket()
     //SetBucketACL
     $client->putBucketAcl(array(
         'Bucket' => $bucketname ,
-        'AccessControlPolicy' => [
-            'Grants' => [
-                [
-                    'Grantee' => [
-                        'ID' => "{$ownerCanonicalId}",
-                        'Type' => 'CanonicalUser',
-                    ],
-                    'Permission' => 'FULL_CONTROL',
+        'Grants' => [
+            [
+                'Grantee' => [
+                    'ID' => "{$ownerCanonicalId}",
+                    'Type' => 'CanonicalUser',
                 ],
-                [
-                    'Grantee' => [
-                        'EmailAddress' => "{$userAEmail}",
-                        'Type' => 'AmazonCustomerByEmail',
-                    ],
-                    'Permission' => 'FULL_CONTROL',
-                ],
-                [
-                    'Grantee' => [
-                        'Type' => 'Group',
-                        'URI' => 'http://acs.amazonaws.com/groups/global/AllUsers'
-                    ],
-                    'Permission' => 'FULL_CONTROL',
-                ],
+                'Permission' => 'FULL_CONTROL',
             ],
-            'Owner' => [
-                'ID' => "{$ownerCanonicalId}"
+            [
+                'Grantee' => [
+                    'EmailAddress' => "{$userAEmail}",
+                    'Type' => 'AmazonCustomerByEmail',
+                ],
+                'Permission' => 'FULL_CONTROL',
+            ],
+            [
+                'Grantee' => [
+                    'Type' => 'Group',
+                    'URI' => 'http://acs.amazonaws.com/groups/global/AllUsers'
+                ],
+                'Permission' => 'FULL_CONTROL',
             ],
         ],
+        'Owner' => [
+            'ID' => "{$ownerCanonicalId}"
+        ]
     ));
     
     //SetBucketACL by Canned ACL
@@ -171,10 +170,7 @@ function putBucketV()
     //Enable Bucket Version
     $client->putBucketVersioning(array(
         'Bucket' => $bucketname,
-        'VersioningConfiguration' => [
-            'MFADelete' => 'Disabled',
-            'Status' => 'Enabled',
-        ],
+        'Status' => 'Enabled'
     ));
     
     //PutObject
@@ -190,33 +186,31 @@ function putBucketV()
     $client->putObjectAcl(array(
         'Bucket' => $bucketname ,
         'Key'	 => $file ,
-        'AccessControlPolicy' => [
-            'Grants' => [
-                [
-                    'Grantee' => [
-                        'ID' => "{$ownerCanonicalId}",
-                        'Type' => 'CanonicalUser',
-                    ],
-                    'Permission' => 'FULL_CONTROL',
+        'Grants' => [
+            [
+                'Grantee' => [
+                    'ID' => "{$ownerCanonicalId}",
+                    'Type' => 'CanonicalUser',
                 ],
-                [
-                    'Grantee' => [
-                        'EmailAddress' => "{$userAEmail}",
-                        'Type' => 'AmazonCustomerByEmail',
-                    ],
-                    'Permission' => 'FULL_CONTROL',
-                ],
-                [
-                    'Grantee' => [
-                        'Type' => 'Group',
-                        'URI' => 'http://acs.amazonaws.com/groups/global/AllUsers'
-                    ],
-                    'Permission' => 'FULL_CONTROL',
-                ],
+                'Permission' => 'FULL_CONTROL',
             ],
-            'Owner' => [
-                'ID' => "{$ownerCanonicalId}"
+            [
+                'Grantee' => [
+                    'EmailAddress' => "{$userAEmail}",
+                    'Type' => 'AmazonCustomerByEmail',
+                ],
+                'Permission' => 'FULL_CONTROL',
             ],
+            [
+                'Grantee' => [
+                    'Type' => 'Group',
+                    'URI' => 'http://acs.amazonaws.com/groups/global/AllUsers'
+                ],
+                'Permission' => 'FULL_CONTROL',
+            ],
+        ],
+        'Owner' => [
+            'ID' => "{$ownerCanonicalId}"
         ],
     ));
 
@@ -245,9 +239,7 @@ function putBucketV()
     if (count($objs) > 0) {
         $result = $client->deleteObjects(array(
             'Bucket' => $bucketname,
-            'Delete' => [
-                'Objects' => $objs
-            ]
+            'Objects' => $objs
         ));
     }
         
@@ -279,9 +271,9 @@ try {
     putBucketV();
 } catch (S3Exception $e) {
     echo "Caught an AmazonServiceException.", "\n";
-    echo "Error Message:    " . $e->getAWSErrorMessage(). "\n";
+    echo "Error Message:    " . $e->getMessage(). "\n";
     echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
-    echo "AWS Error Code:   " . $e->getAwsErrorCode(). "\n";
-    echo "Error Type:       " . $e->getAwsErrorType(). "\n";
-    echo "Request ID:       " . $e->getAwsRequestId(). "\n";
+    echo "AWS Error Code:   " . $e->getExceptionCode(). "\n";
+    echo "Error Type:       " . $e->getExceptionType(). "\n";
+    echo "Request ID:       " . $e->getRequestId(). "\n";
 }
