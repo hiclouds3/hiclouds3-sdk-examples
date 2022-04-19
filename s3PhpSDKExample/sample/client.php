@@ -11,7 +11,7 @@
 	'scheme' => 'http',
 	'endpoint' => 'http://s3.hicloud.net.tw',
 	'version' => '2006-03-01',
-    'region' => 'us-east-1',
+	'region' => 'us-east-1',
 	'signature' =>  new S3Signature()
  ]);
 ?>
