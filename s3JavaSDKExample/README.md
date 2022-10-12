@@ -7,35 +7,23 @@
 ## Getting Started
 
 ### Setup
-* Import the sample project into Eclipse (Optional)
+* Import the sample project into Eclipse
   - File > Open Projects From File System... > Directory > select `sample/JAVA_SDK_Sample/`
 
-* Fill in AccessKey, SecretKey in「AwsCredentials.properties」
+* Fill in AccessKey, SecretKey in `resources/AwsCredentials.properties`
 
-* Fill in user information in「config.properties」
+* Fill in user information in `resources/config.properties`
 
-* Set bucketName, objectName, and filePath information in「SerialTest.java」
-
-### Building the project
-
-```sh
-$ cd sample/JAVA_SDK_Sample/
-
-$ mvn clean package
-```
+* Set bucketName, objectName, and filePath information in `SerialTest.java`
 
 ### Running
 - S3Sample: Demo of simple S3 operations
 
-    ```sh
-    $ java -classpath ./target/s3sample-0.0.1-SNAPSHOT-jar-with-dependencies.jar hicloud.s3.sample.S3Sample
-    ```
+    - Locate to `S3Sample.java` > Right click > Run As > Java Application
 
 - SerialTest
 
-    ```sh
-    $ java -classpath ./target/s3sample-0.0.1-SNAPSHOT-jar-with-dependencies.jar hicloud.s3.sample.SerialTest
-    ```
+    - Locate to `SerialTest.java` > Right click > Run As > Java Application
 
 ## Additional Resource
 * [開發指南](documentation/hicloudS3-java-sdk-開發指南.pdf)
