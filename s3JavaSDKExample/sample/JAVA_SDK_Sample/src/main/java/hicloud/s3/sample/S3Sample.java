@@ -19,6 +19,7 @@ import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
+import com.amazonaws.services.s3.model.StorageClass;
 
 /**
  * The sample program intends to demonstrate how to perform several S3-compatible operations on
@@ -38,6 +39,7 @@ public class S3Sample {
 
     String bucketName = "my-first-s3-bucket-" + UUID.randomUUID();
     String key = "MyObjectKey";
+    String keyIA = "MyObjectKeyIA";
 
     System.out.println("===========================================");
     System.out.println("Getting Started with Amazon S3");
@@ -74,6 +76,22 @@ public class S3Sample {
       displayTextInputStream(object.getObjectContent());
 
       /*
+       * Upload IA Object
+       */
+      System.out.println("Uploading a new IA object to S3 from a file\n");
+      PutObjectRequest iaObjRequest = new PutObjectRequest(bucketName, keyIA, createSampleFile())
+          .withStorageClass(StorageClass.StandardInfrequentAccess);
+      s3.putObject(iaObjRequest);
+
+      /*
+       * Download IA Object
+       */
+      System.out.println("Downloading an object");
+      S3Object objectIA = s3.getObject(new GetObjectRequest(bucketName, keyIA));
+      System.out.println("Content-Type: " + objectIA.getObjectMetadata().getContentType());
+      displayTextInputStream(objectIA.getObjectContent());
+
+      /*
        * List objects with prefix "My" in the Bucket
        */
       System.out.println("Listing objects");
@@ -81,7 +99,8 @@ public class S3Sample {
           s3.listObjects(new ListObjectsRequest().withBucketName(bucketName).withPrefix("My"));
       for (S3ObjectSummary objectSummary : objectListing.getObjectSummaries()) {
         System.out.println(
-            " - " + objectSummary.getKey() + "  " + "(size = " + objectSummary.getSize() + ")");
+            " - " + objectSummary.getKey() + "  " + "(size = " + objectSummary.getSize() + ")"
+            + "  " + "(storageClass = " + objectSummary.getStorageClass() + ")");
       }
       System.out.println();
 
@@ -90,6 +109,7 @@ public class S3Sample {
        */
       System.out.println("Deleting an object\n");
       s3.deleteObject(bucketName, key);
+      s3.deleteObject(bucketName, keyIA);
 
       /*
        * Delete Bucket
