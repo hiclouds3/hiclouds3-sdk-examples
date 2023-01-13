@@ -1,7 +1,7 @@
 # hicloud S3 PHP SDK Examples
 
 ## Prerequisites
-- PHP
+- PHP 7.4
 - Composer
 
 ## Getting Started
