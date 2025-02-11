@@ -3,9 +3,6 @@
 ## Prerequisites
 
 - Ruby
-- Install [AWS SDK for Ruby - Version 3](https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-s3)
-
-  - ```gem install aws-sdk-s3 --version '~> 1'```
 
 ## Getting Started
 
@@ -14,11 +11,18 @@
 * Fill in AccessKey, SecretKey, User information in「config.json」
 
 ### Running
+- Install dependencies
+  ```
+  $ gem install bundler:2.4.22
+
+  $ cd sample/
+  $ bundle install
+  ```
+
 - SerialTest
 
     ```sh
-    $ cd sample/
-    $ ruby ./s3_serial_testing.rb
+    $ bundle exec ruby ./s3_serial_testing.rb
     ```
 
 ## Additional Resource
