@@ -2,7 +2,7 @@
 
 # Gemfile
 # freeze to 1.177 due to change in aws-sdk-core that replaces content-md5 with newer checksum methods
-gem 'aws-sdk-s3', '~> 1.177'
+gem 'aws-sdk-s3', '< 1.178'
 
 require "aws-sdk-s3"
 require "io/console"
