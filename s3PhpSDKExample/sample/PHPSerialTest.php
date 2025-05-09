@@ -26,11 +26,7 @@ require 'BucketLoggingSerialTest.php';
 date_default_timezone_set('Asia/Taipei');
 error_reporting(E_ALL);
 
-//Change test buckets' name here
-$buckets = ["phpbucketdemo1", "phpbucketdemo2", "phpbucketdemo3"];
-// $userAInfo = array($config[userACanonicalID],$config[userAMail]);
-// $userBInfo = array($config[userBCanonicalID],$config[userBMail]);
-// $ownerInfo = array($config[ownerCanonicalID],$config[ownerMail]);
+$buckets = ["testphpbucket1", "testphpbucket2", "testphpbucket3"];
 
 echo "S3 PHP SDK Serial Test\nbucketname1: " . $buckets[0] . " ,bucketname2: " . $buckets[1] . " ,bucketname3: " . $buckets[2];
 echo "\n-----------------------------------------------------------------------\n";
