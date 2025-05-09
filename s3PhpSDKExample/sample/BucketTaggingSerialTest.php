@@ -7,50 +7,54 @@
  * 		5. Delete Bucket
  */
 
-use Aws\S3\Exception\S3Exception;
+require_once 'client.php';
 
-require 'client.php';
+function bucketTaggingSerialTest($bucketname)
+{
+    global $client;
+    try {
+        echo "> BucketTagging Serial testing...\n";
 
-$bucketname=$argv[2];
-
-try {
-    echo "BucketTagging Serial testing...\n";
-        
-    $client->createBucket(array(
-        'Bucket' => $bucketname
-    ));
-
-    $result = $client->putBucketTagging(array(
-                        'Bucket' => $bucketname,
-                        'TagSet' => array(
-                                array(
-                                        'Key' => 'Jan',
-                                        'Value' => 'pink'
-                                ),array(
-                                        'Key' => 'Dec',
-                                        'Value' => 'blue'
-                                )
-                                
-                        )
-            ));
-            
-    $result = $client->getBucketTagging([
-        'Bucket' => $bucketname // REQUIRED
-    ]);
-    #echo $result;
-
-    $result = $client->deleteBucketTagging([
-        'Bucket' => $bucketname // REQUIRED
-    ]);
-
-    $client->deleteBucket(array(
+        echo "Creating bucket: $bucketname\n";
+        $client->createBucket([
             'Bucket' => $bucketname
-    ));
-} catch (S3Exception $e) {
-    echo "Caught an AmazonServiceException.", "\n";
-    echo "Error Message:    " . $e->getMessage(). "\n";
-    echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
-    echo "AWS Error Code:   " . $e->getExceptionCode(). "\n";
-    echo "Error Type:       " . $e->getExceptionType(). "\n";
-    echo "Request ID:       " . $e->getRequestId(). "\n";
+        ]);
+
+        echo "Adding bucket tagging...\n";
+        $result = $client->putBucketTagging([
+            'Bucket' => $bucketname,
+            'Tagging' => [
+                'TagSet' => [
+                    [
+                        'Key' => 'Jan',
+                        'Value' => 'pink'
+                    ],
+                    [
+                        'Key' => 'Dec',
+                        'Value' => 'blue'
+                    ]
+                ]
+            ]
+        ]);
+
+        echo "Retrieving bucket tagging...\n";
+        $result = $client->getBucketTagging([
+            'Bucket' => $bucketname
+        ]);
+        echo "Bucket Tagging: " . json_encode($result['TagSet']) . "\n";
+
+        echo "Deleting bucket tagging...\n";
+        $result = $client->deleteBucketTagging([
+            'Bucket' => $bucketname
+        ]);
+
+        echo "Deleting bucket: $bucketname\n";
+        $client->deleteBucket([
+            'Bucket' => $bucketname
+        ]);
+        echo "\n";
+        echo "✔ BucketTagging Serial Test DONE\n";
+    } catch (Exception $e) {
+        echo "Unexpected error during website serial test for $bucketname: " . $e->getMessage() . "\n";
+    }
 }
