@@ -5,8 +5,8 @@ use Aws\Middleware;
 use GuzzleHttp\Psr7\Utils;
 
 // Hicloud S3 credentials
-$accessKey = "";
-$secretKey = "";
+$accessKey = "Enter Your AccessKey Here";
+$secretKey = "Enter Your SecretKey Here";
 
 // Add check if either $accessKey or $secretKey is empty
 if (empty($accessKey) || empty($secretKey)) {
