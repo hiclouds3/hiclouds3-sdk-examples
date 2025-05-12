@@ -13,8 +13,8 @@ To sign up for a hicloud S3 account
 
 When you sign up, hicloud S3 provides you with security credentials that are specific to your account. Two of these credentials, your access key ID and your secret key, are used by the SDK whenever it accesses to hicloud S3. The security credentials authenticate requests to the service and identify you as the sender of a request. The following examples show these credentials.
 
--	Access Key ID Example: U0U03U5UQXdNREl4TkRFek5UZ3hNek0yTURZd09EWJ0
--	Secret Key Example: WW1NNU9XVTNOLFF34kRNMk5DRTVaV0ZrTVRjMFpEVTFOV1kxWkRZeFlUTT0
+-	Access Key ID Example: U0U03U5UQXd*********URZd09EWJ0
+-	Secret Key Example: WW1NNU9*********RZeFlUTT0
 
 Your secret key must remain a secret that is known only by you and hicloud S3. Keep it confidential in order to protect your account. Store it securely in a safe place, and never email it. Do not share it outside your organization, even if an inquiry appears to come from hicloud S3.No one who legitimately represents hicloud S3 will ever ask you for your secret key.
 
@@ -28,7 +28,7 @@ Currently, we provide code samples tested on the SDKs as follows:
 - Java https://github.com/aws/aws-sdk-java/releases/1.12.61
 - Javascript https://github.com/aws/aws-sdk-js/releases/tag/v2.1.39
 - .NET https://github.com/aws/aws-sdk-net/tree/aws-sdk-net-v1
-- PHP https://github.com/aws/aws-sdk-php/releases/tag/2.8.31
+- PHP https://github.com/aws/aws-sdk-php/releases/tag/3.343.7
 - Python3 https://github.com/boto/boto3/releases/tag/1.17.105
 - Ruby https://github.com/aws/aws-sdk-ruby/tree/version-3
 - Rust https://github.com/awslabs/aws-sdk-rust/tree/v0.0.19-alpha
