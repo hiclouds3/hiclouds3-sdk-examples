@@ -9,8 +9,8 @@ import (
 
 func DeleteBucket(buckets [3]string) {
 	for _, bucket := range buckets {
-		fmt.Printf("%s\n", bucket)
-		fmt.Println("-----------------------------------------------------------------------")
+		fmt.Printf("Deleting bucket: %s\n", bucket)
+
 		input := &s3.DeleteBucketInput{
 			Bucket: &bucket,
 		}

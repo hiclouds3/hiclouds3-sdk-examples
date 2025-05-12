@@ -20,7 +20,7 @@ func LifecycleSerialTest(buckets [3]string) {
 			Rules: []types.LifecycleRule{
 				{
 					Expiration: &types.LifecycleExpiration{
-						Days: day,
+						Days: &day,
 					},
 					Prefix: aws.String("documents/"),
 					ID:     aws.String("Test1"),
@@ -29,7 +29,7 @@ func LifecycleSerialTest(buckets [3]string) {
 			},
 		},
 	}
-	_, putbucketlifecycleExpirationErr := Client.PutBucketLifecycleConfiguration(context.TODO(), expirationInput)
+	_, putbucketlifecycleExpirationErr := Client.PutBucketLifecycleConfiguration(context.TODO(), expirationInput, withContentMD5)
 	if putbucketlifecycleExpirationErr != nil {
 		fmt.Println("Got an error PutBucketLifecycle Expiration item:")
 		fmt.Println(putbucketlifecycleExpirationErr)
@@ -45,7 +45,7 @@ func LifecycleSerialTest(buckets [3]string) {
 					Status: types.ExpirationStatusEnabled,
 					Transitions: []types.Transition{
 						{
-							Days:         day,
+							Days:         &day,
 							StorageClass: types.TransitionStorageClassGlacier,
 						},
 					},
@@ -53,7 +53,7 @@ func LifecycleSerialTest(buckets [3]string) {
 			},
 		},
 	}
-	_, putbucketlifecycleTransitionsErr := Client.PutBucketLifecycleConfiguration(context.TODO(), transitionsInput)
+	_, putbucketlifecycleTransitionsErr := Client.PutBucketLifecycleConfiguration(context.TODO(), transitionsInput, withContentMD5)
 	if putbucketlifecycleTransitionsErr != nil {
 		fmt.Println("Got an error PutBucketlifecycle Transitions item:")
 		fmt.Println(putbucketlifecycleTransitionsErr)
