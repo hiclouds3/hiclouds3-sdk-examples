@@ -9,10 +9,9 @@ import (
 
 func CreateBucket(buckets [3]string) {
 	for _, bucket := range buckets {
-		fmt.Printf("%s\n", bucket)
-		fmt.Println("-----------------------------------------------------------------------")
+		fmt.Printf("Creating bucket: %s\n", bucket)
+
 		input := &s3.CreateBucketInput{
-			ACL:    "log-delivery-write",
 			Bucket: &bucket,
 		}
 		_, createErr := Client.CreateBucket(context.TODO(), input)

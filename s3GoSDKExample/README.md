@@ -1,7 +1,7 @@
 # hicloud S3 Go SDK Examples
 
 ## Environment setup
-* Go >= 1.15
+* Go >= 1.22
 
 ## Go SDK Serial Test Read me
 * Fill in AccessKey, SecretKey in「sample/Client.go」

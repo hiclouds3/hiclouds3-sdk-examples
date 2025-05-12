@@ -25,15 +25,6 @@ func BucketLoggingTest(buckets [3]string) {
 		BucketLoggingStatus: &types.BucketLoggingStatus{
 			LoggingEnabled: &types.LoggingEnabled{
 				TargetBucket: &buckets[1],
-				TargetGrants: []types.TargetGrant{
-					{
-						Grantee: &types.Grantee{
-							ID:   aws.String("Enter_your_canonical_ID"),
-							Type: "CanonicalUser",
-						},
-						Permission: "FULL_CONTROL",
-					},
-				},
 				TargetPrefix: aws.String("MyBucketLogs/"),
 			},
 		},
@@ -56,8 +47,5 @@ func BucketLoggingTest(buckets [3]string) {
 	fmt.Println("Get " + buckets[0] + " BucketLogging:")
 	fmt.Println("  TargetBucket :", *result.LoggingEnabled.TargetBucket)
 	fmt.Println("  TargetPrefix :", *result.LoggingEnabled.TargetPrefix)
-	fmt.Println("  TargetGrants :")
-	fmt.Println("    Grantee :", *result.LoggingEnabled.TargetGrants[0].Grantee.DisplayName)
-	fmt.Println("    Permission :", result.LoggingEnabled.TargetGrants[0].Permission)
 	fmt.Println("")
 }
