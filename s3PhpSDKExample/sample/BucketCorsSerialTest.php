@@ -1,139 +1,71 @@
 <?php
-require 'client.php';
+require_once 'client.php';
 
-use Aws\S3\Exception\S3Exception;
-
-function createBucket($bucketname)
+function bucketCorsSerialTest($bucketname)
 {
     global $client;
 
+    echo "> Bucket CORS Serial Testing....\n";
     try {
-        $result = $client->createBucket(array(
-                'Bucket' => $bucketname
-        ));
-    } catch (S3Exception $e) {
-        echo "Caught an AmazonServiceException.", "\n";
-        echo "Error Message:    " . $e->getMessage(). "\n";
-        echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
-        echo "AWS Error Code:   " . $e->getExceptionCode(). "\n";
-        echo "Error Type:       " . $e->getExceptionType(). "\n";
-        echo "Request ID:       " . $e->getRequestId(). "\n";
-    }
-}
+        // Step 1: Create Bucket
+        echo "Creating bucket $bucketname...\n";
+        $client->createBucket(['Bucket' => $bucketname]);
+        echo "Bucket $bucketname created successfully.\n";
 
-function setBucketCORS($bucketname)
-{
-    global $client;
 
-    try {
-        $result = $client->putBucketCors(array(
-                // Bucket is required
-                'Bucket' => $bucketname,
-                'CORSRules' => array( //ID Parameter NOT Support
-                        array(
-                                'AllowedHeaders' => array('content-type', 'content-encoding'),
-                                'AllowedMethods' => array('POST', 'PUT'),
-                                'AllowedOrigins' => array('http://tw.yahoo.com.tw'),
-                                'ExposeHeaders' => array('x-amz-*'),
-                                'MaxAgeSeconds' => 100,
-                        ),
-                        array(
-                                'AllowedHeaders' => array('connection', 'content-encoding'),
-                                'AllowedMethods' => array('DELETE', 'HEAD'),
-                                'AllowedOrigins' => array('http://hello.world'),
-                                'ExposeHeaders' => array('request-id'),
-                                'MaxAgeSeconds' => 10,
-                        )
-                )
-        ));
-    } catch (S3Exception $e) {
-        echo "Caught an AmazonServiceException.", "\n";
-        echo "Error Message:    " . $e->getMessage(). "\n";
-        echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
-        echo "AWS Error Code:   " . $e->getExceptionCode(). "\n";
-        echo "Error Type:       " . $e->getExceptionType(). "\n";
-        echo "Request ID:       " . $e->getRequestId(). "\n";
-    }
-}
+        // Step 2: Set Bucket CORS
+        echo "Setting CORS configuration for bucket $bucketname...\n";
+        $client->putBucketCors([
+            'Bucket' => $bucketname,
+            'CORSConfiguration' => [
+                'CORSRules' => [
+                    [
+                        'AllowedHeaders' => ['content-type', 'content-encoding'],
+                        'AllowedMethods' => ['POST', 'PUT'],
+                        'AllowedOrigins' => ['http://tw.yahoo.com.tw'],
+                        'ExposeHeaders' => ['x-amz-*'],
+                        'MaxAgeSeconds' => 100,
+                    ],
+                    [
+                        'AllowedHeaders' => ['connection', 'content-encoding'],
+                        'AllowedMethods' => ['DELETE', 'HEAD'],
+                        'AllowedOrigins' => ['http://hello.world'],
+                        'ExposeHeaders' => ['request-id'],
+                        'MaxAgeSeconds' => 10,
+                    ]
+                ]
+            ]
+        ]);
+        echo "CORS configuration set successfully for bucket $bucketname.\n";
 
-function getBucketCORS($bucketname)
-{
-    global $client;
+        // Step 3: Get Bucket CORS
+        echo "Retrieving CORS configuration for bucket $bucketname...\n";
 
-    try {
-        $result = $client->getBucketCors(array(
-                // Bucket is required
-                'Bucket' => $bucketname,
-        ));
-
-        echo "Listing Rules...\n";
+        $result = $client->getBucketCors(['Bucket' => $bucketname]);
+        echo "Listing CORS Rules:\n";
         foreach ($result['CORSRules'] as $rule) {
             echo "--------------------------\n";
-            echo
-            "[AllowedHeaders]".$rule['AllowedHeaders'][0].", ".$rule["AllowedHeaders"][1]. "\n".
-            "[AllowedMethods]".$rule['AllowedMethods'][0].", ".$rule["AllowedMethods"][1]. "\n".
-            "[AllowedOrigins]".$rule['AllowedOrigins'][0]." \n".
-            "[ExposeHeaders]".$rule['ExposeHeaders'][0]." \n".
-            "[MaxAgeSeconds]".$rule['MaxAgeSeconds']." \n";
+            echo "[AllowedHeaders] " . implode(", ", $rule['AllowedHeaders']) . "\n";
+            echo "[AllowedMethods] " . implode(", ", $rule['AllowedMethods']) . "\n";
+            echo "[AllowedOrigins] " . implode(", ", $rule['AllowedOrigins']) . "\n";
+            echo "[ExposeHeaders] " . implode(", ", $rule['ExposeHeaders']) . "\n";
+            echo "[MaxAgeSeconds] " . $rule['MaxAgeSeconds'] . "\n";
         }
-    } catch (S3Exception $e) {
-        echo "Caught an AmazonServiceException.", "\n";
-        echo "Error Message:    " . $e->getMessage(). "\n";
-        echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
-        echo "AWS Error Code:   " . $e->getExceptionCode(). "\n";
-        echo "Error Type:       " . $e->getExceptionType(). "\n";
-        echo "Request ID:       " . $e->getRequestId(). "\n";
+
+        // Step 4: Delete Bucket CORS
+        echo "Deleting CORS configuration for bucket $bucketname...\n";
+        $client->deleteBucketCors(['Bucket' => $bucketname]);
+        echo "CORS configuration deleted successfully for bucket $bucketname.\n";
+
+        // Step 5: Delete Bucket
+        echo "Deleting bucket $bucketname...\n";
+
+        $client->deleteBucket(['Bucket' => $bucketname]);
+        echo "Bucket $bucketname deleted successfully.\n";
+
+        echo "\n";
+        echo "✔ BucketCors Serial Test DONE\n";
+    } catch (Exception $e) {
+        echo "Unexpected error during bucket cors serial test for $bucketname: " . $e->getMessage() . "\n";
     }
 }
-
-function deleteBucketCORS($bucketname)
-{
-    global $client;
-
-    try {
-        $result = $client->deleteBucketCors(array(
-                // Bucket is required
-                'Bucket' => $bucketname,
-        ));
-    } catch (S3Exception $e) {
-        echo "Caught an AmazonServiceException.", "\n";
-        echo "Error Message:    " . $e->getMessage(). "\n";
-        echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
-        echo "AWS Error Code:   " . $e->getExceptionCode(). "\n";
-        echo "Error Type:       " . $e->getExceptionType(). "\n";
-        echo "Request ID:       " . $e->getRequestId(). "\n";
-    }
-}
-
-function delBucket($bucketname)
-{
-    global $client;
-    try {
-        $client->deleteBucket(array('Bucket' => $bucketname));
-    } catch (S3Exception $e) {
-        echo "Caught an AmazonServiceException.", "\n";
-        echo "Error Message:    " . $e->getMessage(). "\n";
-        echo "HTTP Status Code: " . $e->getStatusCode(). "\n";
-        echo "AWS Error Code:   " . $e->getExceptionCode(). "\n";
-        echo "Error Type:       " . $e->getExceptionType(). "\n";
-        echo "Request ID:       " . $e->getRequestId(). "\n";
-    }
-}
-
-
-$bucketname = $argv[1];
-$bucketname2 = $argv[2];
-$bucketname3 = $argv[3];
-echo "Bucket CORS Serial Testing....\n";
-/*
- * test 1. create Bucket
-*      2. Put Bucket CORS
-*      3. Get Bucket CORS
-*      4. Delete Bucket CORS
-*      5. Delete Bucket
-*/
-createBucket($bucketname);
-setBucketCORS($bucketname);
-getBucketCORS($bucketname);
-deleteBucketCORS($bucketname);
-delBucket($bucketname);

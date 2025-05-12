@@ -7,61 +7,98 @@
  * 取得AccessKey與SecretKey之流程，請參考"hicloud S3 Quick Start"文件 :
  * https://userportal.hicloud.hinet.net/cloud/document/files/hicloud-S3-QuickStart.pdf
  *
- * 重要：在運行此範例程式前，請務必確認已將 hicloud S3 Access Key 與 Secret Key 填入 test/client.php 檔案中
+ * 重要：在運行此範例程式前，請務必確認已將 hicloud S3 Access Key 與 Secret Key 填入 client.php 檔案中
  */
-require 'config.php';
+require 'Cleanup.php';
+require 'BucketSerialTest.php';
+require 'BucketCorsSerialTest.php';
+require 'ObjectSerialTest.php';
+require 'MPUSerialTest.php';
+require 'LifecycleSerialTest.php';
+require 'DeleteMultipleObjectsTest.php';
+require 'PolicySerialTest.php';
+require 'VersioningSerialTest.php';
+require 'WebsiteSerialTest.php';
+require 'BucketTaggingSerialTest.php';
+require 'ACLSerialTest.php';
+require 'BucketLoggingSerialTest.php';
 
-error_reporting(0);
+date_default_timezone_set('Asia/Taipei');
+error_reporting(E_ALL);
 
-//Change test buckets' name here
-$bucket = array("testphpbucket1","testphpbucket2","testphpbucket3");
-$userAInfo = array($config[userACanonicalID],$config[userAMail]);
-$userBInfo = array($config[userBCanonicalID],$config[userBMail]);
-$ownerInfo = array($config[ownerCanonicalID],$config[ownerMail]);
+$buckets = ["testphpbucket1", "testphpbucket2", "testphpbucket3"];
 
-echo "S3 PHP SDK Serial Test\nbucketname1: ".$bucket[0]." ,bucketname2: ".$bucket[1]." ,bucketname3: ".$bucket[2];
+echo "S3 PHP SDK Serial Test\nbucketname1: " . $buckets[0] . " ,bucketname2: " . $buckets[1] . " ,bucketname3: " . $buckets[2];
 echo "\n-----------------------------------------------------------------------\n";
 
-system("php ./Cleanup.php $bucket[0]");
-system("php ./Cleanup.php $bucket[1]");
-system("php ./Cleanup.php $bucket[2]");
-sleep(5);
+# clean up buckets
+function cleanup()
+{
+    global $buckets;
+    foreach ($buckets as $bucket) {
+        cleanBucketSuppressed($bucket);
+    }
+    echo "\n";
+}
 
-system("php ./ACLSerialTesting.php $bucket[0] $bucket[1] $bucket[2] $userAInfo[1] $ownerInfo[0]");
-sleep(5);
+# bucket serial test
+cleanup();
+bucketSerialTest($buckets[0]);
+echo "\n";
 
-system("php ./BucketLoggingSerialTesting.php $bucket[0] $bucket[1] $bucket[2] $ownerInfo[0]");
-sleep(5);
+# bucket cors serial test
+cleanup();
+bucketCorsSerialTest($buckets[1]);
+echo "\n";
 
-system("php ./BucketSerialTesting.php $bucket[0] $bucket[1] $bucket[2]");
-sleep(5);
+# object serial test
+cleanup();
+objectSerialTest($buckets[0], $buckets[1]);
+echo "\n";
 
-system("php ./LifecycleSerialTesting.php $bucket[0] $bucket[1] $bucket[2]");
-sleep(5);
+# mpu serial test
+cleanup();
+mpuSerialTest($buckets[0]);
+echo "\n";
 
-system("php ./ObjectSerialTesting.php $bucket[0] $bucket[1] $bucket[2]");
-sleep(5);
+# lifecycle serial test
+cleanup();
+lifecycleSerialTest($buckets[0]);
+echo "\n";
 
-system("php ./PolicySerialTesting.php $bucket[0] $bucket[1] $bucket[2]");
-sleep(5);
+# delete multiple objects
+cleanup();
+deleteMultipleObjectsTest($buckets[1]);
+echo "\n";
 
-system("php ./VersioningSerialTesting.php $bucket[0] $bucket[1] $bucket[2]");
-sleep(5);
+# policy serial test
+cleanup();
+policySerialTest($buckets[2]);
+echo "\n";
 
-system("php ./WebsiteSerialTesting.php $bucket[0] $bucket[1] $bucket[2]");
-sleep(5);
+# versioning serial test
+cleanup();
+versioningSerialTest($buckets[0]);
+echo "\n";
 
-system("php ./MPUSerialTesting.php $bucket[0] $bucket[1] $bucket[2] $userAInfo[1] $userBInfo[0] $ownerInfo[0]");
-sleep(5);
+# website serial test
+cleanup();
+websiteSerialTest($buckets[1]);
+echo "\n";
 
-system("php ./DeleteMultipleObjects.php $bucket[0] $bucket[1] $bucket[2]");
-sleep(5);
+# bucket tagging serial test
+cleanup();
+bucketTaggingSerialTest($buckets[2]);
+echo "\n";
 
-system("php ./BucketCorsSerialTest.php $bucket[0] $bucket[1] $bucket[2]");
-sleep(5);
+# acl serial test
+cleanup();
+aclSerialTest($buckets[0]);
+echo "\n";
 
-system("php ./BucketTaggingSerialTest.php $bucket[0] $bucket[1] $bucket[2]");
-sleep(5);
-
+# bucket logging
+cleanup();
+bucketLoggingSerialTest($buckets[0], $buckets[1]);
+echo "\n";
+cleanup();
 echo "\nS3 PHP SDK Serial Test Done!\n";
-?>
