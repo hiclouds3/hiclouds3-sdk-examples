@@ -24,7 +24,7 @@ GEM
     bigdecimal (4.1.0)
     jmespath (1.6.2)
     logger (1.7.0)
-    rexml (3.4.1)
+    rexml (3.4.2)
 
 PLATFORMS
   ruby

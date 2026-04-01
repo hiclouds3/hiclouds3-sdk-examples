@@ -18,6 +18,28 @@ require "./version_serial_testing"
 require "./bucket_logging_serial_testing"
 require "./presigned_url"
 
+class ContentMD5 < Seahorse::Client::Plugin
+  class Handler < Seahorse::Client::Handler
+    def call(context)
+      if %w[put post].include?(context.http_request.http_method.downcase)
+        body = context.http_request.body
+        context.http_request.headers['Content-Md5'] = calculate_md5(body)
+        body.rewind
+      end
+      @handler.call(context)
+    end
+
+    def calculate_md5(body)
+      require 'digest/md5'
+      Base64.strict_encode64(Digest::MD5.digest(body.read))
+    end
+  end
+
+  handler(Handler, step: :sign)
+end
+
+Aws::S3::Client.add_plugin(ContentMD5)
+
 puts "S3 Ruby SDK Serial Test\n"
 puts "-----------------------------------------------------------------------"
 
